@@ -9,19 +9,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Live From Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">Artists</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#">About Us</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                     <li>
+                        <a href="#">LogIn</a>
                     </li>
                 </ul>
             </div>
