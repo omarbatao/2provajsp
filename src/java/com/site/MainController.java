@@ -30,6 +30,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)//defaulr get metod
     public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
         
+        map.put("titolopagina","LFH - home");
         return "home";
     }
    
