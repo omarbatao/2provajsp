@@ -19,13 +19,10 @@ import javax.persistence.Table;
 public class WA2P_Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "id")
     private String id;
-    @Basic(optional = false)
     @Column(name = "commento")
     private String commento;
-    @Basic(optional = false)
     @Column(name = "voto")
     private Character voto;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")

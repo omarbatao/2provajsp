@@ -5,6 +5,7 @@
  */
 package com.site;
 
+import Models.WA2P_Evento;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     
+    List<WA2P_Evento> eventi = new ArrayList<>();
     
     
     public MainController(){
@@ -31,6 +33,8 @@ public class MainController {
     public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
         
         map.put("titolopagina","LFH - home");
+        
+        
         return "home";
     }
    
