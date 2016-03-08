@@ -8,6 +8,8 @@ package com.site;
 import Models.WA2P_Evento;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
     
     List<WA2P_Evento> eventi = new ArrayList<>();
+    Database db;
     
     
     public MainController(){
+        try {
+            this.db = new Database();
+        } catch (Throwable ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -33,7 +41,8 @@ public class MainController {
     public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
         
         map.put("titolopagina","LFH - home");
-        
+        //eventi = db.getEventi();
+        map.put("eventi",eventi);
         
         return "home";
     }
