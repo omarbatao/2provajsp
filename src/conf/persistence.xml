@@ -9,6 +9,7 @@
     <class>Models.WA2P_Categoria</class>
     <class>Models.WA2P_Evento</class>
     <class>Models.WA2P_Utente</class>
+    <class>Models.WA2P_Provincia</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.1.252:3306/5ib22?zeroDateTimeBehavior=convertToNull"/>
