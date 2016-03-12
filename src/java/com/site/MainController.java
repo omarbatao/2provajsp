@@ -30,6 +30,7 @@ public class MainController {
     public MainController(){
         try {
             this.db = new Database();
+            
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,9 +40,17 @@ public class MainController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)//defaulr get metod
     public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
-        
+        try {
+            this.db = new Database();
+            System.out.println("Database Creato");
+        } catch (Throwable ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         map.put("titolopagina","LFH - home");
-        //eventi = db.getEventi();
+        if(db!=null){
+            eventi = db.getEventi();
+        }
+        
         map.put("eventi",eventi);
         
         return "home";

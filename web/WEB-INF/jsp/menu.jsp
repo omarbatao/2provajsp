@@ -25,15 +25,39 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" id="menuLogin">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
-                    <div class="dropdown-menu" style="padding:17px;">
-                        <form class="form" id="formLogin"> 
-                            <input name="username" id="username" type="text" placeholder="Username"> 
-                            <input name="password" id="password" type="password" placeholder="Password"><br>
-                            <button type="button" id="btnLogin" class="btn">Login</button>
-                        </form>
-                    </div>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                   
+                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Username</label>
+                                            <input type="username" class="form-control" id="exampleInputEmail2" placeholder="Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> keep me logged-in
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New here ? <a href="#"><b>Join Us</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

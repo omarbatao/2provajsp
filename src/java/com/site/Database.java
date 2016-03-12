@@ -33,19 +33,21 @@ public class Database {
     
     public  ArrayList<WA2P_Evento> getEventi(){
         Transaction tx = null;
+        ArrayList<WA2P_Evento> eve= new ArrayList<>(); ;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
              List eventi = session.createCriteria(WA2P_Evento.class).list();
-             /*for (Iterator iterator =
+             for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
-                 
-             }*/
+                 WA2P_Evento evento = (WA2P_Evento) iterator.next();
+                 System.out.println("Evento: "+evento.toString());
+                 eve.add(evento);
+             }
              
              tx.commit();
-             return (ArrayList<WA2P_Evento>) eventi;
+             return  eve;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
