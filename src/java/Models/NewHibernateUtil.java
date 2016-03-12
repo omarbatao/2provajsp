@@ -22,12 +22,14 @@ public class NewHibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = (SessionFactory) new AnnotationConfiguration().configure()
+            sessionFactory = (SessionFactory) new AnnotationConfiguration()
                     .addAnnotatedClass(WA2P_Artista.class)
                     .addAnnotatedClass(WA2P_Categoria.class)
                     .addAnnotatedClass(WA2P_Commento.class)
                     .addAnnotatedClass(WA2P_Evento.class)
-                    .addAnnotatedClass(WA2P_Utente.class);
+                    .addAnnotatedClass(WA2P_Utente.class)
+                    .configure()
+                    .buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
