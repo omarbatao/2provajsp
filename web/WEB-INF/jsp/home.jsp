@@ -30,9 +30,9 @@
                         <a href="#">${evento.getTitolo()}</a>
                     </h2>
                     <p class="lead">
-                        by ${evento.getIdU()}
+                        by ${evento.getIdU().getNickname()}
                     </p>
-                    <p><span class="glyphicon glyphicon-time"></span> ${evento.getData()} ${evento.getLuogo().getNomeProvincia()}</p>
+                    <p><span class="glyphicon glyphicon-time"></span> ${evento.getData()} ${evento.getLuogo()}</p>
                     <hr>
                     <img class="img-responsive" src="http://placehold.it/900x300" alt="">
                     <hr>
