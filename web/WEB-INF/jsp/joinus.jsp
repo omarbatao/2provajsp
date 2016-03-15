@@ -8,36 +8,30 @@
 <jsp:include page="head.jsp"/>
 <jsp:include page="menu.jsp"/>
 
+<div class="col-lg-7" >
 <form>
   <fieldset class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter email">
+    <label for="email">Email:</label>
+    <input width="100" type="email" class="form-control" id="email" placeholder="Enter email">
   </fieldset>
   <fieldset class="form-group">
-    <label for="password">Password</label>
+    <label for="password">Password:</label>
     <input type="password" class="form-control" id="password" placeholder="Password">
   </fieldset>
   <fieldset class="form-group">
-    <label for="exampleTextarea">Example textarea</label>
-    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+    <label for="nickname">Nickname:</label>
+    <input type="text" class="form-control" id="nickname" placeholder="Nickname">
   </fieldset>
-  <fieldset class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" class="form-control-file" id="exampleInputFile">
-    <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+    <fieldset class="form-group">
+    <label for="nome">Nome:</label>
+    <input type="text" class="form-control" id="nome" placeholder="Nome">
   </fieldset>
-  <div class="radio disabled">
-    <label>
-      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-      Option three is disabled
-    </label>
-  </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
+    <fieldset class="form-group">
+    <label for="cognome">Cognome:</label>
+    <input type="text" class="form-control" id="cognome" placeholder="Cognome">
+  </fieldset>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
       
 <jsp:include page="foot.jsp"/>
