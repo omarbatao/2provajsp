@@ -47,8 +47,9 @@ public class WA2P_Provincia implements Serializable {
     @Basic(optional = false)
     @Column(name = "siglaProvincia")
     private String siglaProvincia;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "luogo")
-    private Collection<WA2P_Evento> wA2PEventoCollection;
+    
+    @OneToMany(mappedBy = "luogo")
+    private Collection<WA2P_Evento> eventi;
 
     public WA2P_Provincia() {
     }
@@ -98,11 +99,11 @@ public class WA2P_Provincia implements Serializable {
 
     @XmlTransient
     public Collection<WA2P_Evento> getWA2PEventoCollection() {
-        return wA2PEventoCollection;
+        return eventi;
     }
 
     public void setWA2PEventoCollection(Collection<WA2P_Evento> wA2PEventoCollection) {
-        this.wA2PEventoCollection = wA2PEventoCollection;
+        this.eventi = wA2PEventoCollection;
     }
 
     @Override

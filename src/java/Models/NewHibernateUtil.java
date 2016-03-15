@@ -28,6 +28,7 @@ public class NewHibernateUtil {
                     .addAnnotatedClass(WA2P_Commento.class)
                     .addAnnotatedClass(WA2P_Evento.class)
                     .addAnnotatedClass(WA2P_Utente.class)
+                    .addAnnotatedClass(WA2P_Provincia.class)
                     .configure()
                     .buildSessionFactory();
         } catch (Throwable ex) {

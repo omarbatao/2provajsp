@@ -58,8 +58,8 @@ public class WA2P_Evento implements Serializable {
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne
     private WA2P_Categoria categoria;
-    @JoinColumn(name = "luogo", referencedColumnName = "idProvincia")
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "luogo",referencedColumnName="idProvincia")
     private WA2P_Provincia luogo;
 
     public WA2P_Evento() {
