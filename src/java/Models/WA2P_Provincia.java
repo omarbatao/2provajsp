@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_PROVINCE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Wa2pProvince.findAll", query = "SELECT w FROM Wa2pProvince w"),
-    @NamedQuery(name = "Wa2pProvince.findByIdProvincia", query = "SELECT w FROM Wa2pProvince w WHERE w.idProvincia = :idProvincia"),
-    @NamedQuery(name = "Wa2pProvince.findByIdRegione", query = "SELECT w FROM Wa2pProvince w WHERE w.idRegione = :idRegione"),
-    @NamedQuery(name = "Wa2pProvince.findByNomeProvincia", query = "SELECT w FROM Wa2pProvince w WHERE w.nomeProvincia = :nomeProvincia"),
-    @NamedQuery(name = "Wa2pProvince.findBySiglaProvincia", query = "SELECT w FROM Wa2pProvince w WHERE w.siglaProvincia = :siglaProvincia")})
+    @NamedQuery(name = "WA2P_Provincia.findAll", query = "SELECT w FROM WA2P_Provincia w"),
+    @NamedQuery(name = "WA2P_Provincia.findByIdProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.idProvincia = :idProvincia"),
+    @NamedQuery(name = "WA2P_Provincia.findByIdRegione", query = "SELECT w FROM WA2P_Provincia w WHERE w.idRegione = :idRegione"),
+    @NamedQuery(name = "WA2P_Provincia.findByNomeProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.nomeProvincia = :nomeProvincia"),
+    @NamedQuery(name = "WA2P_Provincia.findBySiglaProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.siglaProvincia = :siglaProvincia")})
 public class WA2P_Provincia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -127,7 +127,7 @@ public class WA2P_Provincia implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Wa2pProvince[ idProvincia=" + idProvincia + " ]";
+        return "Models.WA2P_Provincia[ idProvincia=" + idProvincia + " ]";
     }
     
 }

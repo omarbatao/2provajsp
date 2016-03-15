@@ -6,8 +6,16 @@
 package Models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -15,14 +23,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "WA2P_COMMENTI")
-
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "WA2P_Commento.findAll", query = "SELECT w FROM WA2P_Commento w"),
+    @NamedQuery(name = "WA2P_Commento.findById", query = "SELECT w FROM WA2P_Commento w WHERE w.id = :id"),
+    @NamedQuery(name = "WA2P_Commento.findByCommento", query = "SELECT w FROM WA2P_Commento w WHERE w.commento = :commento"),
+    @NamedQuery(name = "WA2P_Commento.findByVoto", query = "SELECT w FROM WA2P_Commento w WHERE w.voto = :voto")})
 public class WA2P_Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "id")
     private String id;
+    @Basic(optional = false)
     @Column(name = "commento")
     private String commento;
+    @Basic(optional = false)
     @Column(name = "voto")
     private Character voto;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")

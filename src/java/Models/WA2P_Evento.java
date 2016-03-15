@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "WA2P_Evento.findAll", query = "SELECT w FROM WA2P_Evento w"),
     @NamedQuery(name = "WA2P_Evento.findById", query = "SELECT w FROM WA2P_Evento w WHERE w.id = :id"),
     @NamedQuery(name = "WA2P_Evento.findByTitolo", query = "SELECT w FROM WA2P_Evento w WHERE w.titolo = :titolo"),
-    @NamedQuery(name = "WA2P_Evento.findByLuogo", query = "SELECT w FROM WA2P_Evento w WHERE w.luogo = :luogo"),
     @NamedQuery(name = "WA2P_Evento.findByData", query = "SELECT w FROM WA2P_Evento w WHERE w.data = :data")})
 public class WA2P_Evento implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -46,9 +45,6 @@ public class WA2P_Evento implements Serializable {
     @Basic(optional = false)
     @Column(name = "titolo")
     private String titolo;
-    @Basic(optional = false)
-    @Column(name = "luogo")
-    private String luogo;
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
@@ -62,6 +58,9 @@ public class WA2P_Evento implements Serializable {
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne
     private WA2P_Categoria categoria;
+    @JoinColumn(name = "luogo", referencedColumnName = "idProvincia")
+    @ManyToOne(optional = false)
+    private WA2P_Provincia luogo;
 
     public WA2P_Evento() {
     }
@@ -70,10 +69,9 @@ public class WA2P_Evento implements Serializable {
         this.id = id;
     }
 
-    public WA2P_Evento(String id, String titolo, String luogo) {
+    public WA2P_Evento(String id, String titolo) {
         this.id = id;
         this.titolo = titolo;
-        this.luogo = luogo;
     }
 
     public String getId() {
@@ -90,14 +88,6 @@ public class WA2P_Evento implements Serializable {
 
     public void setTitolo(String titolo) {
         this.titolo = titolo;
-    }
-
-    public String getLuogo() {
-        return luogo;
-    }
-
-    public void setLuogo(String luogo) {
-        this.luogo = luogo;
     }
 
     public Date getData() {
@@ -140,6 +130,14 @@ public class WA2P_Evento implements Serializable {
 
     public void setCategoria(WA2P_Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public WA2P_Provincia getLuogo() {
+        return luogo;
+    }
+
+    public void setLuogo(WA2P_Provincia luogo) {
+        this.luogo = luogo;
     }
 
     @Override
