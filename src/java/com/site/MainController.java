@@ -52,5 +52,9 @@ public class MainController {
         return "home";
     }
    
+    @RequestMapping(value = "/joinus", method = RequestMethod.GET)//defaulr get metod
+    public String joinus(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){  
+        return "joinus";
+    }
     
 }
