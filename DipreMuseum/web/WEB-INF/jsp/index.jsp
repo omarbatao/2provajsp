@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+                <a class="navbar-brand" href="index.html">${titolo}</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,7 +51,7 @@
                         <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a href="services.html">Services</a>
+                        <a href="services.html">Visita</a>
                     </li>
                     <li>
                         <a href="contact.html">Contact</a>
@@ -164,7 +164,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Welcome to Modern Business
+                    Benvenuto nel Dipr&egrave Museum
                 </h1>
             </div>
             <div class="col-md-4">
@@ -206,7 +206,7 @@
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Portfolio Heading</h2>
+                <h2 class="page-header">Eventi pi&ugrave recenti</h2>
             </div>
             <div class="col-md-4 col-sm-6">
                 <a href="portfolio-item.html">
@@ -285,7 +285,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; WebArtSeveri 2016</p>
                 </div>
             </div>
         </footer>
