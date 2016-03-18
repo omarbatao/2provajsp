@@ -28,7 +28,7 @@ public class MainController {
         map.put("titolo", "Dipr&egrave Museum");
         //List<Evento> eventi = db.getEventi();
         //map.put("eventi", eventi);
-        return "paginaPrincipale";
+        return "index";
     }
     
 }
