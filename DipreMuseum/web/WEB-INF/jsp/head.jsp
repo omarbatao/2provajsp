@@ -21,13 +21,12 @@
     <link href="./resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
    <!-- Custom CSS -->
-    <!-- <link href="./resources/css/sb-admin.css" rel="stylesheet">
+    <link href="./resources/css/sb-admin.css" rel="stylesheet">
 
-     Morris Charts CSS 
+    <!-- Morris Charts CSS -->
     <link href="./resources/css/plugins/morris.css" rel="stylesheet">
 
-     Custom Fonts
-    <link href="./resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    
 
 </head>
 
