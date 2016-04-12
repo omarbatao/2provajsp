@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione"),
     @NamedQuery(name = "Categorie.findBySconto", query = "SELECT c FROM Categorie c WHERE c.sconto = :sconto"),
     @NamedQuery(name = "Categorie.findByTipoDoc", query = "SELECT c FROM Categorie c WHERE c.tipoDoc = :tipoDoc")})
-public class Categorie implements Serializable {
+public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,16 +47,16 @@ public class Categorie implements Serializable {
     @Column(name = "TipoDoc")
     private String tipoDoc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private Collection<Visitatori> visitatoriCollection;
+    private Collection<Visitatore> visitatoriCollection;
 
-    public Categorie() {
+    public Categoria() {
     }
 
-    public Categorie(String codC) {
+    public Categoria(String codC) {
         this.codC = codC;
     }
 
-    public Categorie(String codC, int sconto, String tipoDoc) {
+    public Categoria(String codC, int sconto, String tipoDoc) {
         this.codC = codC;
         this.sconto = sconto;
         this.tipoDoc = tipoDoc;
@@ -95,11 +95,11 @@ public class Categorie implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Visitatori> getVisitatoriCollection() {
+    public Collection<Visitatore> getVisitatoriCollection() {
         return visitatoriCollection;
     }
 
-    public void setVisitatoriCollection(Collection<Visitatori> visitatoriCollection) {
+    public void setVisitatoriCollection(Collection<Visitatore> visitatoriCollection) {
         this.visitatoriCollection = visitatoriCollection;
     }
 
@@ -113,10 +113,10 @@ public class Categorie implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categorie)) {
+        if (!(object instanceof Categoria)) {
             return false;
         }
-        Categorie other = (Categorie) object;
+        Categoria other = (Categoria) object;
         if ((this.codC == null && other.codC != null) || (this.codC != null && !this.codC.equals(other.codC))) {
             return false;
         }

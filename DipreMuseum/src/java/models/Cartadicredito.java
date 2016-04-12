@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cartedicredito.findByCodC", query = "SELECT c FROM Cartedicredito c WHERE c.codC = :codC"),
     @NamedQuery(name = "Cartedicredito.findByDataS", query = "SELECT c FROM Cartedicredito c WHERE c.dataS = :dataS"),
     @NamedQuery(name = "Cartedicredito.findByPin", query = "SELECT c FROM Cartedicredito c WHERE c.pin = :pin")})
-public class Cartedicredito implements Serializable {
+public class Cartadicredito implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,16 +47,16 @@ public class Cartedicredito implements Serializable {
     private String pin;
     @JoinColumn(name = "IdVisitatore", referencedColumnName = "Id")
     @ManyToOne(optional = false)
-    private Visitatori idVisitatore;
+    private Visitatore idVisitatore;
 
-    public Cartedicredito() {
+    public Cartadicredito() {
     }
 
-    public Cartedicredito(String codC) {
+    public Cartadicredito(String codC) {
         this.codC = codC;
     }
 
-    public Cartedicredito(String codC, Date dataS, String pin) {
+    public Cartadicredito(String codC, Date dataS, String pin) {
         this.codC = codC;
         this.dataS = dataS;
         this.pin = pin;
@@ -86,11 +86,11 @@ public class Cartedicredito implements Serializable {
         this.pin = pin;
     }
 
-    public Visitatori getIdVisitatore() {
+    public Visitatore getIdVisitatore() {
         return idVisitatore;
     }
 
-    public void setIdVisitatore(Visitatori idVisitatore) {
+    public void setIdVisitatore(Visitatore idVisitatore) {
         this.idVisitatore = idVisitatore;
     }
 
@@ -104,10 +104,10 @@ public class Cartedicredito implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cartedicredito)) {
+        if (!(object instanceof Cartadicredito)) {
             return false;
         }
-        Cartedicredito other = (Cartedicredito) object;
+        Cartadicredito other = (Cartadicredito) object;
         if ((this.codC == null && other.codC != null) || (this.codC != null && !this.codC.equals(other.codC))) {
             return false;
         }
