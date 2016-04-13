@@ -5,13 +5,13 @@
  */
 package hibernate;
 
-import models.Amministratori;
-import models.Biglietti;
-import models.Cartedicredito;
-import models.Categorie;
-import models.Servizi;
-import models.Visitatori;
-import models.Visite;
+import models.Amministratore;
+import models.Biglietto;
+import models.Cartadicredito;
+import models.Categoria;
+import models.Servizio;
+import models.Visitatore;
+import models.Visita;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -29,13 +29,13 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = new AnnotationConfiguration().configure().addAnnotatedClass(Amministratori.class)
-                    .addAnnotatedClass(Biglietti.class)
-                    .addAnnotatedClass(Cartedicredito.class)
-                    .addAnnotatedClass(Categorie.class)
-                    .addAnnotatedClass(Servizi.class)
-                    .addAnnotatedClass(Visitatori.class)
-                    .addAnnotatedClass(Visite.class)
+            sessionFactory = new AnnotationConfiguration().configure().addAnnotatedClass(Amministratore.class)
+                    .addAnnotatedClass(Biglietto.class)
+                    .addAnnotatedClass(Cartadicredito.class)
+                    .addAnnotatedClass(Categoria.class)
+                    .addAnnotatedClass(Servizio.class)
+                    .addAnnotatedClass(Visitatore.class)
+                    .addAnnotatedClass(Visita.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 

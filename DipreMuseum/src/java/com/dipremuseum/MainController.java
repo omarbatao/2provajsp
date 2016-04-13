@@ -7,7 +7,7 @@ package com.dipremuseum;
 
 import java.util.ArrayList;
 import java.util.List;
-import models.Visite;
+import models.Visita;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ public class MainController {
     
     @RequestMapping(value="/")
     public String index(ModelMap map){
-        List<Visite> visite = db.getVisite();
+        List<Visita> visite = db.getVisite();
         if(visite!=null){
             map.put("visite", visite);
         }

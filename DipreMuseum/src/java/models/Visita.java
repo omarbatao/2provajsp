@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Visite.findByDataF", query = "SELECT v FROM Visite v WHERE v.dataF = :dataF"),
     @NamedQuery(name = "Visite.findByMaxPartecipanti", query = "SELECT v FROM Visite v WHERE v.maxPartecipanti = :maxPartecipanti"),
     @NamedQuery(name = "Visite.findByDescrizione", query = "SELECT v FROM Visite v WHERE v.descrizione = :descrizione")})
-public class Visite implements Serializable {
+public class Visita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -65,18 +65,18 @@ public class Visite implements Serializable {
     private String descrizione;
     @JoinColumn(name = "IdA", referencedColumnName = "Id")
     @ManyToOne(optional = false)
-    private Amministratori idA;
+    private Amministratore idA;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisita")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
 
-    public Visite() {
+    public Visita() {
     }
 
-    public Visite(String idVisita) {
+    public Visita(String idVisita) {
         this.idVisita = idVisita;
     }
 
-    public Visite(String idVisita, String titolo) {
+    public Visita(String idVisita, String titolo) {
         this.idVisita = idVisita;
         this.titolo = titolo;
     }
@@ -137,20 +137,20 @@ public class Visite implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public Amministratori getIdA() {
+    public Amministratore getIdA() {
         return idA;
     }
 
-    public void setIdA(Amministratori idA) {
+    public void setIdA(Amministratore idA) {
         this.idA = idA;
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
@@ -164,10 +164,10 @@ public class Visite implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Visite)) {
+        if (!(object instanceof Visita)) {
             return false;
         }
-        Visite other = (Visite) object;
+        Visita other = (Visita) object;
         if ((this.idVisita == null && other.idVisita != null) || (this.idVisita != null && !this.idVisita.equals(other.idVisita))) {
             return false;
         }

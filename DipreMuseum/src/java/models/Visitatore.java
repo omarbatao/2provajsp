@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Visitatori.findByDataN", query = "SELECT v FROM Visitatori v WHERE v.dataN = :dataN"),
     @NamedQuery(name = "Visitatori.findByUsername", query = "SELECT v FROM Visitatori v WHERE v.username = :username"),
     @NamedQuery(name = "Visitatori.findByPassword", query = "SELECT v FROM Visitatori v WHERE v.password = :password")})
-public class Visitatori implements Serializable {
+public class Visitatore implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,21 +65,21 @@ public class Visitatori implements Serializable {
     @Column(name = "Password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
-    private Collection<Cartedicredito> cartedicreditoCollection;
+    private Collection<Cartadicredito> cartedicreditoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
     @JoinColumn(name = "Categoria", referencedColumnName = "CodC")
     @ManyToOne(optional = false)
-    private Categorie categoria;
+    private Categoria categoria;
 
-    public Visitatori() {
+    public Visitatore() {
     }
 
-    public Visitatori(Integer id) {
+    public Visitatore(Integer id) {
         this.id = id;
     }
 
-    public Visitatori(Integer id, String nome, String cognome, Date dataN, String username, String password) {
+    public Visitatore(Integer id, String nome, String cognome, Date dataN, String username, String password) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -137,28 +137,28 @@ public class Visitatori implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Cartedicredito> getCartedicreditoCollection() {
+    public Collection<Cartadicredito> getCartedicreditoCollection() {
         return cartedicreditoCollection;
     }
 
-    public void setCartedicreditoCollection(Collection<Cartedicredito> cartedicreditoCollection) {
+    public void setCartedicreditoCollection(Collection<Cartadicredito> cartedicreditoCollection) {
         this.cartedicreditoCollection = cartedicreditoCollection;
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
-    public Categorie getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categorie categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -172,10 +172,10 @@ public class Visitatori implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Visitatori)) {
+        if (!(object instanceof Visitatore)) {
             return false;
         }
-        Visitatori other = (Visitatori) object;
+        Visitatore other = (Visitatore) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

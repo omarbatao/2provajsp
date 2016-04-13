@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Amministratori.findByCognome", query = "SELECT a FROM Amministratori a WHERE a.cognome = :cognome"),
     @NamedQuery(name = "Amministratori.findByEmail", query = "SELECT a FROM Amministratori a WHERE a.email = :email"),
     @NamedQuery(name = "Amministratori.findByPw", query = "SELECT a FROM Amministratori a WHERE a.pw = :pw")})
-public class Amministratori implements Serializable {
+public class Amministratore implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,16 +55,16 @@ public class Amministratori implements Serializable {
     @Column(name = "pw")
     private String pw;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idA")
-    private Collection<Visite> visiteCollection;
+    private Collection<Visita> visiteCollection;
 
-    public Amministratori() {
+    public Amministratore() {
     }
 
-    public Amministratori(Integer id) {
+    public Amministratore(Integer id) {
         this.id = id;
     }
 
-    public Amministratori(Integer id, String nome, String cognome, String email, String pw) {
+    public Amministratore(Integer id, String nome, String cognome, String email, String pw) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -113,11 +113,11 @@ public class Amministratori implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Visite> getVisiteCollection() {
+    public Collection<Visita> getVisiteCollection() {
         return visiteCollection;
     }
 
-    public void setVisiteCollection(Collection<Visite> visiteCollection) {
+    public void setVisiteCollection(Collection<Visita> visiteCollection) {
         this.visiteCollection = visiteCollection;
     }
 
@@ -131,10 +131,10 @@ public class Amministratori implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Amministratori)) {
+        if (!(object instanceof Amministratore)) {
             return false;
         }
-        Amministratori other = (Amministratori) object;
+        Amministratore other = (Amministratore) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

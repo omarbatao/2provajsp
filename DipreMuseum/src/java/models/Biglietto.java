@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Biglietti.findByCodB", query = "SELECT b FROM Biglietti b WHERE b.codB = :codB"),
     @NamedQuery(name = "Biglietti.findByValidita", query = "SELECT b FROM Biglietti b WHERE b.validita = :validita"),
     @NamedQuery(name = "Biglietti.findByTipo", query = "SELECT b FROM Biglietti b WHERE b.tipo = :tipo")})
-public class Biglietti implements Serializable {
+public class Biglietto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,22 +56,22 @@ public class Biglietti implements Serializable {
         @JoinColumn(name = "CodB", referencedColumnName = "CodB")}, inverseJoinColumns = {
         @JoinColumn(name = "CodS", referencedColumnName = "CodS")})
     @ManyToMany
-    private Collection<Servizi> serviziCollection;
+    private Collection<Servizio> serviziCollection;
     @JoinColumn(name = "IdVisitatore", referencedColumnName = "Id")
     @ManyToOne(optional = false)
-    private Visitatori idVisitatore;
+    private Visitatore idVisitatore;
     @JoinColumn(name = "IdVisita", referencedColumnName = "IdVisita")
     @ManyToOne(optional = false)
-    private Visite idVisita;
+    private Visita idVisita;
 
-    public Biglietti() {
+    public Biglietto() {
     }
 
-    public Biglietti(Integer codB) {
+    public Biglietto(Integer codB) {
         this.codB = codB;
     }
 
-    public Biglietti(Integer codB, Date validita, int tipo) {
+    public Biglietto(Integer codB, Date validita, int tipo) {
         this.codB = codB;
         this.validita = validita;
         this.tipo = tipo;
@@ -102,27 +102,27 @@ public class Biglietti implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Servizi> getServiziCollection() {
+    public Collection<Servizio> getServiziCollection() {
         return serviziCollection;
     }
 
-    public void setServiziCollection(Collection<Servizi> serviziCollection) {
+    public void setServiziCollection(Collection<Servizio> serviziCollection) {
         this.serviziCollection = serviziCollection;
     }
 
-    public Visitatori getIdVisitatore() {
+    public Visitatore getIdVisitatore() {
         return idVisitatore;
     }
 
-    public void setIdVisitatore(Visitatori idVisitatore) {
+    public void setIdVisitatore(Visitatore idVisitatore) {
         this.idVisitatore = idVisitatore;
     }
 
-    public Visite getIdVisita() {
+    public Visita getIdVisita() {
         return idVisita;
     }
 
-    public void setIdVisita(Visite idVisita) {
+    public void setIdVisita(Visita idVisita) {
         this.idVisita = idVisita;
     }
 
@@ -136,10 +136,10 @@ public class Biglietti implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Biglietti)) {
+        if (!(object instanceof Biglietto)) {
             return false;
         }
-        Biglietti other = (Biglietti) object;
+        Biglietto other = (Biglietto) object;
         if ((this.codB == null && other.codB != null) || (this.codB != null && !this.codB.equals(other.codB))) {
             return false;
         }

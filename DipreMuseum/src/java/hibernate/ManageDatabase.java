@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import models.Visite;
+import models.Visita;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,7 +25,7 @@ import org.hibernate.Transaction;
 public class ManageDatabase {
 
   
-    public List<Visite> getVisite() {
+    public List<Visita> getVisite() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
@@ -44,7 +44,7 @@ public class ManageDatabase {
         return null;
     }
 
-    public Visite getVisitaById(int id) {
+    public Visita getVisitaById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
@@ -53,7 +53,7 @@ public class ManageDatabase {
             Query q = session.createSQLQuery("SELECT * FROM Visite where id= ? ");
             q.setInteger(0, id);
             if (q.list().size() > 0) {
-                return (Visite) q.list().get(0);
+                return (Visita) q.list().get(0);
             }
         } catch (HibernateException e) {
             if (tx != null) {

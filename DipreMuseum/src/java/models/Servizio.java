@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Servizi.findByCodS", query = "SELECT s FROM Servizi s WHERE s.codS = :codS"),
     @NamedQuery(name = "Servizi.findByDescrizione", query = "SELECT s FROM Servizi s WHERE s.descrizione = :descrizione"),
     @NamedQuery(name = "Servizi.findByPrezzo", query = "SELECT s FROM Servizi s WHERE s.prezzo = :prezzo")})
-public class Servizi implements Serializable {
+public class Servizio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,16 +44,16 @@ public class Servizi implements Serializable {
     @Column(name = "Prezzo")
     private BigDecimal prezzo;
     @ManyToMany(mappedBy = "serviziCollection")
-    private Collection<Biglietti> bigliettiCollection;
+    private Collection<Biglietto> bigliettiCollection;
 
-    public Servizi() {
+    public Servizio() {
     }
 
-    public Servizi(String codS) {
+    public Servizio(String codS) {
         this.codS = codS;
     }
 
-    public Servizi(String codS, BigDecimal prezzo) {
+    public Servizio(String codS, BigDecimal prezzo) {
         this.codS = codS;
         this.prezzo = prezzo;
     }
@@ -83,11 +83,11 @@ public class Servizi implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
+    public Collection<Biglietto> getBigliettiCollection() {
         return bigliettiCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
     }
 
@@ -101,10 +101,10 @@ public class Servizi implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Servizi)) {
+        if (!(object instanceof Servizio)) {
             return false;
         }
-        Servizi other = (Servizi) object;
+        Servizio other = (Servizio) object;
         if ((this.codS == null && other.codS != null) || (this.codS != null && !this.codS.equals(other.codS))) {
             return false;
         }
