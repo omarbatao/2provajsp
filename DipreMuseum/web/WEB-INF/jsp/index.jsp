@@ -1,5 +1,6 @@
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
@@ -93,6 +94,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header">Evento della settimana</h2>
+                 <c:forEach items="${visite}" var="visita">
+                    ${visita.getTitolo()}
+                 </c:forEach>
             </div>
             <div class="col-md-6">
                 <p>The Modern Business template by Start Bootstrap includes:</p>
