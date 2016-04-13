@@ -27,7 +27,13 @@
 
     <!-- Morris Charts CSS -->
     <link href="./resources/css/plugins/morris.css" rel="stylesheet">
-
+    
+    <link href='./resources/css/style.css' rel='stylesheet' />
+    <link href='./resources/css/fullcalendar.css' rel='stylesheet' />
+    <link href='./resources/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='./resources/js/moment.min.js'></script>
+    <script src="./resources/js/jquery.js"></script>
+    <script src='./resources/js/fullcalendar.min.js'></script>
     
 
 </head>
