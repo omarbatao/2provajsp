@@ -31,10 +31,6 @@ public class MainController {
         return "index";
     }
     
-    @RequestMapping(value="/admin")
-    public String admin(ModelMap map){
-        map.put("titolo", "Admin");
-        return "admin";
-    }
+    
     
 }
