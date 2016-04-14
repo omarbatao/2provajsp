@@ -37,11 +37,5 @@ public class MainController {
         map.put("titolo", "Dipr&egrave Museum");
         return "index";
     }
-    
-    @RequestMapping(value="/admin", method = RequestMethod.GET)
-    public String admin(ModelMap map){
-        map.put("titolo", "Admin");
-        return "admin";
-    }
-    
+      
 }
