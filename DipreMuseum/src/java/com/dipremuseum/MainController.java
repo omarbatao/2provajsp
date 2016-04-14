@@ -7,6 +7,8 @@ package com.dipremuseum;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Visita;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,8 +26,12 @@ public class MainController {
     
     ManageDatabase db; 
     
-    public MainController() throws Throwable{
-        db = new ManageDatabase();
+    public MainController(){
+        try {
+            db = new ManageDatabase();
+        } catch (Throwable ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @RequestMapping(value="/",  method = RequestMethod.GET)
