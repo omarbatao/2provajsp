@@ -22,12 +22,13 @@ import po.ManageDatabase;
 @Controller
 public class MainController {
     
-    ManageDatabase db = new ManageDatabase();
+    ManageDatabase db; 
     
-    public MainController(){
+    public MainController() throws Throwable{
+        db = new ManageDatabase();
     }
     
-    @RequestMapping(value="/")
+    @RequestMapping(value="/",  method = RequestMethod.GET)
     public String index(ModelMap map){
         List<Visita> visite = db.getVisite();
         if(visite!=null){
@@ -37,7 +38,7 @@ public class MainController {
         return "index";
     }
     
-    @RequestMapping(value="/admin")
+    @RequestMapping(value="/admin", method = RequestMethod.GET)
     public String admin(ModelMap map){
         map.put("titolo", "Admin");
         return "admin";

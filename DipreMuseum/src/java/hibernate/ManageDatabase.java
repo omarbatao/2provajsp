@@ -16,6 +16,7 @@ import models.Visita;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
@@ -23,29 +24,39 @@ import org.hibernate.Transaction;
  * @author FSEVERI\trovo2987
  */
 public class ManageDatabase {
+     private SessionFactory factory;
+    
+    public ManageDatabase() throws Throwable{
+        factory=  HibernateUtil.getSessionFactory();
+    }
 
   
     public List<Visita> getVisite() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT * FROM Visite");
-            return q.list();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return null;
+       Transaction tx = null;
+        ArrayList<Visita> eve= new ArrayList<>(); ;
+        Session session = factory.openSession();
+         try{
+              tx = session.beginTransaction();
+             
+             List eventi = session.createCriteria(Visita.class).list();
+             for (Iterator iterator =
+                 eventi.iterator(); iterator.hasNext();){
+                 Visita visita = (Visita) iterator.next();
+                 System.out.println("Evento: "+visita.toString());
+                 eve.add(visita);
+             }
+             
+             tx.commit();
+             return  eve;
+         }catch (HibernateException e) {
+             if (tx!=null) tx.rollback();
+         }
+         session.close();
+         return null;
     }
 
     public Visita getVisitaById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = factory.openSession();
         Transaction tx = null;
 
         try {
