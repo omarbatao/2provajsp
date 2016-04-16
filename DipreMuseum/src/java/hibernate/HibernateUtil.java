@@ -5,10 +5,18 @@
  */
 package hibernate;
 
+import models.Amministratore;
+import models.Biglietto;
+import models.Cartadicredito;
+import models.Categoria;
+import models.Servizio;
+import models.Visita;
+import models.Visitatore;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 
 /**
@@ -48,17 +56,25 @@ public class HibernateUtil {
     }*/
     
      public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
+      if (sessionFactory == null) {
             // loads configuration and mappings
-            Configuration configuration = new Configuration().configure();
+            Configuration configuration = new Configuration()
+                    .addAnnotatedClass(Amministratore.class)
+                    .addAnnotatedClass(Biglietto.class)
+                    .addAnnotatedClass(Cartadicredito.class)
+                    .addAnnotatedClass(Categoria.class)
+                    .addAnnotatedClass(Servizio.class)
+                    .addAnnotatedClass(Visitatore.class)
+                    .addAnnotatedClass(Visita.class)
+                    .configure();
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
-
+             
             // builds a session factory from the service registry
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);           
         }
-
-        return sessionFactory;
+         
+        return sessionFactory; 
     }
 }

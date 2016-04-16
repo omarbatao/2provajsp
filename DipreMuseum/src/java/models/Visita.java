@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Visite")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Visite.findAll", query = "SELECT v FROM Visite v"),
-    @NamedQuery(name = "Visite.findByIdVisita", query = "SELECT v FROM Visite v WHERE v.idVisita = :idVisita"),
-    @NamedQuery(name = "Visite.findByTitolo", query = "SELECT v FROM Visite v WHERE v.titolo = :titolo"),
-    @NamedQuery(name = "Visite.findByTariffa", query = "SELECT v FROM Visite v WHERE v.tariffa = :tariffa"),
-    @NamedQuery(name = "Visite.findByDataI", query = "SELECT v FROM Visite v WHERE v.dataI = :dataI"),
-    @NamedQuery(name = "Visite.findByDataF", query = "SELECT v FROM Visite v WHERE v.dataF = :dataF"),
-    @NamedQuery(name = "Visite.findByMaxPartecipanti", query = "SELECT v FROM Visite v WHERE v.maxPartecipanti = :maxPartecipanti"),
-    @NamedQuery(name = "Visite.findByDescrizione", query = "SELECT v FROM Visite v WHERE v.descrizione = :descrizione")})
+    @NamedQuery(name = "Visita.findAll", query = "SELECT v FROM Visita v"),
+    @NamedQuery(name = "Visita.findByIdVisita", query = "SELECT v FROM Visita v WHERE v.idVisita = :idVisita"),
+    @NamedQuery(name = "Visita.findByTitolo", query = "SELECT v FROM Visita v WHERE v.titolo = :titolo"),
+    @NamedQuery(name = "Visita.findByTariffa", query = "SELECT v FROM Visita v WHERE v.tariffa = :tariffa"),
+    @NamedQuery(name = "Visita.findByDataI", query = "SELECT v FROM Visita v WHERE v.dataI = :dataI"),
+    @NamedQuery(name = "Visita.findByDataF", query = "SELECT v FROM Visita v WHERE v.dataF = :dataF"),
+    @NamedQuery(name = "Visita.findByMaxPartecipanti", query = "SELECT v FROM Visita v WHERE v.maxPartecipanti = :maxPartecipanti"),
+    @NamedQuery(name = "Visita.findByDescrizione", query = "SELECT v FROM Visita v WHERE v.descrizione = :descrizione")})
 public class Visita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,7 +67,7 @@ public class Visita implements Serializable {
     @ManyToOne(optional = false)
     private Amministratore idA;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisita")
-    private Collection<Biglietto> bigliettiCollection;
+    private Collection<Biglietto> bigliettoCollection;
 
     public Visita() {
     }
@@ -146,12 +146,12 @@ public class Visita implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietto> getBigliettiCollection() {
-        return bigliettiCollection;
+    public Collection<Biglietto> getBigliettoCollection() {
+        return bigliettoCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
-        this.bigliettiCollection = bigliettiCollection;
+    public void setBigliettoCollection(Collection<Biglietto> bigliettoCollection) {
+        this.bigliettoCollection = bigliettoCollection;
     }
 
     @Override
@@ -176,7 +176,7 @@ public class Visita implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Visite[ idVisita=" + idVisita + " ]";
+        return "models.Visita[ idVisita=" + idVisita + " ]";
     }
     
 }

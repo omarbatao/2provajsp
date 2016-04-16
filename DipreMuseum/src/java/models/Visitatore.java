@@ -34,13 +34,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Visitatori")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Visitatori.findAll", query = "SELECT v FROM Visitatori v"),
-    @NamedQuery(name = "Visitatori.findById", query = "SELECT v FROM Visitatori v WHERE v.id = :id"),
-    @NamedQuery(name = "Visitatori.findByNome", query = "SELECT v FROM Visitatori v WHERE v.nome = :nome"),
-    @NamedQuery(name = "Visitatori.findByCognome", query = "SELECT v FROM Visitatori v WHERE v.cognome = :cognome"),
-    @NamedQuery(name = "Visitatori.findByDataN", query = "SELECT v FROM Visitatori v WHERE v.dataN = :dataN"),
-    @NamedQuery(name = "Visitatori.findByUsername", query = "SELECT v FROM Visitatori v WHERE v.username = :username"),
-    @NamedQuery(name = "Visitatori.findByPassword", query = "SELECT v FROM Visitatori v WHERE v.password = :password")})
+    @NamedQuery(name = "Visitatore.findAll", query = "SELECT v FROM Visitatore v"),
+    @NamedQuery(name = "Visitatore.findById", query = "SELECT v FROM Visitatore v WHERE v.id = :id"),
+    @NamedQuery(name = "Visitatore.findByNome", query = "SELECT v FROM Visitatore v WHERE v.nome = :nome"),
+    @NamedQuery(name = "Visitatore.findByCognome", query = "SELECT v FROM Visitatore v WHERE v.cognome = :cognome"),
+    @NamedQuery(name = "Visitatore.findByDataN", query = "SELECT v FROM Visitatore v WHERE v.dataN = :dataN"),
+    @NamedQuery(name = "Visitatore.findByUsername", query = "SELECT v FROM Visitatore v WHERE v.username = :username"),
+    @NamedQuery(name = "Visitatore.findByPassword", query = "SELECT v FROM Visitatore v WHERE v.password = :password")})
 public class Visitatore implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,9 +65,9 @@ public class Visitatore implements Serializable {
     @Column(name = "Password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
-    private Collection<Cartadicredito> cartedicreditoCollection;
+    private Collection<Cartadicredito> cartadicreditoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
-    private Collection<Biglietto> bigliettiCollection;
+    private Collection<Biglietto> bigliettoCollection;
     @JoinColumn(name = "Categoria", referencedColumnName = "CodC")
     @ManyToOne(optional = false)
     private Categoria categoria;
@@ -137,21 +137,21 @@ public class Visitatore implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Cartadicredito> getCartedicreditoCollection() {
-        return cartedicreditoCollection;
+    public Collection<Cartadicredito> getCartadicreditoCollection() {
+        return cartadicreditoCollection;
     }
 
-    public void setCartedicreditoCollection(Collection<Cartadicredito> cartedicreditoCollection) {
-        this.cartedicreditoCollection = cartedicreditoCollection;
+    public void setCartadicreditoCollection(Collection<Cartadicredito> cartadicreditoCollection) {
+        this.cartadicreditoCollection = cartadicreditoCollection;
     }
 
     @XmlTransient
-    public Collection<Biglietto> getBigliettiCollection() {
-        return bigliettiCollection;
+    public Collection<Biglietto> getBigliettoCollection() {
+        return bigliettoCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
-        this.bigliettiCollection = bigliettiCollection;
+    public void setBigliettoCollection(Collection<Biglietto> bigliettoCollection) {
+        this.bigliettoCollection = bigliettoCollection;
     }
 
     public Categoria getCategoria() {
@@ -184,7 +184,7 @@ public class Visitatore implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Visitatori[ id=" + id + " ]";
+        return "models.Visitatore[ id=" + id + " ]";
     }
     
 }

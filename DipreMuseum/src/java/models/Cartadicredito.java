@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Cartedicredito")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cartedicredito.findAll", query = "SELECT c FROM Cartedicredito c"),
-    @NamedQuery(name = "Cartedicredito.findByCodC", query = "SELECT c FROM Cartedicredito c WHERE c.codC = :codC"),
-    @NamedQuery(name = "Cartedicredito.findByDataS", query = "SELECT c FROM Cartedicredito c WHERE c.dataS = :dataS"),
-    @NamedQuery(name = "Cartedicredito.findByPin", query = "SELECT c FROM Cartedicredito c WHERE c.pin = :pin")})
+    @NamedQuery(name = "Cartadicredito.findAll", query = "SELECT c FROM Cartadicredito c"),
+    @NamedQuery(name = "Cartadicredito.findByCodC", query = "SELECT c FROM Cartadicredito c WHERE c.codC = :codC"),
+    @NamedQuery(name = "Cartadicredito.findByDataS", query = "SELECT c FROM Cartadicredito c WHERE c.dataS = :dataS"),
+    @NamedQuery(name = "Cartadicredito.findByPin", query = "SELECT c FROM Cartadicredito c WHERE c.pin = :pin")})
 public class Cartadicredito implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -116,7 +116,7 @@ public class Cartadicredito implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Cartedicredito[ codC=" + codC + " ]";
+        return "models.Cartadicredito[ codC=" + codC + " ]";
     }
     
 }

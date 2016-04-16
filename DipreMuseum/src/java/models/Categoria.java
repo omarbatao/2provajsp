@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Categorie")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c"),
-    @NamedQuery(name = "Categorie.findByCodC", query = "SELECT c FROM Categorie c WHERE c.codC = :codC"),
-    @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione"),
-    @NamedQuery(name = "Categorie.findBySconto", query = "SELECT c FROM Categorie c WHERE c.sconto = :sconto"),
-    @NamedQuery(name = "Categorie.findByTipoDoc", query = "SELECT c FROM Categorie c WHERE c.tipoDoc = :tipoDoc")})
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
+    @NamedQuery(name = "Categoria.findByCodC", query = "SELECT c FROM Categoria c WHERE c.codC = :codC"),
+    @NamedQuery(name = "Categoria.findByDescrizione", query = "SELECT c FROM Categoria c WHERE c.descrizione = :descrizione"),
+    @NamedQuery(name = "Categoria.findBySconto", query = "SELECT c FROM Categoria c WHERE c.sconto = :sconto"),
+    @NamedQuery(name = "Categoria.findByTipoDoc", query = "SELECT c FROM Categoria c WHERE c.tipoDoc = :tipoDoc")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,7 +47,7 @@ public class Categoria implements Serializable {
     @Column(name = "TipoDoc")
     private String tipoDoc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private Collection<Visitatore> visitatoriCollection;
+    private Collection<Visitatore> visitatoreCollection;
 
     public Categoria() {
     }
@@ -95,12 +95,12 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Visitatore> getVisitatoriCollection() {
-        return visitatoriCollection;
+    public Collection<Visitatore> getVisitatoreCollection() {
+        return visitatoreCollection;
     }
 
-    public void setVisitatoriCollection(Collection<Visitatore> visitatoriCollection) {
-        this.visitatoriCollection = visitatoriCollection;
+    public void setVisitatoreCollection(Collection<Visitatore> visitatoreCollection) {
+        this.visitatoreCollection = visitatoreCollection;
     }
 
     @Override
@@ -125,7 +125,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Categorie[ codC=" + codC + " ]";
+        return "models.Categoria[ codC=" + codC + " ]";
     }
     
 }

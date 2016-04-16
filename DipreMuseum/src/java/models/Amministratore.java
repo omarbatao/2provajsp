@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Amministratori")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Amministratori.findAll", query = "SELECT a FROM Amministratori a"),
-    @NamedQuery(name = "Amministratori.findById", query = "SELECT a FROM Amministratori a WHERE a.id = :id"),
-    @NamedQuery(name = "Amministratori.findByNome", query = "SELECT a FROM Amministratori a WHERE a.nome = :nome"),
-    @NamedQuery(name = "Amministratori.findByCognome", query = "SELECT a FROM Amministratori a WHERE a.cognome = :cognome"),
-    @NamedQuery(name = "Amministratori.findByEmail", query = "SELECT a FROM Amministratori a WHERE a.email = :email"),
-    @NamedQuery(name = "Amministratori.findByPw", query = "SELECT a FROM Amministratori a WHERE a.pw = :pw")})
+    @NamedQuery(name = "Amministratore.findAll", query = "SELECT a FROM Amministratore a"),
+    @NamedQuery(name = "Amministratore.findById", query = "SELECT a FROM Amministratore a WHERE a.id = :id"),
+    @NamedQuery(name = "Amministratore.findByNome", query = "SELECT a FROM Amministratore a WHERE a.nome = :nome"),
+    @NamedQuery(name = "Amministratore.findByCognome", query = "SELECT a FROM Amministratore a WHERE a.cognome = :cognome"),
+    @NamedQuery(name = "Amministratore.findByEmail", query = "SELECT a FROM Amministratore a WHERE a.email = :email"),
+    @NamedQuery(name = "Amministratore.findByPw", query = "SELECT a FROM Amministratore a WHERE a.pw = :pw")})
 public class Amministratore implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,7 +55,7 @@ public class Amministratore implements Serializable {
     @Column(name = "pw")
     private String pw;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idA")
-    private Collection<Visita> visiteCollection;
+    private Collection<Visita> visitaCollection;
 
     public Amministratore() {
     }
@@ -113,12 +113,12 @@ public class Amministratore implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Visita> getVisiteCollection() {
-        return visiteCollection;
+    public Collection<Visita> getVisitaCollection() {
+        return visitaCollection;
     }
 
-    public void setVisiteCollection(Collection<Visita> visiteCollection) {
-        this.visiteCollection = visiteCollection;
+    public void setVisitaCollection(Collection<Visita> visitaCollection) {
+        this.visitaCollection = visitaCollection;
     }
 
     @Override
@@ -143,7 +143,7 @@ public class Amministratore implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Amministratori[ id=" + id + " ]";
+        return "models.Amministratore[ id=" + id + " ]";
     }
     
 }

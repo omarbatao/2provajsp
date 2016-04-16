@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Biglietti")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
-    @NamedQuery(name = "Biglietti.findByCodB", query = "SELECT b FROM Biglietti b WHERE b.codB = :codB"),
-    @NamedQuery(name = "Biglietti.findByValidita", query = "SELECT b FROM Biglietti b WHERE b.validita = :validita"),
-    @NamedQuery(name = "Biglietti.findByTipo", query = "SELECT b FROM Biglietti b WHERE b.tipo = :tipo")})
+    @NamedQuery(name = "Biglietto.findAll", query = "SELECT b FROM Biglietto b"),
+    @NamedQuery(name = "Biglietto.findByCodB", query = "SELECT b FROM Biglietto b WHERE b.codB = :codB"),
+    @NamedQuery(name = "Biglietto.findByValidita", query = "SELECT b FROM Biglietto b WHERE b.validita = :validita"),
+    @NamedQuery(name = "Biglietto.findByTipo", query = "SELECT b FROM Biglietto b WHERE b.tipo = :tipo")})
 public class Biglietto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,7 +56,7 @@ public class Biglietto implements Serializable {
         @JoinColumn(name = "CodB", referencedColumnName = "CodB")}, inverseJoinColumns = {
         @JoinColumn(name = "CodS", referencedColumnName = "CodS")})
     @ManyToMany
-    private Collection<Servizio> serviziCollection;
+    private Collection<Servizio> servizioCollection;
     @JoinColumn(name = "IdVisitatore", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Visitatore idVisitatore;
@@ -102,12 +102,12 @@ public class Biglietto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Servizio> getServiziCollection() {
-        return serviziCollection;
+    public Collection<Servizio> getServizioCollection() {
+        return servizioCollection;
     }
 
-    public void setServiziCollection(Collection<Servizio> serviziCollection) {
-        this.serviziCollection = serviziCollection;
+    public void setServizioCollection(Collection<Servizio> servizioCollection) {
+        this.servizioCollection = servizioCollection;
     }
 
     public Visitatore getIdVisitatore() {
@@ -148,7 +148,7 @@ public class Biglietto implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Biglietti[ codB=" + codB + " ]";
+        return "models.Biglietto[ codB=" + codB + " ]";
     }
     
 }

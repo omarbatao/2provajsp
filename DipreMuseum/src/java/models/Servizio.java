@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Servizi")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Servizi.findAll", query = "SELECT s FROM Servizi s"),
-    @NamedQuery(name = "Servizi.findByCodS", query = "SELECT s FROM Servizi s WHERE s.codS = :codS"),
-    @NamedQuery(name = "Servizi.findByDescrizione", query = "SELECT s FROM Servizi s WHERE s.descrizione = :descrizione"),
-    @NamedQuery(name = "Servizi.findByPrezzo", query = "SELECT s FROM Servizi s WHERE s.prezzo = :prezzo")})
+    @NamedQuery(name = "Servizio.findAll", query = "SELECT s FROM Servizio s"),
+    @NamedQuery(name = "Servizio.findByCodS", query = "SELECT s FROM Servizio s WHERE s.codS = :codS"),
+    @NamedQuery(name = "Servizio.findByDescrizione", query = "SELECT s FROM Servizio s WHERE s.descrizione = :descrizione"),
+    @NamedQuery(name = "Servizio.findByPrezzo", query = "SELECT s FROM Servizio s WHERE s.prezzo = :prezzo")})
 public class Servizio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,8 +43,8 @@ public class Servizio implements Serializable {
     @Basic(optional = false)
     @Column(name = "Prezzo")
     private BigDecimal prezzo;
-    @ManyToMany(mappedBy = "serviziCollection")
-    private Collection<Biglietto> bigliettiCollection;
+    @ManyToMany(mappedBy = "servizioCollection")
+    private Collection<Biglietto> bigliettoCollection;
 
     public Servizio() {
     }
@@ -83,12 +83,12 @@ public class Servizio implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Biglietto> getBigliettiCollection() {
-        return bigliettiCollection;
+    public Collection<Biglietto> getBigliettoCollection() {
+        return bigliettoCollection;
     }
 
-    public void setBigliettiCollection(Collection<Biglietto> bigliettiCollection) {
-        this.bigliettiCollection = bigliettiCollection;
+    public void setBigliettoCollection(Collection<Biglietto> bigliettoCollection) {
+        this.bigliettoCollection = bigliettoCollection;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Servizio implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Servizi[ codS=" + codS + " ]";
+        return "models.Servizio[ codS=" + codS + " ]";
     }
     
 }

@@ -9,6 +9,13 @@
     <class>models.Servizio</class>
     <class>models.Visitatore</class>
     <class>models.Visita</class>
+    <class>models.Biglietti</class>
+    <class>models.Servizi</class>
+    <class>models.Cartedicredito</class>
+    <class>models.Amministratori</class>
+    <class>models.Categorie</class>
+    <class>models.Visite</class>
+    <class>models.Visitatori</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.1.252:3306/5ib29?zeroDateTimeBehavior=convertToNull"/>
