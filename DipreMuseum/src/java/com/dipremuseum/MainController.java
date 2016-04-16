@@ -28,6 +28,7 @@ public class MainController {
     
     public MainController(){
         try {
+            db = new ManageDatabase();
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
