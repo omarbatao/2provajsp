@@ -111,17 +111,17 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li class="${menustate[0]}">
                         <a href="/DipreMuseum/admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
-                        <a href="/DipreMuseum/adminevents"><i class="fa fa-fw fa-bar-chart-o"></i>  Eventi </a>
+                    <li class="${menustate[1]}">
+                        <a href="/DipreMuseum/adminevents"><i class="fa fa-fw fa-calendar"></i>  Eventi </a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>  Visite </a>
+                    <li class="${menustate[2]}">
+                        <a href="/DipreMuseum/adminvisits"><i class="fa fa-fw Example of camera fa-camera"></i>  Visite </a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i>  Servizi</a>
+                    <li class="${menustate[3]}">
+                        <a href="/DipreMuseum/adminservices"><i class="fa fa-fw fa-edit"></i>  Servizi</a>
                     </li>
                     <!--<li>
                         <a href="#"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
