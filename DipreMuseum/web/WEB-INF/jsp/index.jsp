@@ -92,35 +92,19 @@
     <!-- /.row -->
     <!-- Features Section -->
     <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">Evento della settimana</h2>
-            <c:forEach items="${visite}" var="visita">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4><i class="fa fa-university"></i>${visita.getTitolo()}</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                            <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
         <div class="col-md-6">
-            <p>The Modern Business template by Start Bootstrap includes:</p>
-            <ul>
-                <li><strong>Bootstrap v3.2.0</strong>
-                </li>
-                <li>jQuery v1.11.0</li>
-                <li>Font Awesome v4.1.0</li>
-                <li>Working PHP contact form with validation</li>
-                <li>Unstyled page elements for easy customization</li>
-                <li>17 HTML pages</li>
-            </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+            <h2 class="page-header">Evento della settimana</h2>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>                        </div>
+                <div class="panel-body">
+                    <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
+                    <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-6">
             <img class="img-responsive" src="http://placehold.it/700x450" alt="">
         </div>
@@ -131,40 +115,22 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">Eventi pi&ugrave recenti</h2>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
+            <c:forEach items="${ultimiEventi}" var="evento">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>
+                        </div>
+                        <div class="panel-body">
+                            <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
+                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default">Leggi di pi&ugrave</a>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
     <!-- /.row -->
-
 
 
     <hr>

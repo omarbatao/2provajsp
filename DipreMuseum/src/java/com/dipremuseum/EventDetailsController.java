@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dipremuseum;
 
 import hibernate.ManageDatabase;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,32 +18,31 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author FSEVERI\loreggian3064
  */
 @Controller
-public class MainController {
-
-    ManageDatabase db;
-
-    public MainController() {
+public class EventDetailsController {
+    
+    ManageDatabase db; 
+    
+    public EventDetailsController(){
         try {
             db = new ManageDatabase();
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map) {
+    
+    @RequestMapping(value="/evento",  method = RequestMethod.GET)
+    public String infoevento(ModelMap map,@RequestParam(value="id") String id){
         try {
-            List<Visita> ultimiEventi = db.getEventiRecenti();
-            if (ultimiEventi != null) {
-                map.put("evento", ultimiEventi.get(0));
-                map.put("ultimiEventi", ultimiEventi);
+            
+            Visita evento = db.getEventoById(id);
+            
+            if(evento!=null){
+                map.put("evento", evento);
             }
-
-            map.put("titolo", "Dipr&egrave Museum");
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "index";
+        return "dettaglievento";
     }
-
+   
 }
