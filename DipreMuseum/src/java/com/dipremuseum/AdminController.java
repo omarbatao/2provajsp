@@ -59,9 +59,10 @@ public class AdminController {
     @RequestMapping(value = "/adminevents")
     public String events(ModelMap map) {// --- request menu 1
         init();
-        //List<Visita> visite = db.getEventi();
+        List<Visita> eventi = db.getEventi();
         menustate[1]="active";
         map.put("menustate",menustate);
+        map.put("eventi",eventi);
         map.put("titolo", "Admin - Events");
         map.put("username", "Username");
         return "adminviews/events";
@@ -71,11 +72,12 @@ public class AdminController {
     @RequestMapping(value = "/adminvisits")
     public String visits(ModelMap map) {// --- request menu 2
         init();
-        
+        List<Visita> visite = db.getVisite();
         menustate[2]="active";
         map.put("menustate",menustate);
         map.put("titolo", "Admin - Visits");
         map.put("username", "Username");
+        map.put("visite",visite);
         return "adminviews/visite";
 
     }

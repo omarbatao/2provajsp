@@ -38,52 +38,30 @@
                             </div>
                             <div class="panel-body">
                                 <div class="list-group">
-                                    
-                                    
-                                    
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">just now</span>
+                                    <c:forEach  items="${visite}" var="visita">
+                                        <a href="#" class="list-group-item" >
+                                        <!--<span class="badge"><button>ciao</button></span>
                                         <i class="fa fa-fw fa-calendar"></i> 
-                                        <div class ="left">Calendar updated</div>
-                                        <div class="right"><button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+                                        Calendar updated-->
+                                        <!--<div class="col-md-3"><button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></div>-->
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12"> 
+                                                    <div class="col-md-9 paddingtop" >
+                                                        ${visita.getTitolo()}
+                                                    </div>
+                                                    <div class="col-md-3 centertext" >
+                                                        <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button> <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
-                                    
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">4 minutes ago</span>
-                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">23 minutes ago</span>
-                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">46 minutes ago</span>
-                                        <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has been added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">2 hours ago</span>
-                                        <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">yesterday</span>
-                                        <i class="fa fa-fw fa-globe"></i> Saved the world
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">two days ago</span>
-                                        <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
-                                    </a>
+                                    </c:forEach>
                                 </div>
-                                <div class="text-right">
-                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                               
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

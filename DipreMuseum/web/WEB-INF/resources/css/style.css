@@ -12,3 +12,9 @@ and open the template in the editor.
 .pad{
     padding : 10px;
 }
+.paddingtop{
+    padding-top:1%; 
+}
+.centertext{
+    text-align: center;  
+}
