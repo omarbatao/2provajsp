@@ -100,7 +100,7 @@
                     <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>                        </div>
                 <div class="panel-body">
                     <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                    <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>
