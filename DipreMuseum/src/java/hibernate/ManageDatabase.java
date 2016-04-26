@@ -125,13 +125,15 @@ public class ManageDatabase {
 
 
     //ricorda di fare il punto length
-    /*public List<Biglietto> getBigliettiByEsposizione(String idVisita) {
+    public List<Biglietto> getBigliettiByEsposizione(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = '"+idVisita+"'").addEntity(Biglietto.class);
+        List<Biglietto> rows = query.list();
         session.getTransaction().commit();
         session.close();
         return rows;
-    }*/
+    }
 
     //ricorda di fare il punto length
     public List<Visita> getEventiInCorso(Date dataI, Date dataF) {
@@ -145,16 +147,26 @@ public class ManageDatabase {
         return rows;
     }
 
-    public List<Visita> query1(String idVisita) {
+    public Biglietto query2(String idVisita) {
         Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("select * from Biglietti where idVisita='" + idVisita + "'").addEntity(Visita.class);
-        List<Visita> rows = query.list();
-
-
-        session.getTransaction().commit();
-        session.close();
-        return rows;
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
+            query.setString(0, idVisita);
+            List cats = query.list();
+            if (cats.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Biglietto) cats.get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Visita getEventoById(String id) {
@@ -188,6 +200,30 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
+    
+    public Visita query1(Date dataI, Date dataF) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            SQLQuery query = session.createSQLQuery("select IdVisita,IdEsposizione,Titolo,Tariffa,DataI,DataF from Visite where DataI>= ? and DataF<=?").addEntity(Visita.class);
+            query.setDate(0,dataI);
+            query.setDate(1,dataF);
+            List cats = query.list();
+            if (cats.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Visita) cats.get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
     }
+    
+}
     
 
