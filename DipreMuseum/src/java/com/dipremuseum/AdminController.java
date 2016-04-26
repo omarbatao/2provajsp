@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import hibernate.ManageDatabase;
+import models.Biglietto;
 
 /**
  *
@@ -48,7 +49,11 @@ public class AdminController {
     @RequestMapping(value = "/admin")
     public String admin(ModelMap map) {// --- request menu 0
         init();
+        List<Visita> eventi = db.getEventi();
+        List<Biglietto> biglietti = db.getBiglietti();
         menustate[0]="active";
+        map.put("biglietti",biglietti);
+        map.put("eventi", eventi);
         map.put("menustate",menustate);
         map.put("titolo", "Admin");
         map.put("username", "Username");

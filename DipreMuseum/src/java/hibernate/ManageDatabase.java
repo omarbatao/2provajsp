@@ -188,6 +188,15 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
+    
+    public void insertEvento(Visita evento){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(evento);
+        session.getTransaction().commit();
+        session.close();
     }
+    
+}
     
 

@@ -10,7 +10,8 @@ and open the template in the editor.
 
 
 .pad{
-    padding : 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .paddingtop{
     padding-top:1%; 
