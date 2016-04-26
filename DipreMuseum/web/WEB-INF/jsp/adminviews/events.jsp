@@ -1,9 +1,25 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.List"%>
+<%@page import="models.Visita"%>
 <jsp:include page="../head.jsp"/>
 
 <body>
-    <br/>
     <div id="wrapper">
         <jsp:include page="menu.jsp"/>
+        <div id="page-wrapper" >
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Events <small>manage events</small>
+                        </h1>
+                    </div>
+                </div>
+                </div>
+                <!-- /.row -->
+            
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -21,11 +37,24 @@
                                 editable: true,
                                 eventLimit: true, // allow "more" link when too many events
                                 events: [
-                                    {
+                                    /*{
                                         title: 'All Day Event',
                                         start: '2016-04-01'
-                                    },
-                                    {
+                                    }*/
+
+                                    <%
+                                        List<Visita> eventi = (List) request.getAttribute("eventi");
+                                        String s = "";
+                                        for(Visita evento : eventi ){
+                                            s+="{ id: '"+evento.getIdVisita()+"', title: '"+evento.getTitolo()+"', start: '"+evento.getDateIString()+"', end: '"+evento.getDateFString()+"' }, ";
+                                            
+                                        }      
+                                        s = s.substring(0, s.length()-2);
+                                        out.println(s);
+                                    %>
+                                    
+                                    
+                                    /*{
                                         title: 'Long Event',
                                         start: '2016-04-07',
                                         end: '2016-04-10'
@@ -74,11 +103,14 @@
                                         title: 'Click for Google',
                                         url: 'http://google.com/',
                                         start: '2016-04-28'
-                                    }
+                                    }*/
                                 ]
                             });
 
                         });
+                        
+                       
+                        
 
                         function getToday() {
                             var today = new Date();
@@ -103,7 +135,7 @@
         </div>
 
 
-
+            </div>
     </div>
     <!-- /#wrapper -->
 

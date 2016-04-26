@@ -5,6 +5,7 @@
  */
 package com.dipremuseum;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import hibernate.ManageDatabase;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Visita;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author FSEVERI\loreggian3064
  */
 @Controller
-public class MainController {
+public class UtentiController {
 
     ManageDatabase db;
 
-    public MainController() {
+    public UtentiController() {
         try {
             db = new ManageDatabase();
         } catch (Throwable ex) {
@@ -34,20 +37,20 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map) {
-        try {
-            List<Visita> ultimiEventi = db.getEventiRecenti();
-            if (ultimiEventi != null) {
-                map.put("evento", ultimiEventi.get(0));
-                map.put("ultimiEventi", ultimiEventi);
-            }
-
-            map.put("titolo", "Dipr&egrave Museum");
-        } catch (Throwable ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "index";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(ModelMap map) {
+        return "login";
     }
-
+    
+     @RequestMapping(value = "/checklogin", method = RequestMethod.POST)
+    public String check(ModelMap map) {
+        return "checklogin";
+    }
+   
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap map){
+        return "logout";
+    }
+    
+ 
 }
