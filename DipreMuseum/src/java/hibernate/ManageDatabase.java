@@ -15,7 +15,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import models.Amministratore;
 import models.Biglietto;
-import models.Cartadicredito;
+import models.CartaDiCredito;
 import models.Categoria;
 import models.Servizio;
 import models.Visita;
@@ -81,11 +81,11 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
-    public List<Cartadicredito> getCartaDiCredito() {
+    public List<CartaDiCredito> getCartaDiCredito() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("select * from Cartedicredito ").addEntity(Cartadicredito.class);
-        List<Cartadicredito> rows = query.list();
+        SQLQuery query = session.createSQLQuery("select * from Cartedicredito ").addEntity(CartaDiCredito.class);
+        List<CartaDiCredito> rows = query.list();
         
         session.getTransaction().commit();
         session.close();
