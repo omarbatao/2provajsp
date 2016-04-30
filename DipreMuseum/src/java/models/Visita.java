@@ -7,6 +7,8 @@ package models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -178,5 +180,19 @@ public class Visita implements Serializable {
     public String toString() {
         return "models.Visita[ idVisita=" + idVisita + " ]";
     }
+    
+    
+    public String getDateIString(){
+        DateFormat df = new SimpleDateFormat("yyy-MM-dd");
+        String reportdate = df.format(dataI);
+        return reportdate;
+    }
+    
+     public String getDateFString(){
+        DateFormat df = new SimpleDateFormat("yyy-MM-dd");
+        String reportdate = df.format(dataF);
+        return reportdate;
+    }
+    
     
 }
