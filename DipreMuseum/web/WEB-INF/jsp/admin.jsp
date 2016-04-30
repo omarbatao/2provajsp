@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="head.jsp"/>
 
 <body>
@@ -44,18 +45,18 @@
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                        <div class="huge">${biglietti.size()}</div>
                                         <div>Tickets Sold!</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <!--<a href="#">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -71,13 +72,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <!--<a href="#">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -93,13 +94,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <!--<a href="#">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                     
@@ -116,13 +117,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <!--<a href="#">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                 </div>
@@ -174,60 +175,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <c:forEach items="${eventi}" var="evento">
                                             <tr>
-                                                <td>3326</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:29 PM</td>
-                                                <td>$321.33</td>
+                                                <td>${evento.getIdVisita()}</td>
+                                                <td>${evento.getTitolo()}</td>
+                                                <td>${evento.getDataI()}</td>
+                                                <td>${evento.getDataF()}</td>
                                             </tr>
-                                            <tr>
-                                                <td>3325</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:20 PM</td>
-                                                <td>$234.34</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3324</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:03 PM</td>
-                                                <td>$724.17</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3323</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:00 PM</td>
-                                                <td>$23.71</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3322</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:49 PM</td>
-                                                <td>$8345.23</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3321</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:23 PM</td>
-                                                <td>$245.12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3320</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:15 PM</td>
-                                                <td>$5663.54</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3319</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:13 PM</td>
-                                                <td>$943.45</td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="text-right">
+                                <!--<div class="text-right">
                                     <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

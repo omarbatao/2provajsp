@@ -33,6 +33,7 @@
     <link href='./resources/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <script src='./resources/js/moment.min.js'></script>
     <script src="./resources/js/jquery.js"></script>
+    <script src="./resources/js/bootstrap.min.js"></script>
     <script src='./resources/js/fullcalendar.min.js'></script>
     
 

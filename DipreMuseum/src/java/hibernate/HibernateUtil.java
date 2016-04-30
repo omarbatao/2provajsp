@@ -7,7 +7,7 @@ package hibernate;
 
 import models.Amministratore;
 import models.Biglietto;
-import models.Cartadicredito;
+import models.CartaDiCredito;
 import models.Categoria;
 import models.Servizio;
 import models.Visita;
@@ -61,7 +61,7 @@ public class HibernateUtil {
             Configuration configuration = new Configuration()
                     .addAnnotatedClass(Amministratore.class)
                     .addAnnotatedClass(Biglietto.class)
-                    .addAnnotatedClass(Cartadicredito.class)
+                    .addAnnotatedClass(CartaDiCredito.class)
                     .addAnnotatedClass(Categoria.class)
                     .addAnnotatedClass(Servizio.class)
                     .addAnnotatedClass(Visitatore.class)

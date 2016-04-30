@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\depaula2995
+ * @author FSEVERI\ceretta2991
  */
 @Entity
 @Table(name = "Biglietti")
@@ -63,6 +63,9 @@ public class Biglietto implements Serializable {
     @JoinColumn(name = "IdVisita", referencedColumnName = "IdVisita")
     @ManyToOne(optional = false)
     private Visita idVisita;
+    @JoinColumn(name = "Categoria", referencedColumnName = "CodC")
+    @ManyToOne(optional = false)
+    private Categoria categoria;
 
     public Biglietto() {
     }
@@ -124,6 +127,14 @@ public class Biglietto implements Serializable {
 
     public void setIdVisita(Visita idVisita) {
         this.idVisita = idVisita;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

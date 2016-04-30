@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Find Visit">
                             </div>
-                            <button type="submit" class="btn btn-default">Find</button>
+                            <button type="submit" class="btn btn-default">Search</button>
                         </form>
                     </div>  
                 </div>
