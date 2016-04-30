@@ -92,6 +92,18 @@
     <!-- /.row -->
     <!-- Features Section -->
     <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Video presentazione</h2>
+        </div>
+        <div class="col-lg-12">
+            <iframe width="100%" height="600" src="https://www.youtube.com/embed/-zdUy7K02-4" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <!-- /.row -->
+    
+    <!-- /.row -->
+    <!-- Features Section -->
+    <div class="row" style="margin-top: 40px">
         <div class="col-md-6">
             <h2 class="page-header">Evento della settimana</h2>
 
