@@ -38,6 +38,7 @@ public class EventDetailsController {
             
             if(evento!=null){
                 map.put("evento", evento);
+                map.put("titolo", evento.getTitolo());
             }
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

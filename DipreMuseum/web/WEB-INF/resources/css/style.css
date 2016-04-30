@@ -19,3 +19,10 @@ and open the template in the editor.
 .centertext{
     text-align: center;  
 }
+
+.titoloevento{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 600%;
+    margin-top: 100px;
+}
