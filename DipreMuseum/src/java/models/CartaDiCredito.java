@@ -22,17 +22,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FSEVERI\depaula2995
+ * @author FSEVERI\ceretta2991
  */
 @Entity
-@Table(name = "Cartedicredito")
+@Table(name = "CarteDiCredito")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cartadicredito.findAll", query = "SELECT c FROM Cartadicredito c"),
-    @NamedQuery(name = "Cartadicredito.findByCodC", query = "SELECT c FROM Cartadicredito c WHERE c.codC = :codC"),
-    @NamedQuery(name = "Cartadicredito.findByDataS", query = "SELECT c FROM Cartadicredito c WHERE c.dataS = :dataS"),
-    @NamedQuery(name = "Cartadicredito.findByPin", query = "SELECT c FROM Cartadicredito c WHERE c.pin = :pin")})
-public class Cartadicredito implements Serializable {
+    @NamedQuery(name = "CartaDiCredito.findAll", query = "SELECT c FROM CartaDiCredito c"),
+    @NamedQuery(name = "CartaDiCredito.findByCodC", query = "SELECT c FROM CartaDiCredito c WHERE c.codC = :codC"),
+    @NamedQuery(name = "CartaDiCredito.findByDataS", query = "SELECT c FROM CartaDiCredito c WHERE c.dataS = :dataS"),
+    @NamedQuery(name = "CartaDiCredito.findByPin", query = "SELECT c FROM CartaDiCredito c WHERE c.pin = :pin")})
+public class CartaDiCredito implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,14 +49,14 @@ public class Cartadicredito implements Serializable {
     @ManyToOne(optional = false)
     private Visitatore idVisitatore;
 
-    public Cartadicredito() {
+    public CartaDiCredito() {
     }
 
-    public Cartadicredito(String codC) {
+    public CartaDiCredito(String codC) {
         this.codC = codC;
     }
 
-    public Cartadicredito(String codC, Date dataS, String pin) {
+    public CartaDiCredito(String codC, Date dataS, String pin) {
         this.codC = codC;
         this.dataS = dataS;
         this.pin = pin;
@@ -104,10 +104,10 @@ public class Cartadicredito implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cartadicredito)) {
+        if (!(object instanceof CartaDiCredito)) {
             return false;
         }
-        Cartadicredito other = (Cartadicredito) object;
+        CartaDiCredito other = (CartaDiCredito) object;
         if ((this.codC == null && other.codC != null) || (this.codC != null && !this.codC.equals(other.codC))) {
             return false;
         }
@@ -116,7 +116,7 @@ public class Cartadicredito implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Cartadicredito[ codC=" + codC + " ]";
+        return "models.CartaDiCredito[ codC=" + codC + " ]";
     }
     
 }

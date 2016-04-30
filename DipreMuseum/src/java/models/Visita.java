@@ -7,9 +7,6 @@ package models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -30,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\depaula2995
+ * @author FSEVERI\ceretta2991
  */
 @Entity
 @Table(name = "Visite")
@@ -45,7 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Visita.findByMaxPartecipanti", query = "SELECT v FROM Visita v WHERE v.maxPartecipanti = :maxPartecipanti"),
     @NamedQuery(name = "Visita.findByDescrizione", query = "SELECT v FROM Visita v WHERE v.descrizione = :descrizione")})
 public class Visita implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -182,17 +178,5 @@ public class Visita implements Serializable {
     public String toString() {
         return "models.Visita[ idVisita=" + idVisita + " ]";
     }
-
-    public String getDateIString() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String reportDate = df.format(dataI);
-        return reportDate;
-    }
-
-    public String getDateFString() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String reportDate = df.format(dataF);
-        return reportDate;
-    }
-
+    
 }

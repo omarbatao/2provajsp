@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\depaula2995
+ * @author FSEVERI\ceretta2991
  */
 @Entity
 @Table(name = "Visitatori")
@@ -65,12 +63,9 @@ public class Visitatore implements Serializable {
     @Column(name = "Password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
-    private Collection<Cartadicredito> cartadicreditoCollection;
+    private Collection<CartaDiCredito> cartaDiCreditoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
     private Collection<Biglietto> bigliettoCollection;
-    @JoinColumn(name = "Categoria", referencedColumnName = "CodC")
-    @ManyToOne(optional = false)
-    private Categoria categoria;
 
     public Visitatore() {
     }
@@ -137,12 +132,12 @@ public class Visitatore implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Cartadicredito> getCartadicreditoCollection() {
-        return cartadicreditoCollection;
+    public Collection<CartaDiCredito> getCartaDiCreditoCollection() {
+        return cartaDiCreditoCollection;
     }
 
-    public void setCartadicreditoCollection(Collection<Cartadicredito> cartadicreditoCollection) {
-        this.cartadicreditoCollection = cartadicreditoCollection;
+    public void setCartaDiCreditoCollection(Collection<CartaDiCredito> cartaDiCreditoCollection) {
+        this.cartaDiCreditoCollection = cartaDiCreditoCollection;
     }
 
     @XmlTransient
@@ -152,14 +147,6 @@ public class Visitatore implements Serializable {
 
     public void setBigliettoCollection(Collection<Biglietto> bigliettoCollection) {
         this.bigliettoCollection = bigliettoCollection;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 
     @Override
