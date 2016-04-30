@@ -38,7 +38,72 @@ public class ManageDatabase {
     public ManageDatabase() throws Throwable {
         factory = HibernateUtil.getSessionFactory();
     }
-
+    
+    public void inserisciEvento(Visita evento){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(evento);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciVisita(Visita visita){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(visita);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciBiglietto(Biglietto biglietto){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(biglietto);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciAmministratore(Amministratore amministratore){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(amministratore);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciCartaDiCredito(CartaDiCredito carta){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(carta);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void inserisciCategorie(Categoria categoria){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(categoria);
+        session.getTransaction().commit();
+        session.close();
+    }
+    /*
+    public void inserisciBiglietto(int codB,Date validita,int tipo,int idVisitatore,String idVisita,String categoria){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("INSERT INTO Biglietti(CodB,Validita,Tipo,IdVisitatore,IdVisita,Categoria) VALUES("+idVisita+","+titolo+","+tariffa+","+idA+","+descrizione+")");
+        int result=query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciVisita(String idVisita,String titolo,Double tariffa,int idA,String descrizione){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("INSERT INTO Viste(IdVisita,Titolo,Tariffa,IdA,Descrizione) VALUES("+idVisita+","+titolo+","+tariffa+","+idA+","+descrizione+")");
+        int result=query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    */
     public List<Visita> getVisite() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
@@ -223,6 +288,7 @@ public class ManageDatabase {
         }
         return null;
     }
+    
     
 }
     
