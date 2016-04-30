@@ -19,7 +19,7 @@
                 </div>
             </div>
             <!-- /.row -->
-      
+
 
             <div class="container">
                 <!-- Button trigger modal -->
@@ -27,7 +27,7 @@
                 <div class="row pad">
                     <div class="col-md-12">
                         <form class="form-inline" role="search">
-                            <button type="button" class="btn btn-success" >Add event</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addevent" >Add event</button>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Find Event">
                             </div>
@@ -35,33 +35,101 @@
                         </form>
                     </div>  
                 </div>
-                
-                
-                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="addevent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Add event</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="idevento" class="col-sm-2 control-label">Id Event</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="idevento" placeholder="id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Title </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="title" placeholder="Event Title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price" class="col-sm-2 control-label">Price </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="price" placeholder="Event price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataI" class="col-sm-2 control-label">Start date </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="titolo" placeholder="Event start date">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="dataF" class="col-sm-2 control-label">End date </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="titolo" placeholder="Event end date">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="maxp" class="col-sm-2 control-label">Max people </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="maxp" placeholder="Max people">
+                                        </div>
+                                    </div>
+                                        <input type="hidden" id="idA" value="12"/>
+                                    <!--<div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    Visite (IdV, Titolo, Tariffa, DataI, DataF, MaxPartecipanti, IdA)
+                                    -->
+                                    <div class="form-group">
+                                         <div class="col-sm-offset-2 col-sm-10">
+                                            <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </form>
+                            </div>
+                            
+                            <!--<div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save Event</button>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
                 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
 
                 <div class="row">
                     <div class="col-md-12">
