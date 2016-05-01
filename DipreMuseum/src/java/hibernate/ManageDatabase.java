@@ -5,6 +5,7 @@ package hibernate;
  * and open the template in the editor.
  */
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -82,6 +83,20 @@ public class ManageDatabase {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(categoria);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void inserisciVisitatori(Visitatore visitatore){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(visitatore);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void inserisciServizi(Servizio servizio){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(servizio);
         session.getTransaction().commit();
         session.close();
     }
@@ -220,28 +235,6 @@ public class ManageDatabase {
         return rows;
     }
 
-    public Biglietto query2(String idVisita) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
-            query.setString(0, idVisita);
-            List cats = query.list();
-            if (cats.size() > 0) {
-                session.getTransaction().commit();
-                session.close();
-                return (Biglietto) cats.get(0);
-            }
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public Visita getEventoById(String id) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -296,8 +289,106 @@ public class ManageDatabase {
         }
         return null;
     }
+    //non so se biglietto è giusto
+    public Biglietto query2(String idVisita) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
+            query.setString(0, idVisita);
+            List cats = query.list();
+            if (cats.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Biglietto) cats.get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //non so se il group by è giusto perchè nel foglio delle query è diverso
+    public void vista1 (String idVisita){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
+                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita="+idVisita+" GROUP BY IdVisita,Categirua,Conta,Sconto");
+        int result=query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
     
+    public void vista2 (String idVisita){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista2 (Tariffa,IdVisita) AS"
+                + "SELECT Tariffa,IdVisita FROM Visite WHERE IdVisita="+idVisita+" ");
+        int result=query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void vista3 (){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista3 (Categoria,Totale) AS"
+                + "SELECT Categoria,(Tariffa * Conta)-(Tariffa*100/Sconto)*Conta AS Totale FROM Vista1 NATURAL JOIN Vista2 GROUP BY Categoria");
+        int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    //DROP Viste posso mettere tutte e 3 insieme ?
+    public void dropVista1(){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1");
+        int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void dropVista2(){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("DROP VIEW Vista2");
+        int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void dropVista3(){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("DROP VIEW Vista3");
+        int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    //boh.....Int non può andare bene.......... che palle cazzo
+    public Int query3(){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            SQLQuery query = session.createSQLQuery("SELECT SUM(Totale) FROM Vista3").addEntity(Biglietto.class);
+            List cats = query.list();
+            if (cats.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Int) cats.get(0);
+            }
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        return null;
+    }
     
 }
-    
-
