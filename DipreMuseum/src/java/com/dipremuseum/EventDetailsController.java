@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Categoria;
 import models.Visita;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,13 +34,18 @@ public class EventDetailsController {
     @RequestMapping(value="/evento",  method = RequestMethod.GET)
     public String infoevento(ModelMap map,@RequestParam(value="id") String id){
         try {
+            List<Categoria> categorie = db.getCategorie();
             
+            for(Categoria c :categorie){
+                System.out.println("categoria:  ->"+c.getDescrizione());
+            }
             Visita evento = db.getEventoById(id);
             
             if(evento!=null){
                 map.put("evento", evento);
-                map.put("titolo", evento.getTitolo());
+                map.put("titolo", evento.getTitolo());             
             }
+            map.put("categorie",categorie);
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }

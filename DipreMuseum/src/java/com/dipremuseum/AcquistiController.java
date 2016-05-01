@@ -58,7 +58,7 @@ public class AcquistiController {
         //b.setCategoria(cat);
         //b.setIdVisita(visita);
         //b.setIdVisitatore(user);
-        //db.inserisciBiglietto(b);
+        db.inserisciBiglietto(b);
         return "inserito";
     }
 
