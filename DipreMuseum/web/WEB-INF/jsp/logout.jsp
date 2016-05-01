@@ -13,7 +13,10 @@
     </head>
     <body>
         <% 
+            session.setAttribute("email",null);
+            session.setAttribute("password",null);
             session.invalidate();
+            
             response.sendRedirect("./");
         %>
     </body>

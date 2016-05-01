@@ -85,6 +85,14 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
+    
+    public void inserisciVisitatore(Visitatore visitatore){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(visitatore);
+        session.getTransaction().commit();
+        session.close();
+    }
     /*
     public void inserisciBiglietto(int codB,Date validita,int tipo,int idVisitatore,String idVisita,String categoria){
         Session session = factory.openSession();
