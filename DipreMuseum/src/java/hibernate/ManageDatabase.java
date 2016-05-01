@@ -370,7 +370,7 @@ public class ManageDatabase {
     }
     
     //boh.....Int non può andare bene.......... che palle cazzo
-    public Int query3(){
+    public Integer query3(){
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -380,7 +380,7 @@ public class ManageDatabase {
             if (cats.size() > 0) {
                 session.getTransaction().commit();
                 session.close();
-                return (Int) cats.get(0);
+                return (Integer) cats.get(0);
             }
         } catch (HibernateException e) {
             if (tx != null) {
