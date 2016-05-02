@@ -163,10 +163,10 @@ public class Visitatore implements Serializable {
             return false;
         }
         Visitatore other = (Visitatore) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
+        if (this.username !=null && other.username!=null && this.username.equals(other.username) && this.password.equals(other.password)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -4,6 +4,7 @@
     Author     : FSEVERI\depaula2995
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,15 +13,16 @@
         <title>JSP Page</title>
     </head>
     <body>
+
+
         <%
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            if (username != null && password != null) {
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
+            
+            if (request.getAttribute("login")!= null && request.getAttribute("login").equals("true")) {
+                session.setAttribute("username", request.getParameter("username"));
+                session.setAttribute("password", request.getParameter("password"));
                 response.sendRedirect("./");
             } else {
-                response.sendRedirect("error.jsp");
+               response.sendRedirect("./login?error=true");
             }
 
         %>

@@ -12,28 +12,27 @@
 
 <div class="container">
     <div class="row">
+
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Sign in to continue to Dipr&egrave; Museum</h1>
+            <h1 class="text-center login-title">Effettua il login per continuare su Dipr&egrave; Museum</h1>
             <div class="account-wall">
+        <%
+        if(request.getParameter("error")!=null && request.getParameter("error").equals("true"))
+            out.print("<h4 style='text-align:center;color:red'>Login errato</h4>");
+        %>
                 <form class="form-signin" action="./checklogin" method="POST">
-                <input type="text" class="form-control" placeholder="Email" name="username" required autofocus>
+                <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Sign in</button>
-                <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
-                    Remember me
-                </label>
-                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                    Log in</button>
+                   <div style="text-align:center"> <br> <b>Oppure</b><div>
+            <a href="./register" class="text-center new-account"><h4>Crea un account</h4> </a>
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
+            
         </div>
     </div>
 </div>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
    
 <jsp:include page="footer.jsp"/>
