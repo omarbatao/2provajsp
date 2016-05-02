@@ -160,6 +160,7 @@ public class UtentiController {
         v.setPassword(password);
         v.setNome(nome);
         v.setCognome(cognome);
+        v.setId((Integer)request.getSession().getAttribute("userid"));
         db.aggiornaVisitatore(v);
         return "profilo";
     }

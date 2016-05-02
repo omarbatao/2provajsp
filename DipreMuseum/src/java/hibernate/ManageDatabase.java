@@ -242,12 +242,14 @@ public class ManageDatabase {
     public int aggiornaVisitatore(Visitatore visitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("UPDATE Visitatori SET Username=? Password=? Nome=? Cognome=? WHERE id = '"+visitatore.getId()+"'").addEntity(Visitatore.class);
-        query.setString(0, visitatore.getUsername());
-        query.setString(0, visitatore.getPassword());
-        query.setString(0, visitatore.getNome());
-        query.setString(0, visitatore.getCognome());
+        Query query = session.createSQLQuery("UPDATE Visitatori SET Username=:username Password=:password Nome=:nome Cognome=:cognome WHERE id ="+visitatore.getId()).addEntity(Visitatore.class);
+        query.setString("username", visitatore.getUsername());
+        query.setString("password", visitatore.getPassword());
+        query.setString("nome", visitatore.getNome());
+        query.setString("cognome", visitatore.getCognome());
         int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
         return result;
     }
 
