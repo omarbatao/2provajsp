@@ -12,13 +12,21 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">Info</a>
-                </li>
-                <li>
                     <a href="#">Visite</a>
                 </li>
                 <li>
+                    <a href="#">Info</a>
+                </li>
+                
+                <li>
                     <a href="#">Contatti</a>
+                </li>
+                <li>
+                    <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
+                            out.println("<a href='./carrello'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello</a>");
+                        } 
+                    %>
+
                 </li>
                 <li>
 
@@ -29,13 +37,7 @@
                     %>
 
                 </li>
-                <li>
-                    <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
-                            out.println("<a href='./carrello'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello</a>");
-                        } 
-                    %>
-
-                </li>
+                
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
 
