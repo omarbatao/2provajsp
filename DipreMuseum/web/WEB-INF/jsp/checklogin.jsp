@@ -16,13 +16,14 @@
 
 
         <%
-            
-            if (request.getAttribute("login")!= null && request.getAttribute("login").equals("true")) {
-                session.setAttribute("username", request.getParameter("username"));
-                session.setAttribute("password", request.getParameter("password"));
+
+            if (request.getAttribute("login") != null && request.getAttribute("login").equals("true")) {
+                session.setAttribute("username", request.getAttribute("username"));
+                session.setAttribute("userid", request.getAttribute("userid"));
+                session.setAttribute("password", request.getAttribute("password"));
                 response.sendRedirect("./");
             } else {
-               response.sendRedirect("./login?error=true");
+                response.sendRedirect("./login?error=true");
             }
 
         %>

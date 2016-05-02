@@ -18,7 +18,7 @@
             <div class="account-wall">
         <%
         if(request.getParameter("error")!=null && request.getParameter("error").equals("true"))
-            out.print("<h4 style='text-align:center;color:red'>Login errato</h4>");
+            out.print("<h4 style='text-align:center;color:red;padding-top:30px'>Login errato</h4>");
         %>
                 <form class="form-signin" action="./checklogin" method="POST">
                 <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>

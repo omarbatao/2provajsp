@@ -24,7 +24,7 @@
 
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
 
-                            out.println("<li><a href='#'>Profilo</a></li>");
+                            out.println("<li><a href='./profile'>Profilo</a></li>");
                         }
                     %>
 

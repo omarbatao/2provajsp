@@ -222,6 +222,34 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
+    
+     //ricorda di fare il punto length
+    public Visitatore getVisitatoreById(Integer idVisitatore) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Visitatori WHERE id = '"+idVisitatore+"'").addEntity(Visitatore.class);
+        List<Visitatore> rows = query.list();
+         if (rows.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Visitatore) rows.get(0);
+            }
+        session.getTransaction().commit();
+        session.close();
+        return null;
+    }
+       //ricorda di fare il punto length
+    public int aggiornaVisitatore(Visitatore visitatore) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("UPDATE Visitatori SET Username=? Password=? Nome=? Cognome=? WHERE id = '"+visitatore.getId()+"'").addEntity(Visitatore.class);
+        query.setString(0, visitatore.getUsername());
+        query.setString(0, visitatore.getPassword());
+        query.setString(0, visitatore.getNome());
+        query.setString(0, visitatore.getCognome());
+        int result = query.executeUpdate();
+        return result;
+    }
 
     //ricorda di fare il punto length
     public List<Visita> getEventiInCorso(Date dataI, Date dataF) {

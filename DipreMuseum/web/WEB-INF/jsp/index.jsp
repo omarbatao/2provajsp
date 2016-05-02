@@ -100,21 +100,25 @@
         </div>
     </div>
     <!-- /.row -->
-    
+
     <!-- /.row -->
     <!-- Features Section -->
     <div class="row" style="margin-top: 40px">
         <div class="col-md-6">
             <h2 class="page-header">Evento della settimana</h2>
+            <div clasS="col-md-12">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>                        </div>
-                <div class="panel-body">
-                    <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                    <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default">Leggi di pi&ugrave</a>
-                </div>
+                <div class="panel panel-default"  style="height:220px;">
+                        <div class="panel-heading">
+                            <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>
+                        </div>
+                        <div class="panel-body">
+                            <p>${evento.getDescrizione()}</p>
+                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default" style="position:absolute;bottom:40px;">Leggi di pi&ugrave</a>
+                        </div>
+                    </div>
             </div>
+
         </div>
 
         <div class="col-md-6">
@@ -125,17 +129,17 @@
 
     <!-- Portfolio Section -->
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <h2 class="page-header">Eventi pi&ugrave recenti</h2>
             <c:forEach items="${ultimiEventi}" var="evento">
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default"  style="height:220px;">
                         <div class="panel-heading">
                             <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>
                         </div>
                         <div class="panel-body">
-                            <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default">Leggi di pi&ugrave</a>
+                            <p>${evento.getDescrizione()}</p>
+                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default" style="position:absolute;bottom:40px;">Leggi di pi&ugrave</a>
                         </div>
                     </div>
                 </div>
@@ -147,16 +151,5 @@
 
     <hr>
 
-    <!-- Call to Action Section -->
-    <div class="well">
-        <div class="row">
-            <div class="col-md-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-            </div>
-            <div class="col-md-4">
-                <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
-            </div>
-        </div>
-    </div>
-
+  
     <jsp:include page="footer.jsp"/>
