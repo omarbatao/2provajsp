@@ -418,5 +418,38 @@ public class ManageDatabase {
         }
         return null;
     }
+
+    public Visitatore getVisitatore(String idVisitatore) {
+        Session  session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Visitatore.findById");
+        query.setString("id", idVisitatore);
+        Visitatore v = (Visitatore) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
+
+    public Visita getVisita(String idVisita) {
+        Session  session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Visita.findByIdVisita");
+        query.setString("idVisita", idVisita);
+        Visita v = (Visita) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
+
+    public Categoria getCategoria(String categoria) {
+       Session  session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Categoria.findByCodC");
+        query.setString("codC", categoria);
+        Categoria v = (Categoria) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
     
 }
