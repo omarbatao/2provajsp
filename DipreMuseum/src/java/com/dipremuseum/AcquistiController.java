@@ -21,6 +21,7 @@ import models.Categoria;
 import models.Visita;
 import models.Visitatore;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +45,11 @@ public class AcquistiController {
         } catch (Throwable ex) {
             Logger.getLogger(AcquistiController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    @RequestMapping(value = "/carrello")
+    public String carrello(ModelMap map) {
+        map.put("titolo", "Carrello");
+        return "carrello";
     }
 
     @RequestMapping(value = "/addbiglietto", method = RequestMethod.GET)
@@ -95,6 +101,10 @@ public class AcquistiController {
         }
         return "inserito";
     }
+    
+   
+    
+    
     
 
     private Date validita() {
