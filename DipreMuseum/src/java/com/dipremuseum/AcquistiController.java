@@ -16,6 +16,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Biglietto;
+import models.Categoria;
+import models.Visita;
 import models.Visitatore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,15 +51,17 @@ public class AcquistiController {
             @RequestParam(value = "tipo", required = true) int tipo,
             @RequestParam(value = "categoria", required = true) String categoria) {
 
-        //Visitatore user = db.getVisitatore(idVisitatore);
-        //Visita visita = db.getVisita(idVisita);
-        //Categoria cat = db.getCategoria(categoria);
+        Visitatore user = db.getVisitatore(idVisitatore);
+        Visita visita = db.getVisita(idVisita);
+        Categoria cat = db.getCategoria(categoria);
+        System.out.println(cat.getDescrizione());
         Biglietto b = new Biglietto();
-        b.setValidita(validita());
+        if(tipo==1) b.setValidita(visita.getDataF());
+        else b.setValidita(validita());
         b.setTipo(tipo);
-        //b.setCategoria(cat);
-        //b.setIdVisita(visita);
-        //b.setIdVisitatore(user);
+        b.setCategoria(cat);
+        b.setIdVisita(visita);
+        b.setIdVisitatore(user);
         db.inserisciBiglietto(b);
         return "inserito";
     }

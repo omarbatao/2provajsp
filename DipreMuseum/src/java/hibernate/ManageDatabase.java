@@ -39,7 +39,52 @@ public class ManageDatabase {
         factory = HibernateUtil.getSessionFactory();
     }
     
-    /////---------------------- Get methods --------------------------
+    public void inserisciEvento(Visita evento){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(evento);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciVisita(Visita visita){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(visita);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciBiglietto(Biglietto biglietto){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(biglietto);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciAmministratore(Amministratore amministratore){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(amministratore);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void inserisciCartaDiCredito(CartaDiCredito carta){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(carta);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public void inserisciCategorie(Categoria categoria){
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(categoria);
+        session.getTransaction().commit();
+        session.close();
+    }
     /*
     public void inserisciBiglietto(int codB,Date validita,int tipo,int idVisitatore,String idVisita,String categoria){
         Session session = factory.openSession();
@@ -142,81 +187,6 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
-    
-    public Visita getVisita(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Visita.findByIdVisita");
-        q.setString("idVisita", id);
-        Visita v = (Visita) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return v;
-    }
-    public Categoria getCategoria(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Categoria.findByCodC");
-        q.setString("codC", id);
-        Categoria c = (Categoria) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
-    public Amministratore getAmministratore(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Amministratore.findById");
-        q.setString("id", id);
-        Amministratore c = (Amministratore) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
-    
-    public Biglietto getBiglietto(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Biglietto.findByCodB");
-        q.setString("codB", id);
-        Biglietto c = (Biglietto) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
-    
-    public CartaDiCredito getCartaDiCredito(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("CartaDiCredito.findByCodC");
-        q.setString("codC", id);
-        CartaDiCredito c = (CartaDiCredito) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
-    
-    public Servizio getServizio(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Servizio.findByCodS");
-        q.setString("codS", id);
-        Servizio c = (Servizio) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
-    
-    public Visitatore getVisitatore(String id ) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query q = session.getNamedQuery("Visitatore.findById");
-        q.setString("id", id);
-        Visitatore c = (Visitatore) q.uniqueResult();
-        session.getTransaction().commit();
-        session.close(); 
-        return c;
-    }
 
 
     //ricorda di fare il punto length
@@ -241,7 +211,6 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
-     
 
     public Biglietto query2(String idVisita) {
         Session session = factory.openSession();
@@ -320,55 +289,6 @@ public class ManageDatabase {
         return null;
     }
     
-    
-    //------------ insert methods
-    
-    public void inserisciEvento(Visita evento){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(evento);
-        session.getTransaction().commit();
-        session.close();
-    }
-    
-    public void inserisciVisita(Visita visita){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(visita);
-        session.getTransaction().commit();
-        session.close();
-    }
-    
-    public void inserisciBiglietto(Biglietto biglietto){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(biglietto);
-        session.getTransaction().commit();
-        session.close();
-    }
-    
-    public void inserisciAmministratore(Amministratore amministratore){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(amministratore);
-        session.getTransaction().commit();
-        session.close();
-    }
-    
-    public void inserisciCartaDiCredito(CartaDiCredito carta){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(carta);
-        session.getTransaction().commit();
-        session.close();
-    }
-    public void inserisciCategorie(Categoria categoria){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(categoria);
-        session.getTransaction().commit();
-        session.close();
-    }
     
 }
     
