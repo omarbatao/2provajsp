@@ -50,10 +50,10 @@
 
                                 <% int i = 0;%>
                                 <c:forEach items="${categorie}" var="categoria">
-                                    <div  id="${categoria.getCodC()}" class="col-md-9">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
+                                    <div  id="${categoria.getCodC()}" class="col-md-9 catDiv">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
                                     <div class="form-group col-md-3">
-                                        <select class="form-control" id="sel<%=i%>">
-                                            <option value="" selected>0</option>
+                                        <select class="form-control" id="sel<%=i%> selectList">
+                                            <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -73,16 +73,59 @@
                         </div>
                     </form>
                 </div>
-                                
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-                    <button type="button" class="btn btn-primary" >Aggiungi al Carrello</button>
+                    <button type="button" class="btn btn-primary" id="addcarrello">Aggiungi al Carrello</button>
                 </div>
-               
+
             </div>
         </div>
     </div>
 
 
 </div>
+
+<script>
+    $('document').ready(function () {
+  
+        $('#addcarrello').click(function () {
+            
+            var qty=[];
+            var idVisita=[];
+            var tipo=[];
+            var categoria=[];
+            
+            
+            var req="/addgruppobigliettocategoria";
+              
+            $('select.form-control :selected').each(function (i) {
+                var qty=$(this).text();
+                console.log("qty= "+qty);
+                qty[i]=qty;
+            });
+        
+            
+/*            
+          @RequestParam(value = "idVisita", required = true) String idVisita,
+            @RequestParam(value = "tipo", required = true) int tipo,
+            @RequestParam(value = "categoria", required = true) String categoria,
+            @RequestParam(value = "qty", required = true) int qty) {*/
+            
+            
+            $('div.catDiv').each(function(i){
+                 var cat=$(this).find("b").text();
+                 console.log("categoria= "+cat);
+                 cat[i]=cat;
+            });
+            
+             
+
+        });
+
+
+
+    });
+
+</script>
 <jsp:include page="footer.jsp"/>

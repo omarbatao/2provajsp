@@ -81,17 +81,18 @@ public class AcquistiController {
     @RequestMapping(value = "/addgruppobigliettocategoria", method = RequestMethod.GET)
     @ResponseBody
     public String addGruppoBiglietti(
-            @RequestParam(value = "idVisitatore", required = true) String idVisitatore,
             @RequestParam(value = "idVisita", required = true) String idVisita,
             @RequestParam(value = "tipo", required = true) int tipo,
             @RequestParam(value = "categoria", required = true) String categoria,
-            @RequestParam(value = "qty", required = true) int qty, HttpServletRequest request) {
+            @RequestParam(value = "qty", required = true) int qty,
+            HttpServletRequest request) {
         if(qty<0||qty>10) return "errore";
-        if(qty==0) return "";
-        Visitatore user = db.getVisitatore(idVisitatore);
+        if(qty==0) return "nessun";
+        Integer idVisitatore =(Integer) request.getSession().getAttribute("userid");
+        Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
-        List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
+         List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
         if(butente==null)butente= new ArrayList<Biglietto>();
         for(int i = 0; i<qty;i++){
             Biglietto b = new Biglietto();
@@ -121,3 +122,4 @@ public class AcquistiController {
     }
 
 }
+
