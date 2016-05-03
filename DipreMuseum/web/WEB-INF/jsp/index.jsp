@@ -145,11 +145,25 @@
                 </div>
             </c:forEach>
         </div>
+        
     </div>
     <!-- /.row -->
 
 
     <hr>
-
+    <div class="row">
+        <div class="col-lg-12" style="text-align: center">
+            <p>
+                <h3>Come contattarci:</h3>
+                E-mail: dipre@museum.it
+                <br/>
+                Tel: 049 2325400
+                <br/>
+                Fax: 049 2325500
+                <br/>
+                Indirizzo: via fasulla 123
+            </p>
+        </div>
+    </div>
   
     <jsp:include page="footer.jsp"/>

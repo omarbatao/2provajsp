@@ -17,10 +17,6 @@
                 <li>
                     <a href="#">Info</a>
                 </li>
-                
-                <li>
-                    <a href="#">Contatti</a>
-                </li>
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
                             out.println("<a href='./carrello'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello</a>");
@@ -54,7 +50,7 @@
             </ul>
         </div>
         <!-- /.navbar-collapse -->
-
+        
         <!-- /.container -->
     </div>
 </nav>

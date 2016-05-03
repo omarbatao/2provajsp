@@ -3,7 +3,7 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12" style="margin-left:50px;">
+                <div class="col-lg-12" style="text-align: center">
                     <p>Copyright &copy; WebArtSeveri 2016</p>
                 </div>
             </div>
