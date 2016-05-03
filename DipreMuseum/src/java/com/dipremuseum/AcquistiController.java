@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import models.Biglietto;
 import models.Categoria;
 import models.Visita;
@@ -78,16 +79,18 @@ public class AcquistiController {
     @RequestMapping(value = "/addgruppobigliettocategoria", method = RequestMethod.GET)
     @ResponseBody
     public String addGruppoBiglietti(
-            @RequestParam(value = "idVisitatore", required = true) String idVisitatore,
             @RequestParam(value = "idVisita", required = true) String idVisita,
             @RequestParam(value = "tipo", required = true) int tipo,
             @RequestParam(value = "categoria", required = true) String categoria,
-            @RequestParam(value = "qty", required = true) int qty) {
+            @RequestParam(value = "qty", required = true) int qty,
+            HttpServletRequest request) {
         if(qty<0||qty>10) return "errore";
         if(qty==0) return "nessun";
-        Visitatore user = db.getVisitatore(idVisitatore);
+        Integer idVisitatore =(Integer) request.getSession().getAttribute("userid");
+        Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
+        
         
         for(int i = 0; i<qty;i++){
             Biglietto b = new Biglietto();
