@@ -371,35 +371,16 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
-    //DROP Viste posso mettere tutte e 3 insieme ?
-    public void dropVista1(){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
 
-    public void dropVista2(){
+    public void dropViste(){
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista2");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void dropVista3(){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista3");
+        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1,Vista2,Vista3");
         int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
     
-    //boh.....Int non può andare bene.......... che palle cazzo
     public Integer query3(){
         Session session = factory.openSession();
         Transaction tx = null;

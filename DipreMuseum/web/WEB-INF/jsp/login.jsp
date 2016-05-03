@@ -8,7 +8,6 @@
 
 <link rel="stylesheet" type="text/css" href="./resources/css/login/styles.css">
 
-<body>
 
 <div class="container">
     <div class="row">
@@ -33,6 +32,6 @@
         </div>
     </div>
 </div>
-  </body>
+
    
 <jsp:include page="footer.jsp"/>
