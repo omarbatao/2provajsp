@@ -103,6 +103,7 @@ public class AcquistiController {
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
             butente.add(b);
+            
         }
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
