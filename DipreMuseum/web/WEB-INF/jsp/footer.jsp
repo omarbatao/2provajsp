@@ -3,7 +3,7 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="text-align: center">
                     <p>Copyright &copy; WebArtSeveri 2016</p>
                 </div>
             </div>
@@ -16,7 +16,7 @@
     
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="./resources/js/bootstrap.min.js"></script>
+    
         <!-- Morris Charts JavaScript -->
     <script src="./resources/js/plugins/morris/raphael.min.js"></script>
     <script src="./resources/js/plugins/morris/morris.min.js"></script>

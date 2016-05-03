@@ -6,7 +6,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             
-            <a class="navbar-brand" href="/DipreMuseum/">Dipr&egrave; Museum</a>
+            <a class="navbar-brand" href="./">Dipr&egrave; Museum</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -18,21 +18,26 @@
                     <a href="#">Visite</a>
                 </li>
                 <li>
-                    <a href="#">Contatti</a>
+                    <a href="#">Info</a>
                 </li>
                 <li>
-
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
-
-                            out.println("<li><a href='#'>Profilo</a></li>");
-                        }
+                            out.println("<a href='./carrello'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello</a>");
+                        } 
                     %>
 
                 </li>
                 <li>
 
+                    <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
 
+                            out.println("<li><a href='./profile'>Profilo</a></li>");
+                        }
+                    %>
 
+                </li>
+                
+                <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
 
                             out.println("<a href='./logout'>Logout</a>");
@@ -48,7 +53,7 @@
             </ul>
         </div>
         <!-- /.navbar-collapse -->
-
+        
         <!-- /.container -->
     </div>
 </nav>

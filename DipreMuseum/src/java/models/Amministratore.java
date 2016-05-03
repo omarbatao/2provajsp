@@ -135,10 +135,10 @@ public class Amministratore implements Serializable {
             return false;
         }
         Amministratore other = (Amministratore) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
+        if (this.email !=null && other.email!=null && this.email.equals(other.email) && this.pw.equals(other.pw)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
