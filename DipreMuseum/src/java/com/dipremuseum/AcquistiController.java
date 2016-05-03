@@ -22,6 +22,7 @@ import models.Categoria;
 import models.Visita;
 import models.Visitatore;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,8 +49,9 @@ public class AcquistiController {
         }
     }
     @RequestMapping(value = "/carrello")
-    public String carrello(ModelMap map) {
+    public String carrello(ModelMap map, HttpServletRequest request) {
         map.put("titolo", "Carrello");
+        map.put("biglietti",request.getSession().getAttribute("biglietti"));
         return "carrello";
     }
 
@@ -90,8 +92,8 @@ public class AcquistiController {
         Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
-        
-        
+         List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
+        if(butente==null)butente= new ArrayList<Biglietto>();
         for(int i = 0; i<qty;i++){
             Biglietto b = new Biglietto();
             if(tipo==1) b.setValidita(visita.getDataF());
@@ -100,8 +102,9 @@ public class AcquistiController {
             b.setCategoria(cat);
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
-            bigliettitmp.add(b);
+            butente.add(b);
         }
+        request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
     
@@ -119,3 +122,4 @@ public class AcquistiController {
     }
 
 }
+

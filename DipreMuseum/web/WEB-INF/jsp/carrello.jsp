@@ -4,14 +4,16 @@
     Author     : Omar
 --%>
 
+<%@page import="java.math.BigDecimal"%>
+<%@page import="models.Biglietto"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
 <script>
-    function del() {
-        document.getElementById("rown").innerHTML = "<td></td><td></td><td></td><td></td> ";
+    function del(id) {
+        document.getElementById(id).innerHTML = "<td></td><td></td><td></td><td></td> ";
     }
 </script>
 
@@ -39,13 +41,63 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                    <%   
+                                         double price=0.0;
+                                         List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
+                                         if(biglietti==null){
+                                             
+                                         %>
+                                         <td colspan="4" style="text-align:center;">Nessun biglietto nel carrello</td>
+                                    <%
+                                         }
+                                         else{%>
+                                    
+                                         <% int i = 0;
+                                        Biglietto o = null;
+                                        int countb = 0;
+                                    %>
+                                    <c:forEach items="biglietti" var="biglietto">
 
-                                    <tr id="rown">                                               
-                                        <td><b>Basdass</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del()">Rimuovi</span> </td>
-                                        <td>Padss</td>
-                                        <td>5</td>
-                                        <td>234</td>
-                                    </tr>
+                                        <%
+                                            Biglietto t = (Biglietto) pageContext.getAttribute("biglietto");
+                                            if (o != null) {
+                                                if (!o.getCategoria().getCodC().equals(t.getCategoria().getCodC())) {
+                                                   
+                                        %>
+                                        <tr id="row<%=i%>">                                               
+                                            <td><b>${o.getVisita().getTitolo()}</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del('row<%=i%>')">Rimuovi</span> </td>
+                                            <td>${o.getIdVisita().getTariffa()}</td>
+                                            <td>${o.getCategoria().getSconto()}</td>
+
+                                            <td><%=countb%></td>
+                                        </tr>
+
+                                        <%          BigDecimal tariffa = o.getIdVisita().getTariffa();
+                                                    int sconto = o.getCategoria().getSconto();
+                                                    price+= ((tariffa.doubleValue()*sconto)/100)*countb;
+                                                    o = t;
+                                                    countb=0;
+                                                } else {
+                                                    countb++;
+                                                    o = t;
+                                                }
+                                            }else{
+                                                    countb++;
+                                                    o = t;
+                                            }
+
+                                        %>                                       
+                                    </c:forEach>
+                                         
+                                         
+                                         <%
+                                         }
+                                    %>
+                                    
+                                    
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -57,9 +109,20 @@
                 <div class="panel panel-warning">
                     <div class="panel-heading">Totale provvisorio: </div>
                     <div class="panel-body" style="color:red;text-align: center">
-                        EUR <b style="font-size:200%">99</b>
+                        EUR <b style="font-size:200%"><%=price%></b>
                     </div>
-                    <div class="panel-footer"><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+                    <%
+                        if(price==0.0) {
+                          %>
+                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled">Acquista</button></div>
+                    <%  
+                        }else{
+                        %>
+                        <div class="panel-footer"><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+                    <%
+                        }
+                    %>
+                    
                 </div>
             </div>
         </div>
@@ -75,13 +138,13 @@
                 </div>
 
                 <div class="modal-body">
-                    
-                        <div class="page-header">
-                            <h3>Grazie per aver effettuato l'acquisto</h3>
-                            <br/>
-                            <small>Ti aspettiamo al nostro evento!</small>
-                        </div>
-                    
+
+                    <div class="page-header">
+                        <h3>Grazie per aver effettuato l'acquisto</h3>
+                        <br/>
+                        <small>Ti aspettiamo al nostro evento!</small>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">
