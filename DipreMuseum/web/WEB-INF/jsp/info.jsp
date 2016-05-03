@@ -26,17 +26,21 @@
     <hr/>
     <div class="row">
         <div class="col-md-7" style="margin-top: 50px"><h3>ANDREA DIPR&Egrave;</h3><p><br>Il Dott. Avv. Andrea Dipr&egrave; &egrave; nato a Tione di Trento nel 1974 e si divide tra Milano, Firenze e Roma. Brillante critico e competente storico dell'arte, &egrave; profondo conoscitore dell'arte rinascimentale e manierista. Studia con particolare interesse le vicende del collezionismo in et&agrave; moderna e contemporanea. Ha tenuto conferenze e curato pi&ugrave; di 600 esposizioni d'arte in Italia e all'estero e ha pubblicato circa 200 recensioni su altrettanti pittori e scultori.<br> Il Dott. Avv. Andrea Dipr&egrave; &egrave; anche avvocato. Il Dott. Avv. Andrea Dipr&egrave; &egrave; convinto che la maggior parte degli artisti di cui continuamente sentiamo parlare non sono che un piccolo, marginale, non rappresentativo aspetto di una realt&agrave; infinitamente pi&ugrave; complessa e variegata che, con i suoi umori, le sue esuberanze, i suoi furori, sta in penombra. &Egrave; a questa realtà "sotterranea", a questo arcipelago ancora in buona parte sommerso o inesplorato, che il Dott. Avv. Andrea Dipr&egrave;, critico d'arte disincantato e coinvolto, si rivolge, con competenza e con la precisa volont&agrave; di ristabilire i valori.</p></div>
-        <div class="col-md-5" style="margin-top: 20px; text-align: center;"><img src="./resources/img/img5.png" style="height: 400px;"/></div>
+        <div class="col-md-5" style="margin-top: 20px; text-align: center;"><img src="./resources/img/img4.png" style="height: 400px;"/></div>
     </div>
     <hr/>
     <div class="row">
-        <div class="col-lg-12" style="text-align: center;"><h2>GLI INVITI DEL DOTT. DIPR&Egrave;</h2></div>
+        <div class="col-lg-12" style="text-align: center;"><h2>GLI INVITI DEL DOTT. AVV. ANDREA DIPR&Egrave;</h2></div>
     </div>
     <hr/>
     <div class="row">
-        <div class="col-md-6" style="text-align: center"><iframe width="520" height="360" src="https://www.youtube.com/embed/9ezlAXiQIYI" frameborder="0" allowfullscreen></iframe></div>
-        <div class="col-md-6" style="text-align: center"><iframe width="520" height="360" src="https://www.youtube.com/embed/Bf6pjzeKjyY?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></div>
-        <div class="col-md-6" style="text-align: center"><iframe width="480" height="360" src="https://www.youtube.com/embed/bGCDShlswWk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></div>
+        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/9ezlAXiQIYI" frameborder="0" allowfullscreen></iframe></div>
+        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/Bf6pjzeKjyY?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></div>
+    </div>
+    <div class="row">
+        <br/>
+        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/bGCDShlswWk?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></div>
+        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/So3EpSLo4fQ?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></div>
     </div>
     <!-- /.row -->
 
@@ -44,4 +48,5 @@
 
 </div>
 
+<jsp:include page="contatti.jsp"/>
 <jsp:include page="footer.jsp"/>
