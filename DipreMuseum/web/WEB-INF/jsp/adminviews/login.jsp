@@ -19,7 +19,7 @@
         if(request.getParameter("error")!=null && request.getParameter("error").equals("true"))
             out.print("<h4 style='text-align:center;color:red;padding-top:30px'>Login errato</h4>");
         %>
-                <form class="form-signin" action="./checklogin" method="POST">
+                <form class="form-signin" action="./adminchecklogin" method="POST">
                 <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">

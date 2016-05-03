@@ -296,20 +296,32 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
+     public List<Visita> getEventiPassati(Date dataF) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("select * from Visite where  DataF<=? order by DataF DESC ").addEntity(Visita.class);
+        query.setDate(0,dataF);
+        List<Visita> rows = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return rows;
+    }
     
-    public Visita query1(Date dataI, Date dataF) {
+    
+    
+    public List<Visita> query1(Date dataI, Date dataF) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("select IdVisita,IdEsposizione,Titolo,Tariffa,DataI,DataF from Visite where DataI>= ? and DataF<=?").addEntity(Visita.class);
+            SQLQuery query = session.createSQLQuery("select IdVisita,Titolo,Tariffa,DataI,DataF from Visite where DataI>= ? and DataF<=?").addEntity(Visita.class);
             query.setDate(0,dataI);
             query.setDate(1,dataF);
             List cats = query.list();
             if (cats.size() > 0) {
                 session.getTransaction().commit();
                 session.close();
-                return (Visita) cats.get(0);
+                return cats;
             }
         } catch (HibernateException e) {
             if (tx != null) {
@@ -319,27 +331,23 @@ public class ManageDatabase {
         }
         return null;
     }
-    //non so se biglietto è giusto
-    public Biglietto query2(String idVisita) {
+    
+    public int query2(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
             query.setString(0, idVisita);
-            List cats = query.list();
-            if (cats.size() > 0) {
-                session.getTransaction().commit();
-                session.close();
-                return (Biglietto) cats.get(0);
-            }
+            int value =(int) query.uniqueResult();
+            return value;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
         }
-        return null;
+        return 0;
     }
     //non so se il group by è giusto perchè nel foglio delle query è diverso
     public void vista1 (String idVisita){

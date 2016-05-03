@@ -19,10 +19,25 @@
                 </div>
             </div>
             <!-- /.row -->
-
-
             <div class="container">
                 <!-- Button trigger modal -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <%
+                            if (request.getParameter("inserito") != null) {
+                                if (request.getParameter("inserito").equals("fasle")) {
+
+                        %>
+                        <div class="alert alert-danger" role="alert">Event error not set</div>
+                        <%            } else {
+                        %>
+                        <div class="alert alert-success" role="alert">Successfully added event</div>
+                        <%
+                                }
+                            }
+                        %>
+                    </div>
+                </div>
 
                 <div class="row pad">
                     <div class="col-md-12">
@@ -47,94 +62,100 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">Add event</h4>
                             </div>
-                            
+
                             <div class="modal-body">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="idevento" class="col-sm-2 control-label">Id Event</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="idevento" placeholder="id">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="title" class="col-sm-2 control-label">Title </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="title" placeholder="Event Title">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="price" class="col-sm-2 control-label">Price </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="price" placeholder="Event price">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dataI" class="col-sm-2 control-label">Start date </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="titolo" placeholder="Event start date">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="dataF" class="col-sm-2 control-label">End date </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="titolo" placeholder="Event end date">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="maxp" class="col-sm-2 control-label">Max people </label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="maxp" placeholder="Max people">
-                                        </div>
-                                    </div>
-                                        <input type="hidden" id="idA" value="12"/>
-                                    <!--<div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Remember me
-                                                </label>
+                                <form class="form-horizontal" action='./adminaddevent' method="POST">
+                                    <fieldset>
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="idevento">Id Event</label>
+                                            <div class="controls">
+                                                <input type="text" id="idevento" name="idevento" placeholder="" class="input-xlarge">
+
                                             </div>
                                         </div>
-                                    </div>
-                                    Visite (IdV, Titolo, Tariffa, DataI, DataF, MaxPartecipanti, IdA)
-                                    -->
-                                    <div class="form-group">
-                                         <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="title">Title</label>
+                                            <div class="controls">
+                                                <input type="text" id="title" name="title" placeholder="" class="input-xlarge">
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="desc">Description</label>
+                                            <div class="controls">
+                                                <input type="text" id="desc" name="desc" placeholder="" class="input-xlarge">
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="tariffa">Price</label>
+                                            <div class="controls">
+                                                <input type="text" id="tariffa" name="tariffa" placeholder="" class="input-xlarge">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="dateI">Start date</label>
+                                            <div class="controls">
+                                                <input type="text" id="datepicker0" name="dataI">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <!-- Username -->
+                                            <label class="control-label"  for="dateF">End date</label>
+                                            <div class="controls">
+                                                <input type="text" id="datepicker1" name="dataF">
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <!-- Password-->
+                                            <label class="control-label" for="maxp">Max people</label>
+                                            <div class="controls">
+                                                <input type="text" id="maxp" name="maxp" placeholder="" class="input-xlarge">
+
+                                            </div>
+                                        </div>
+                                        <div class="controls">
                                             <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
                                             <button type="submit" class="btn btn-success">Add</button>
-                                        </div>
-                                    </div>
-                                    
-                                    
+                                        </div>    
+                                    </fieldset>
                                 </form>
                             </div>
-                            
-                            <!--<div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save Event</button>
-                            </div>-->
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
 
                 <div class="row">
                     <div class="col-md-12">
                         <div id='calendar' ></div>
                         <script>
+                            
+                            $(function () {
+                                $("#datepicker0").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    showButtonPanel: true,
+                                    yearRange: '1910:2016'
+
+                                });
+                            });
+                            
+                            $(function () {
+                                $("#datepicker1").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    showButtonPanel: true,
+                                    yearRange: '1910:2016'
+
+                                });
+                            });
+  
                             $(document).ready(function () {
 
                                 $('#calendar').fullCalendar({
@@ -152,8 +173,7 @@
                                          start: '2016-04-01'
                                          }*/
 
-                            <%
-                                List<Visita> eventi = (List) request.getAttribute("eventi");
+                            <%                                List<Visita> eventi = (List) request.getAttribute("eventi");
                                 String s = "";
                                 for (Visita evento : eventi) {
                                     s += "{ id: '" + evento.getIdVisita() + "', title: '" + evento.getTitolo() + "', start: '" + evento.getDateIString() + "', end: '" + evento.getDateFString() + "' }, ";
@@ -248,5 +268,6 @@
         </div>
     </div>
     <!-- /#wrapper -->
+    
 
     <jsp:include page="../footer.jsp"/>
