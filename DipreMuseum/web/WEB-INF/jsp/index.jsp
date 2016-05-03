@@ -62,7 +62,7 @@
                 </div>
                 <div class="panel-body">
                     <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                    <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./info" class="btn btn-default">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>
@@ -150,20 +150,5 @@
     <!-- /.row -->
 
 
-    <hr>
-    <div class="row">
-        <div class="col-lg-12" style="text-align: center">
-            <p>
-                <h3>Come contattarci:</h3>
-                E-mail: dipre@museum.it
-                <br/>
-                Tel: 049 2325400
-                <br/>
-                Fax: 049 2325500
-                <br/>
-                Indirizzo: via fasulla 123
-            </p>
-        </div>
-    </div>
-  
+    <jsp:include page="contatti.jsp"/>
     <jsp:include page="footer.jsp"/>

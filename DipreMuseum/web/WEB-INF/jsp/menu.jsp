@@ -15,10 +15,10 @@
                     <a href="./info">Info</a>
                 </li>
                 <li>
-                    <a href="#">Visite</a>
+                    <a href="./visite">Visite</a>
                 </li>
                 <li>
-                    <a href="#">Info</a>
+                    <a href="#">Eventi</a>
                 </li>
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
