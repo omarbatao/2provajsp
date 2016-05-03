@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import models.Amministratore;
 import models.Visita;
 import models.Visitatore;
@@ -63,18 +64,20 @@ public class UtentiController {
 //                map.put("email", email);
 //                map.put("password", password);
 //            }
-            Visitatore v = new Visitatore();
-            v.setUsername(username);
-            v.setPassword(password);
-            if (visitatori.contains(v)) {
-                map.put("login", "true");
-                map.put("admin", "false");
-                map.put("username", username);
-                map.put("password", password);
+
+            for (int i = 0; i < visitatori.size(); i++) {
+                if (visitatori.get(i).getPassword().equals(password) && visitatori.get(i).getUsername().equals(username)) {
+                    Visitatore v = db.getVisitatoreById(visitatori.get(i).getId());
+                    map.put("login", "true");
+                    map.put("admin", "false");
+                    map.put("username", username);
+                    map.put("userid", v.getId());
+                    return "checklogin";
+                }
             }
-            return "checklogin";
+            return "redirect:/login?error=true";
         } else {
-            return "index";
+            return "redirect:/login";
         }
     }
 
@@ -100,7 +103,7 @@ public class UtentiController {
             @RequestParam(value = "password") String password,
             @RequestParam(value = "nome") String nome,
             @RequestParam(value = "cognome") String cognome) {
-           System.out.println("DATAN: "+dataN);
+        System.out.println("DATAN: " + dataN);
         if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty()) {
 
             List<Visitatore> visitatori = db.getVisitatori();
@@ -130,6 +133,36 @@ public class UtentiController {
             return "redirect:/register?fields=true";
         }
 
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(ModelMap map, HttpServletRequest request) {
+        Integer id = (Integer) request.getSession().getAttribute("userid");
+        System.out.println("ID: " + id);
+        if (id != null && !id.equals("")) {
+            Visitatore visitatore = db.getVisitatoreById(id);
+            map.put("profilo", visitatore);
+            return "profile";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(ModelMap map, HttpServletRequest request,
+            @RequestParam(value = "dataN") String dataN,
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password,
+            @RequestParam(value = "nome") String nome,
+            @RequestParam(value = "cognome") String cognome) {
+        Visitatore v = new Visitatore();
+        v.setUsername(username);
+        v.setPassword(password);
+        v.setNome(nome);
+        v.setCognome(cognome);
+        v.setId((Integer)request.getSession().getAttribute("userid"));
+        db.aggiornaVisitatore(v);
+        return "profilo";
     }
 
 }

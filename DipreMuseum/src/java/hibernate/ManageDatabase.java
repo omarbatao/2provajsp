@@ -222,6 +222,36 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
+    
+     //ricorda di fare il punto length
+    public Visitatore getVisitatoreById(Integer idVisitatore) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Visitatori WHERE id = '"+idVisitatore+"'").addEntity(Visitatore.class);
+        List<Visitatore> rows = query.list();
+         if (rows.size() > 0) {
+                session.getTransaction().commit();
+                session.close();
+                return (Visitatore) rows.get(0);
+            }
+        session.getTransaction().commit();
+        session.close();
+        return null;
+    }
+       //ricorda di fare il punto length
+    public int aggiornaVisitatore(Visitatore visitatore) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createSQLQuery("UPDATE Visitatori SET Username=:username Password=:password Nome=:nome Cognome=:cognome WHERE id ="+visitatore.getId()).addEntity(Visitatore.class);
+        query.setString("username", visitatore.getUsername());
+        query.setString("password", visitatore.getPassword());
+        query.setString("nome", visitatore.getNome());
+        query.setString("cognome", visitatore.getCognome());
+        int result = query.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
 
     //ricorda di fare il punto length
     public List<Visita> getEventiInCorso(Date dataI, Date dataF) {
@@ -341,35 +371,16 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
-    //DROP Viste posso mettere tutte e 3 insieme ?
-    public void dropVista1(){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
 
-    public void dropVista2(){
+    public void dropViste(){
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista2");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void dropVista3(){
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista3");
+        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1,Vista2,Vista3");
         int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
     
-    //boh.....Int non può andare bene.......... che palle cazzo
     public Integer query3(){
         Session session = factory.openSession();
         Transaction tx = null;

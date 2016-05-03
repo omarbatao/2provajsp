@@ -12,14 +12,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a href="./info">Info</a>
+                </li>
+                <li>
                     <a href="#">Visite</a>
                 </li>
                 <li>
                     <a href="#">Info</a>
-                </li>
-                
-                <li>
-                    <a href="#">Contatti</a>
                 </li>
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
@@ -32,7 +31,7 @@
 
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {
 
-                            out.println("<li><a href='#'>Profilo</a></li>");
+                            out.println("<li><a href='./profile'>Profilo</a></li>");
                         }
                     %>
 
@@ -54,7 +53,7 @@
             </ul>
         </div>
         <!-- /.navbar-collapse -->
-
+        
         <!-- /.container -->
     </div>
 </nav>

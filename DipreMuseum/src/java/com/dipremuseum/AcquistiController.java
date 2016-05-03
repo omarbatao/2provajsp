@@ -16,11 +16,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import models.Biglietto;
 import models.Categoria;
 import models.Visita;
 import models.Visitatore;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,8 +49,9 @@ public class AcquistiController {
         }
     }
     @RequestMapping(value = "/carrello")
-    public String carrello(ModelMap map) {
+    public String carrello(ModelMap map, HttpServletRequest request) {
         map.put("titolo", "Carrello");
+        map.put("biglietti",request.getSession().getAttribute("biglietti"));
         return "carrello";
     }
 
@@ -78,17 +81,19 @@ public class AcquistiController {
     @RequestMapping(value = "/addgruppobigliettocategoria", method = RequestMethod.GET)
     @ResponseBody
     public String addGruppoBiglietti(
-            @RequestParam(value = "idVisitatore", required = true) String idVisitatore,
             @RequestParam(value = "idVisita", required = true) String idVisita,
             @RequestParam(value = "tipo", required = true) int tipo,
             @RequestParam(value = "categoria", required = true) String categoria,
-            @RequestParam(value = "qty", required = true) int qty) {
+            @RequestParam(value = "qty", required = true) int qty,
+            HttpServletRequest request) {
         if(qty<0||qty>10) return "errore";
         if(qty==0) return "nessun";
-        Visitatore user = db.getVisitatore(idVisitatore);
+        Integer idVisitatore =(Integer) request.getSession().getAttribute("userid");
+        Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
-        
+         List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
+        if(butente==null)butente= new ArrayList<Biglietto>();
         for(int i = 0; i<qty;i++){
             Biglietto b = new Biglietto();
             if(tipo==1) b.setValidita(visita.getDataF());
@@ -97,8 +102,9 @@ public class AcquistiController {
             b.setCategoria(cat);
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
-            bigliettitmp.add(b);
+            butente.add(b);
         }
+        request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
     
@@ -116,3 +122,4 @@ public class AcquistiController {
     }
 
 }
+
