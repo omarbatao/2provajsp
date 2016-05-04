@@ -18,7 +18,7 @@
                     <a href="./visite">Visite</a>
                 </li>
                 <li>
-                    <a href="#">Eventi</a>
+                    <a href="./eventi">Eventi</a>
                 </li>
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {

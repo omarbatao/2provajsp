@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dipremuseum;
 
 import hibernate.ManageDatabase;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Categoria;
 import models.Visita;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,36 +19,34 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author FSEVERI\loreggian3064
  */
 @Controller
-public class MainController {
-
-    ManageDatabase db;
-
-    public MainController() {
+public class EventiController {
+    ManageDatabase db; 
+    
+    public EventiController(){
         try {
             db = new ManageDatabase();
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map) {
+    
+    @RequestMapping(value="/eventi",  method = RequestMethod.GET)
+    public String infoevento(ModelMap map){
         try {
-            List<Visita> ultimiEventi = db.getEventiRecenti();
-            if (ultimiEventi != null) {
-                map.put("ultimiEventi", ultimiEventi);
+            List<Categoria> categorie = db.getCategorie();
+            
+            for(Categoria c :categorie){
+                System.out.println("categoria:  ->"+c.getDescrizione());
             }
-
-            map.put("titolo", "Dipr&egrave Museum");
+            List<Visita> eventi = db.getEventi();
+            
+            if(eventi!=null){
+                map.put("eventi", eventi);           
+            }
         } catch (Throwable ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "index";
+        return "eventi";
     }
-    
-    @RequestMapping(value ="/info")
-    public String info(ModelMap map){
-        return "info";
-    }
-
+   
 }
