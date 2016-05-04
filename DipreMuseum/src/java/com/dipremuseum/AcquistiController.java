@@ -15,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -60,27 +62,20 @@ public class AcquistiController {
         return "carrello";
     }
 
-    @RequestMapping(value = "/addbiglietto", method = RequestMethod.GET)
-    @ResponseBody
-    public String addBiglietto(
-            @RequestParam(value = "idVisitatore", required = true) String idVisitatore,
-            @RequestParam(value = "idVisita", required = true) String idVisita,
-            @RequestParam(value = "tipo", required = true) int tipo,
-            @RequestParam(value = "categoria", required = true) String categoria) {
-
-        Visitatore user = db.getVisitatore(idVisitatore);
-        Visita visita = db.getVisita(idVisita);
-        Categoria cat = db.getCategoria(categoria);
-        System.out.println(cat.getDescrizione());
-        Biglietto b = new Biglietto();
-        if(tipo==1) b.setValidita(visita.getDataF());
-        else b.setValidita(validita());
-        b.setTipo(tipo);
-        b.setCategoria(cat);
-        b.setIdVisita(visita);
-        b.setIdVisitatore(user);
-        db.inserisciBiglietto(b);
-        return "inserito";
+    @RequestMapping(value = "/bigliettocompra", method = RequestMethod.POST)
+    public String compraBiglietti(
+            @RequestParam(value = "comprabiglietti", required = true) boolean compra,
+            HttpServletRequest request
+            ){
+        if(!compra) return "redirect: /carrello?comprati=false";
+        List<Biglietto> biglietti= (List<Biglietto>) request.getSession().getAttribute("biglietti");
+        if(biglietti==null)return "redirect: /carrello?comprati=false";
+        
+        for(Biglietto b:biglietti){
+            db.inserisciBiglietto(b);
+        }
+        request.getSession().setAttribute("biglietti",null);
+        return "redirect: /carrello?comprati=true";
     }
     
     @RequestMapping(value = "/addgruppobigliettocategoria", method = RequestMethod.GET)
@@ -112,12 +107,16 @@ public class AcquistiController {
             butente.add(b);
             
         }
-        for(Biglietto b:butente){
+        /*for(Biglietto b:butente){
             System.out.println("Biglietto: "+b.toString());
-        }
-        for(Biglietto b:butente){
-            System.out.println("Biglietto: "+b.toString());
-        }
+        }*/
+        Collections.sort(butente, new Comparator<Biglietto>() {
+            @Override
+            public int compare(Biglietto t, Biglietto t1) {
+                return t.getCategoria().getCodC().compareTo(t1.getCategoria().getCodC());
+            }
+        
+       } );
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }

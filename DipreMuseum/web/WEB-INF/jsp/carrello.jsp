@@ -13,9 +13,23 @@
 
 <jsp:include page="menu.jsp"/>
 <script>
+    $(document).ready(function () {
+        $("#acquistarichiesta").click(function () {
+            alert("cliccato");
+            $.post("./bigliettocompra",
+                    {
+                        comprabiglietti: true
+                    }, function (resp) {
+                console.log(resp);
+
+            }
+            );
+        });
+    });
+
     function del(n) {
-       alert(n);
-       $('#'+n+"'").remove();
+        alert(n);
+        $('#' + n + "'").remove();
     }
 </script>
 
@@ -25,21 +39,45 @@
         public String printrow(int count, Biglietto b, int qty) {
 
             return "<tr id='row" + count + "'>"
-                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del('row"+count+"')'>Rimuovi</span> </td>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del('row" + count + "')'>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
-                    +"<td id='' style='display:none'>"+b.getCategoria().getCodC()+"</td>"
-                    + "<td> Categoria <b style='color:green'>" +b.getCategoria().getDescrizione()+"</b> sconto: "+ b.getCategoria().getSconto() + "%</td>"
+                    + "<td id='' style='display:none'>" + b.getCategoria().getCodC() + "</td>"
+                    + "<td> Categoria <b style='color:green'>" + b.getCategoria().getDescrizione() + "</b> sconto: " + b.getCategoria().getSconto() + "%</td>"
                     + "<td>" + qty + "</td>"
                     + "</tr>";
         }
-        public void eliminaBiglietti(){
-            
+
+        public void eliminaBiglietti() {
+
         }
     %>
 
     <div class="row">
         <div class="col-md-12">
             <h2 class="title">Carrello</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <%
+                if (request.getParameter("comprati") != null) {
+                    if (request.getParameter("comprati").equals("true")) {
+
+            %>
+            <div class="alert alert-success" role="alert">Hai acquistato i biglietti con successo</div>
+            <%            } else {
+            %>
+            <div class="alert alert-danger" role="alert">Operazione non riuscita</div>
+            <%
+                    }
+                }
+            %>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">  
             <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -61,7 +99,6 @@
 
 
                                     <%
-
                                         double price = 0.0;
                                         List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
 
@@ -105,12 +142,6 @@
 
                                     }
                                 %>
-
-
-
-
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -132,8 +163,7 @@
                     } else {
 
                     %>
-                    <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
-
+                    <div class="panel-footer "><button id="acquistaactive" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
 
                     <%                        }
                     %>
@@ -155,15 +185,15 @@
                 <div class="modal-body">
 
                     <div class="page-header">
-                        <h3>Grazie per aver effettuato l'acquisto</h3>
-                        <br/>
-                        <small>Ti aspettiamo al nostro evento!</small>
+                        <h3>Acquistare i biglietti? </h3>
+
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    <button  type="button" class="btn btn-danger"  data-dismiss="modal">No</button>
+                    <button id="acquistarichiesta" type="button" class="btn btn-warning">Ok</button>
                 </div>
 
             </div>

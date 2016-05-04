@@ -62,7 +62,7 @@ public class AdminController {
     public String admin(ModelMap map, HttpServletRequest request) {// --- request menu
         if (authcheck(request)) {
             adminhome(map);
-            return "admin";
+            return "/admin";
         }
         return "adminviews/login";
     }
@@ -73,7 +73,7 @@ public class AdminController {
     public String check(ModelMap map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletRequest request) {
         if (authcheck(request)) {
             adminhome(map);
-            return "admin";
+            return "/admin";
         }
         if (username != null && password != null) {
             for (Amministratore admin : admins) {
@@ -86,9 +86,9 @@ public class AdminController {
 
                 }
             }
-            return "redirect: admin?error=true";
+            return "redirect: /admin?error=true";
         } else {
-            return "redirect: admin";
+            return "redirect: /admin";
         }
     }
 
@@ -97,7 +97,7 @@ public class AdminController {
     @RequestMapping(value = "/adminevents")
     public String events(ModelMap map, HttpServletRequest request) {// --- request menu 1
         if (!authcheck(request)) {
-            return "redirect: admin";
+            return "redirect: /admin";
         }
         init();
         List<Visita> eventi = db.getEventi();
@@ -113,7 +113,7 @@ public class AdminController {
     @RequestMapping(value = "/adminvisits")
     public String visits(ModelMap map, HttpServletRequest request) {// --- request menu 2
         if (!authcheck(request)) {
-            return "redirect: admin";
+            return "redirect: /admin";
         }
         init();
         List<Visita> visite = db.getVisite();
