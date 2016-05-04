@@ -1,4 +1,5 @@
 package hibernate;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -39,75 +40,79 @@ public class ManageDatabase {
     public ManageDatabase() throws Throwable {
         factory = HibernateUtil.getSessionFactory();
     }
-    
-    public void inserisciEvento(Visita evento){
+
+    public void inserisciEvento(Visita evento) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(evento);
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void inserisciVisita(Visita visita){
+
+    public void inserisciVisita(Visita visita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(visita);
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void inserisciBiglietto(Biglietto biglietto){
+
+    public void inserisciBiglietto(Biglietto biglietto) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(biglietto);
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void inserisciAmministratore(Amministratore amministratore){
+
+    public void inserisciAmministratore(Amministratore amministratore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(amministratore);
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void inserisciCartaDiCredito(CartaDiCredito carta){
+
+    public void inserisciCartaDiCredito(CartaDiCredito carta) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(carta);
         session.getTransaction().commit();
         session.close();
     }
-    public void inserisciCategorie(Categoria categoria){
+
+    public void inserisciCategorie(Categoria categoria) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(categoria);
         session.getTransaction().commit();
         session.close();
     }
-    public void inserisciVisitatori(Visitatore visitatore){
+
+    public void inserisciVisitatori(Visitatore visitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(visitatore);
         session.getTransaction().commit();
         session.close();
     }
-    public void inserisciServizi(Servizio servizio){
+
+    public void inserisciServizi(Servizio servizio) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(servizio);
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void inserisciVisitatore(Visitatore visitatore){
+
+    public void inserisciVisitatore(Visitatore visitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(visitatore);
         session.getTransaction().commit();
         session.close();
     }
+
     /*
     public void inserisciBiglietto(int codB,Date validita,int tipo,int idVisitatore,String idVisita,String categoria){
         Session session = factory.openSession();
@@ -126,131 +131,145 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
-    */
+     */
     public List<Visita> getVisite() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Visite where DataI is null and DataF is null").addEntity(Visita.class);
         List<Visita> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-    
+
     public List<Visita> getEventi() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Visite where DataI is not null and DataF is not null").addEntity(Visita.class);
         List<Visita> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-        
+
     public List<Categoria> getCategorie() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Categorie ").addEntity(Categoria.class);
         List<Categoria> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
+
     public List<Visitatore> getVisitatori() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Visitatori ").addEntity(Visitatore.class);
         List<Visitatore> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
+
     public List<CartaDiCredito> getCartaDiCredito() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Cartedicredito ").addEntity(CartaDiCredito.class);
         List<CartaDiCredito> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
+
     public List<Biglietto> getBiglietti() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Biglietti ").addEntity(Biglietto.class);
         List<Biglietto> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
+
     public List<Amministratore> getAmministratori() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Amministratori ").addEntity(Amministratore.class);
         List<Amministratore> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-    
+
     public List<Servizio> getServizi() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Servizi ").addEntity(Servizio.class);
         List<Servizio> rows = query.list();
-        
+
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-
 
     //ricorda di fare il punto length
     public List<Biglietto> getBigliettiByEsposizione(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = '"+idVisita+"'").addEntity(Biglietto.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = '" + idVisita + "'").addEntity(Biglietto.class);
         List<Biglietto> rows = query.list();
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-    
-     //ricorda di fare il punto length
+
+    //ricorda di fare il punto length
     public Visitatore getVisitatoreById(Integer idVisitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM Visitatori WHERE id = '"+idVisitatore+"'").addEntity(Visitatore.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Visitatori WHERE id = '" + idVisitatore + "'").addEntity(Visitatore.class);
         List<Visitatore> rows = query.list();
-         if (rows.size() > 0) {
-                session.getTransaction().commit();
-                session.close();
-                return (Visitatore) rows.get(0);
-            }
+        if (rows.size() > 0) {
+            session.getTransaction().commit();
+            session.close();
+            return (Visitatore) rows.get(0);
+        }
         session.getTransaction().commit();
         session.close();
         return null;
     }
-       //ricorda di fare il punto length
-    public int aggiornaVisitatore(Visitatore visitatore) {
+    //ricorda di fare il punto length
+
+    public void aggiornaVisitatore(Visitatore visitatore) {
         Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createSQLQuery("UPDATE Visitatori SET Username=:username Password=:password Nome=:nome Cognome=:cognome WHERE id ="+visitatore.getId()).addEntity(Visitatore.class);
-        query.setString("username", visitatore.getUsername());
-        query.setString("password", visitatore.getPassword());
-        query.setString("nome", visitatore.getNome());
-        query.setString("cognome", visitatore.getCognome());
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Visitatore visit
+                    = (Visitatore) session.get(Visitatore.class, visitatore.getId());
+            visit.setUsername(visitatore.getUsername());
+            visit.setPassword(visitatore.getPassword());
+            visit.setNome(visitatore.getNome());
+            visit.setCognome(visitatore.getCognome());
+            visit.setDataN(visitatore.getDataN());
+            session.update(visit);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     //ricorda di fare il punto length
@@ -296,27 +315,26 @@ public class ManageDatabase {
         session.close();
         return rows;
     }
-     public List<Visita> getEventiPassati(Date dataF) {
+
+    public List<Visita> getEventiPassati(Date dataF) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Visite where  DataF<=? order by DataF DESC ").addEntity(Visita.class);
-        query.setDate(0,dataF);
+        query.setDate(0, dataF);
         List<Visita> rows = query.list();
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-    
-    
-    
+
     public List<Visita> query1(Date dataI, Date dataF) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             SQLQuery query = session.createSQLQuery("select IdVisita,Titolo,Tariffa,DataI,DataF from Visite where DataI>= ? and DataF<=?").addEntity(Visita.class);
-            query.setDate(0,dataI);
-            query.setDate(1,dataF);
+            query.setDate(0, dataI);
+            query.setDate(1, dataF);
             List cats = query.list();
             if (cats.size() > 0) {
                 session.getTransaction().commit();
@@ -331,7 +349,7 @@ public class ManageDatabase {
         }
         return null;
     }
-    
+
     public int query2(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -339,7 +357,7 @@ public class ManageDatabase {
             tx = session.beginTransaction();
             SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
             query.setString(0, idVisita);
-            int value =(int) query.uniqueResult();
+            int value = (int) query.uniqueResult();
             return value;
         } catch (HibernateException e) {
             if (tx != null) {
@@ -349,28 +367,29 @@ public class ManageDatabase {
         }
         return 0;
     }
+
     //non so se il group by è giusto perchè nel foglio delle query è diverso
-    public void vista1 (String idVisita){
+    public void vista1(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("CREATE VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
-                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita="+idVisita+" GROUP BY IdVisita,Categirua,Conta,Sconto");
-        int result=query.executeUpdate();
+                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita=" + idVisita + " GROUP BY IdVisita,Categirua,Conta,Sconto");
+        int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void vista2 (String idVisita){
+
+    public void vista2(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("CREATE VIEW Vista2 (Tariffa,IdVisita) AS"
-                + "SELECT Tariffa,IdVisita FROM Visite WHERE IdVisita="+idVisita+" ");
-        int result=query.executeUpdate();
+                + "SELECT Tariffa,IdVisita FROM Visite WHERE IdVisita=" + idVisita + " ");
+        int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void vista3 (){
+
+    public void vista3() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("CREATE VIEW Vista3 (Categoria,Totale) AS"
@@ -380,7 +399,7 @@ public class ManageDatabase {
         session.close();
     }
 
-    public void dropViste(){
+    public void dropViste() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("DROP VIEW Vista1,Vista2,Vista3");
@@ -388,8 +407,8 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
-    
-    public Integer query3(){
+
+    public Integer query3() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -411,7 +430,7 @@ public class ManageDatabase {
     }
 
     public Visitatore getVisitatore(String idVisitatore) {
-        Session  session = factory.openSession();
+        Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.getNamedQuery("Visitatore.findById");
         query.setString("id", idVisitatore);
@@ -422,7 +441,7 @@ public class ManageDatabase {
     }
 
     public Visita getVisita(String idVisita) {
-        Session  session = factory.openSession();
+        Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.getNamedQuery("Visita.findByIdVisita");
         query.setString("idVisita", idVisita);
@@ -433,14 +452,17 @@ public class ManageDatabase {
     }
 
     public Categoria getCategoria(String categoria) {
-       Session  session = factory.openSession();
+        Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.getNamedQuery("Categoria.findByCodC");
-        query.setString("codC", categoria);
-        Categoria v = (Categoria) query.uniqueResult();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Categorie WHERE Descrizione =  :desrizione").addEntity(Categoria.class);
+        query.setString("desrizione", categoria);
+           List cats = query.list();
+            if (cats.size() > 0) {
+                return (Categoria) cats.get(0);
+            }
         tx.commit();
         session.close();
-        return v;
+        return null;
     }
-    
+
 }

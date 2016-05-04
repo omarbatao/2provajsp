@@ -160,9 +160,17 @@ public class UtentiController {
         v.setPassword(password);
         v.setNome(nome);
         v.setCognome(cognome);
+         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Date startDate;
+            try {
+                startDate = df.parse(dataN);
+                v.setDataN(startDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         v.setId((Integer)request.getSession().getAttribute("userid"));
         db.aggiornaVisitatore(v);
-        return "profilo";
+        return "redirect:./profile";
     }
 
 }
