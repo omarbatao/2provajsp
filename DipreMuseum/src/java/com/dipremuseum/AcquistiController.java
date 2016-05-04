@@ -115,6 +115,9 @@ public class AcquistiController {
         for(Biglietto b:butente){
             System.out.println("Biglietto: "+b.toString());
         }
+        for(Biglietto b:butente){
+            System.out.println("Biglietto: "+b.toString());
+        }
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }

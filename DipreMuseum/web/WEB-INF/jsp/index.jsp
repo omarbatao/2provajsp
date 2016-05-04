@@ -73,7 +73,7 @@
                 </div>
                 <div class="panel-body">
                     <p>All'interno del Dipr&egrave Museum potrete assistere ai migliori eventi ed alle migliori esposizioni mondiali per quanto concerne l'arte contemporanea. Gli eventi vengono gestiti e supervisionati da uno staff internazionale, prenota subito...</p>
-                    <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./eventi" class="btn btn-default">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>
@@ -101,32 +101,6 @@
     </div>
     <!-- /.row -->
 
-    <!-- /.row -->
-    <!-- Features Section -->
-    <div class="row" style="margin-top: 40px">
-        <div class="col-md-6">
-            <h2 class="page-header">Evento della settimana</h2>
-            <div clasS="col-md-12">
-
-                <div class="panel panel-default"  style="height:220px;">
-                        <div class="panel-heading">
-                            <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>
-                        </div>
-                        <div class="panel-body">
-                            <p>${evento.getDescrizione()}</p>
-                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default" style="position:absolute;bottom:40px;">Leggi di pi&ugrave</a>
-                        </div>
-                    </div>
-            </div>
-
-        </div>
-
-        <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450" alt="">
-        </div>
-    </div>
-    <!-- /.row -->
-
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-md-12">
@@ -148,7 +122,15 @@
         
     </div>
     <!-- /.row -->
-
+    <!-- Portfolio Section -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-header">Location</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12087.72844071472!2d-73.9870598!3d40.7635179!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xae29277a62695aa5!2sDipr%C3%A8+Museum+of+New+York!5e0!3m2!1sit!2sit!4v1462361346493" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        
+    </div>
+    <!-- /.row -->
 
     <jsp:include page="contatti.jsp"/>
     <jsp:include page="footer.jsp"/>
