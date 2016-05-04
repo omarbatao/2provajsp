@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.dipremuseum;
 
 import hibernate.ManageDatabase;
@@ -110,6 +115,9 @@ public class AcquistiController {
         for(Biglietto b:butente){
             System.out.println("Biglietto: "+b.toString());
         }
+        for(Biglietto b:butente){
+            System.out.println("Biglietto: "+b.toString());
+        }
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
@@ -128,4 +136,3 @@ public class AcquistiController {
     }
 
 }
-
