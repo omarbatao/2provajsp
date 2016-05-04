@@ -12,10 +12,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">Visite</a>
+                    <a href="./info">Info</a>
                 </li>
                 <li>
-                    <a href="#">Info</a>
+                    <a href="./visite">Visite</a>
+                </li>
+                <li>
+                    <a href="#">Eventi</a>
                 </li>
                 <li>
                     <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {

@@ -97,5 +97,5 @@
 <jsp:include page="footer.jsp"/>
 
 
-<link rel="stylesheet" href="./resources/css/plugins/jquery_ui/jquery-ui.min.css"/>
+
 

@@ -29,6 +29,7 @@
     <link href="./resources/css/plugins/morris.css" rel="stylesheet">
     
     <link href='./resources/css/style.css' rel='stylesheet' />
+    <link rel="stylesheet" href="./resources/css/plugins/jquery_ui/jquery-ui.min.css"/>
     <link href='./resources/css/fullcalendar.css' rel='stylesheet' />
     <link href='./resources/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <script src='./resources/js/moment.min.js'></script>

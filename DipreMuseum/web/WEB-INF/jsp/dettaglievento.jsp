@@ -1,5 +1,6 @@
 
 
+<%@page import="models.Visita"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="head.jsp"/>
@@ -26,6 +27,8 @@
         </div>
         <div class="col-md-6">
             <div class="row">
+                
+          
                 <p> ${evento.getDescrizione()} </p>
                 <button style="margin-top:47% " class="col-md-12 btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
             </div>
@@ -88,42 +91,61 @@
 
 <script>
     $('document').ready(function () {
-  
+
         $('#addcarrello').click(function () {
-            
-            var qty=[];
-            var idVisita=[];
-            var tipo=[];
-            var categoria=[];
-            
-            
-            var req="/addgruppobigliettocategoria";
-              
+
+            var qtys = [];
+            var idVisita = "${evento.getIdVisita()}";
+            var tipo = "";
+            var categoria = [];
+
+    <%
+                Visita vs = (Visita) request.getAttribute("evento");
+                if (vs.getDataI() == null) {
+    %>
+            tipo = 0;
+    <%
+            } else {
+    %>
+            tipo = 1;
+    <%}%>
+            var req = "/addgruppobigliettocategoria";
+
             $('select.form-control :selected').each(function (i) {
-                var qty=$(this).text();
-                console.log("qty= "+qty);
-                qty[i]=qty;
+                var qty = ($(this).text());
+                qtys[i] = qty;
             });
-        
-            
-/*            
-          @RequestParam(value = "idVisita", required = true) String idVisita,
-            @RequestParam(value = "tipo", required = true) int tipo,
-            @RequestParam(value = "categoria", required = true) String categoria,
-            @RequestParam(value = "qty", required = true) int qty) {*/
-            
-            
-            $('div.catDiv').each(function(i){
-                 var cat=$(this).find("b").text();
-                 console.log("categoria= "+cat);
-                 cat[i]=cat;
+
+            console.log("qty= " + qtys);
+            console.log("idVisita= " + idVisita);
+
+            /*            
+             @RequestParam(value = "idVisita", required = true) String idVisita,
+             @RequestParam(value = "tipo", required = true) int tipo,
+             @RequestParam(value = "categoria", required = true) String categoria,
+             @RequestParam(value = "qty", required = true) int qty) {*/
+
+
+            $('div.catDiv').each(function (i) {
+                var cat = $(this).find("b").text();
+                categoria[i] = cat;
             });
-            
-             
+
+            console.log("categoria= " + categoria);
+
+            for (var i = 0; i < 5; i++) {
+                if (qtys[i] != 0) {
+
+                    console.log("REQUEST ./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo="+tipo);
+
+                    $.get("./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=0", function (resp) {
+                        console.log(resp);
+                    });
+                }
+
+            }
 
         });
-
-
 
     });
 

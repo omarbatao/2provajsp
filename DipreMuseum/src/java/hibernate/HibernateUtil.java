@@ -62,10 +62,11 @@ public class HibernateUtil {
                     .addAnnotatedClass(Amministratore.class)
                     .addAnnotatedClass(Biglietto.class)
                     .addAnnotatedClass(CartaDiCredito.class)
-                    .addAnnotatedClass(Categoria.class)
+                    
                     .addAnnotatedClass(Servizio.class)
                     .addAnnotatedClass(Visitatore.class)
                     .addAnnotatedClass(Visita.class)
+                    .addAnnotatedClass(Categoria.class)
                     .configure();
             ServiceRegistry serviceRegistry
                 = new StandardServiceRegistryBuilder()

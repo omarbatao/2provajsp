@@ -4,8 +4,8 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:8889/museum</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.5:3306/dipremuseum?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">remoteuser</property>
+    <property name="hibernate.connection.password">mypass</property>
   </session-factory>
 </hibernate-configuration>

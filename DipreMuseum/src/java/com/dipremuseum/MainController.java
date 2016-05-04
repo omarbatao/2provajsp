@@ -49,5 +49,10 @@ public class MainController {
         }
         return "index";
     }
+    
+    @RequestMapping(value ="/info")
+    public String info(ModelMap map){
+        return "info";
+    }
 
 }
