@@ -57,13 +57,13 @@
                                         Biglietto o = null;
                                         int countb = 0;
                                     %>
-                                    <c:forEach items="biglietti" var="biglietto">
 
                                         <%
-                                            Biglietto t = (Biglietto) pageContext.getAttribute("biglietto");
+                                            for(Biglietto b:biglietti){
+                                            Biglietto t =b; 
                                             if (o != null) {
-                                                if (!o.getCategoria().getCodC().equals(t.getCategoria().getCodC())) {
-                                                   
+                                                if (!o.getCategoria().getCodC().equals(t.getCategoria().getCodC())) {   
+
                                         %>
                                         <tr id="row<%=i%>">                                               
                                             <td><b>${o.getVisita().getTitolo()}</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del('row<%=i%>')">Rimuovi</span> </td>
@@ -86,9 +86,8 @@
                                                     countb++;
                                                     o = t;
                                             }
-
+                                            }
                                         %>                                       
-                                    </c:forEach>
                                          
                                          
                                          <%

@@ -39,7 +39,7 @@ public class AcquistiController {
     
     private List<Biglietto> bigliettitmp;
     private ManageDatabase db;
-
+    
     public AcquistiController() {
         try {
             db = new ManageDatabase();
@@ -92,6 +92,7 @@ public class AcquistiController {
         Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
+        System.out.println("CATEGORIA: "+cat);
          List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
         if(butente==null)butente= new ArrayList<Biglietto>();
         for(int i = 0; i<qty;i++){
@@ -105,6 +106,8 @@ public class AcquistiController {
             butente.add(b);
             
         }
+        
+        System.out.println("BIGLIETTI: "+butente.toString());
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
