@@ -12,20 +12,25 @@
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
+ <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+<c:redirect url="./"/>                
+<%}%>
+
 <script>
-    function del(n) {
-       alert(n);
+    function del(codB) {
+       alert(codB);
        $('#'+n+"'").remove();
     }
 </script>
 
 <!-- Page Content -->
 <div class="container">
+
     <%!
         public String printrow(int count, Biglietto b, int qty) {
 
-            return "<tr id='row" + count + "'>"
-                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del('row"+count+"')'>Rimuovi</span> </td>"
+            return "<tr id='row" + count + "' data-codb='"+b.getCodB()+"'>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del("+b.getCodB()+qty+")'>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
                     +"<td id='' style='display:none'>"+b.getCategoria().getCodC()+"</td>"
                     + "<td> Categoria <b style='color:green'>" +b.getCategoria().getDescrizione()+"</b> sconto: "+ b.getCategoria().getSconto() + "%</td>"

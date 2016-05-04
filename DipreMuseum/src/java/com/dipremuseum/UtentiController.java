@@ -64,7 +64,7 @@ public class UtentiController {
 //                map.put("email", email);
 //                map.put("password", password);
 //            }
-
+           
             for (int i = 0; i < visitatori.size(); i++) {
                 if (visitatori.get(i).getPassword().equals(password) && visitatori.get(i).getUsername().equals(username)) {
                     Visitatore v = db.getVisitatoreById(visitatori.get(i).getId());
@@ -102,7 +102,7 @@ public class UtentiController {
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "nome") String nome,
-            @RequestParam(value = "cognome") String cognome) {
+            @RequestParam(value = "cognome") String cognome,HttpServletRequest request) {
         System.out.println("DATAN: " + dataN);
         if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty()) {
 
@@ -127,8 +127,10 @@ public class UtentiController {
             newVisitatore.setCognome(cognome);
             newVisitatore.setPassword(password);
             newVisitatore.setUsername(username);
-            db.inserisciVisitatore(newVisitatore);
-            return "redirect:/login";
+            int newId = db.inserisciVisitatore(newVisitatore);
+            request.getSession().setAttribute("userid",newId);
+            request.getSession().setAttribute("username",username);
+            return "redirect:/";
         } else {
             return "redirect:/register?fields=true";
         }
