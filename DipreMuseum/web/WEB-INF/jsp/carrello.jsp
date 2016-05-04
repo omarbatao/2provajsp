@@ -42,54 +42,38 @@
                                 </thead>
                                 <tbody>
                                     
+                                    
                                     <%   
+
                                          double price=0.0;
                                          List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
-                                         if(biglietti==null){
-                                             
+                                         if(biglietti==null){  
                                          %>
                                          <td colspan="4" style="text-align:center;">Nessun biglietto nel carrello</td>
                                     <%
+                                         }else{
+                                             int rowcount =1;
+                                             int bc =1;  
+                                             for(int i = 0; i<biglietti.size();i++){
+                                                 
+                                                 
+                                             }
+
                                          }
-                                         else{%>
+                                    %>
                                     
-                                         <% 
-                                             int i = 0;
-                                        Biglietto o = null;
-                                        int countb = 0;
-                                        for(Biglietto b:biglietti){
-                                            Biglietto t =b; 
-                                            if (o != null) {
-                                                if (!o.getCategoria().getCodC().equals(t.getCategoria().getCodC())) {   
-
+                                    <%!
+                                        public void printrow(int count,Biglietto  b,int qty ){
                                         %>
-                                        <tr id="row<%=i%>">                                               
-                                            <td><b>${o.getVisita().getTitolo()}</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del('row<%=i%>')">Rimuovi</span> </td>
-                                            <td>${o.getIdVisita().getTariffa()}</td>
-                                            <td>${o.getCategoria().getSconto()}</td>
+                                        <tr id="row<%=count%>">                                               
+                                            <td><b>${b.getVisita().getTitolo()}</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del('row<%=count%>')">Rimuovi</span> </td>
+                                            <td>${b.getIdVisita().getTariffa()}</td>
+                                            <td>${b.getCategoria().getSconto()}</td>
 
-                                            <td><%=countb%></td>
+                                            <td><%=qty%></td>
                                         </tr>
-
-                                        <%          BigDecimal tariffa = o.getIdVisita().getTariffa();
-                                                    int sconto = o.getCategoria().getSconto();
-                                                    price+= ((tariffa.doubleValue()*sconto)/100)*countb;
-                                                    o = t;
-                                                    countb=0;
-                                                } else {
-                                                    countb++;
-                                                    o = t;
-                                                }
-                                            }else{
-                                                    countb++;
-                                                    o = t;
-                                            }
-                                            }
-                                        %>                                       
-                                         
-                                         
-                                         <%
-                                         }
+                                    <%
+                                        }
                                     %>
                                     
                                     
@@ -111,11 +95,14 @@
                     <%
                         if(price==0.0) {
                           %>
-                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled>Acquista</button></div>
+                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled">Acquista</button></div>
                     <%  
                         }else{
+                            
                         %>
-                        <div class="panel-footer"><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+                        <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+                        
+                    
                     <%
                         }
                     %>
