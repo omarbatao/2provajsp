@@ -4,6 +4,7 @@
     Author     : Omar
 --%>
 
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="models.Biglietto"%>
 <%@page import="java.util.List"%>
@@ -12,13 +13,29 @@
 
 <jsp:include page="menu.jsp"/>
 <script>
-    function del(id) {
-        document.getElementById(id).innerHTML = "<td></td><td></td><td></td><td></td> ";
+    function del(n) {
+       alert(n);
+       $('#'+n+"'").remove();
     }
 </script>
 
 <!-- Page Content -->
 <div class="container">
+    <%!
+        public String printrow(int count, Biglietto b, int qty) {
+
+            return "<tr id='row" + count + "'>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del('row"+count+"')'>Rimuovi</span> </td>"
+                    + "<td>" + b.getIdVisita().getTariffa() + "</td>"
+                    +"<td id='' style='display:none'>"+b.getCategoria().getCodC()+"</td>"
+                    + "<td> Categoria <b style='color:green'>" +b.getCategoria().getDescrizione()+"</b> sconto: "+ b.getCategoria().getSconto() + "%</td>"
+                    + "<td>" + qty + "</td>"
+                    + "</tr>";
+        }
+        public void eliminaBiglietti(){
+            
+        }
+    %>
 
     <div class="row">
         <div class="col-md-12">
@@ -26,7 +43,7 @@
             <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-clock-o"></i> Il tuo carrello </h3>
+                        <h3 class="panel-title"><i class="fa fa-cart-arrow-down"></i> Il tuo carrello </h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -41,44 +58,59 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                    
-                                    <%   
 
-                                         double price=0.0;
-                                         List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
-                                         if(biglietti==null){  
-                                         %>
-                                         <td colspan="4" style="text-align:center;">Nessun biglietto nel carrello</td>
+
                                     <%
-                                         }else{
-                                             int rowcount =1;
-                                             int bc =1;  
-                                             for(int i = 0; i<biglietti.size();i++){
-                                                 
-                                                 
-                                             }
 
-                                         }
+                                        double price = 0.0;
+                                        List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
+
+                                        if (biglietti == null) {
                                     %>
-                                    
-                                    <%!
-                                        public void printrow(int count,Biglietto  b,int qty ){
-                                        %>
-                                        <tr id="row<%=count%>">                                               
-                                            <td><b>${b.getVisita().getTitolo()}</b><br/><span style="float:right; cursor: pointer;" class="label label-danger label-as-badge" onclick="del('row<%=count%>')">Rimuovi</span> </td>
-                                            <td>${b.getIdVisita().getTariffa()}</td>
-                                            <td>${b.getCategoria().getSconto()}</td>
+                                <td colspan="4" style="text-align:center;">Nessun biglietto nel carrello</td>
+                                <%
+                                    } else {
+                                        //out.write("<script>alert('"+biglietti.toString()+"')</script>");
+                                        int rowcount = 1;
+                                        int bperc = 1;
+                                        for (int i = 0; i < biglietti.size(); i++) {
+                                            Biglietto bthis = biglietti.get(i);
+                                            //out.write("<script>alert('"+bthis.getIdVisita().getTitolo()+"')</script>");
+                                            if (i + 1 >= biglietti.size()) {
+                                                out.write(printrow(rowcount, bthis, bperc));
+                                                int sconto = bthis.getCategoria().getSconto();
+                                                double tariffa = bthis.getIdVisita().getTariffa().doubleValue();
+                                                price += (tariffa * bperc) - (((tariffa * sconto) / 100) * bperc);
+                                                break;
+                                            }
+                                            Biglietto bnext = biglietti.get(i + 1);
 
-                                            <td><%=qty%></td>
-                                        </tr>
-                                    <%
+                                            if (bnext == null) {
+                                                out.write(printrow(rowcount, bthis, bperc));
+                                                int sconto = bthis.getCategoria().getSconto();
+                                                double tariffa = bthis.getIdVisita().getTariffa().doubleValue();
+                                                price += (tariffa * bperc) - (((tariffa * sconto) / 100) * bperc);
+                                                break;
+                                            } else if (bthis.getCategoria().equals(bnext.getCategoria())) {
+                                                bperc++;
+                                            } else {
+                                                out.write(printrow(rowcount, bthis, bperc));
+                                                int sconto = bthis.getCategoria().getSconto();
+                                                double tariffa = bthis.getIdVisita().getTariffa().doubleValue();
+                                                price += (tariffa * bperc) - (((tariffa * sconto) / 100) * bperc);
+                                                rowcount++;
+                                                bperc = 1;
+                                            }
                                         }
-                                    %>
-                                    
-                                    
-                                    
-                                    
+
+                                    }
+                                %>
+
+
+
+
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -93,20 +125,19 @@
                         EUR <b style="font-size:200%"><%=price%></b>
                     </div>
                     <%
-                        if(price==0.0) {
-                          %>
-                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled">Acquista</button></div>
-                    <%  
-                        }else{
-                            
-                        %>
-                        <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
-                        
-                    
-                    <%
-                        }
+                        if (price == 0.0) {
                     %>
-                    
+                    <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled">Acquista</button></div>
+                    <%
+                    } else {
+
+                    %>
+                    <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+
+
+                    <%                        }
+                    %>
+
                 </div>
             </div>
         </div>
