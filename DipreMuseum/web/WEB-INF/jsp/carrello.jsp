@@ -111,7 +111,7 @@
                     <%
                         if(price==0.0) {
                           %>
-                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled">Acquista</button></div>
+                          <div class="panel-footer "><button type="button" class="btn btn-primary btn-lg btn-block disabled>Acquista</button></div>
                     <%  
                         }else{
                         %>
