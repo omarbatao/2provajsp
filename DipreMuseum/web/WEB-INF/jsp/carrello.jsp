@@ -53,13 +53,11 @@
                                          }
                                          else{%>
                                     
-                                         <% int i = 0;
+                                         <% 
+                                             int i = 0;
                                         Biglietto o = null;
                                         int countb = 0;
-                                    %>
-
-                                        <%
-                                            for(Biglietto b:biglietti){
+                                        for(Biglietto b:biglietti){
                                             Biglietto t =b; 
                                             if (o != null) {
                                                 if (!o.getCategoria().getCodC().equals(t.getCategoria().getCodC())) {   

@@ -92,7 +92,6 @@ public class AcquistiController {
         Visitatore user = db.getVisitatore(""+idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
-        System.out.println("CATEGORIA: "+cat);
          List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
         if(butente==null)butente= new ArrayList<Biglietto>();
         for(int i = 0; i<qty;i++){
@@ -103,11 +102,14 @@ public class AcquistiController {
             b.setCategoria(cat);
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
+           System.out.println("for: "+b.toString());
+
             butente.add(b);
             
         }
-        
-        System.out.println("BIGLIETTI: "+butente.toString());
+        for(Biglietto b:butente){
+            System.out.println("Biglietto: "+b.toString());
+        }
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
