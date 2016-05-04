@@ -6,8 +6,8 @@
 
 <jsp:include page="menu.jsp"/>
 
- <% if (session.getAttribute("username") != null || !session.getAttribute("username").toString().equals("")) {%>
-<c:redirect url="../"/>                
+ <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
+<c:redirect url="./"/>                
 <%}%>
 <body>
 

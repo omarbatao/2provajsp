@@ -1,5 +1,9 @@
 
 
+<%@page import="java.util.Calendar"%>
+<%@page import="javafx.scene.chart.PieChart.Data"%>
+<%@page import="models.Visitatore"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="head.jsp"/>
@@ -85,6 +89,18 @@
             yearRange: '1910:2016'
 
         });
+
+    <%
+            Visitatore vis = (Visitatore) request.getAttribute("profilo");
+            Date data = vis.getDataN();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(data);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+
+    %>
+        $('#datepicker').datepicker("setDate", new Date(<%=year%>,<%=month%>,<%=day%>));
     });
 </script>
 <jsp:include page="footer.jsp"/>

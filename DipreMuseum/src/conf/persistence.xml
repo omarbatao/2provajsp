@@ -19,10 +19,10 @@
     <class>models.CartaDiCredito</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhpst:8889/museum"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.5:3306/dipremuseum?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="remoteuser"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="5ib29"/>
+      <property name="javax.persistence.jdbc.password" value="mypass"/>
     </properties>
   </persistence-unit>
 </persistence>

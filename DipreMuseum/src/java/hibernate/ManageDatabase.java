@@ -105,12 +105,13 @@ public class ManageDatabase {
         session.close();
     }
 
-    public void inserisciVisitatore(Visitatore visitatore) {
+    public int inserisciVisitatore(Visitatore visitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(visitatore);
+        int id=  (Integer)session.save(visitatore);
         session.getTransaction().commit();
         session.close();
+        return id;
     }
 
     /*
