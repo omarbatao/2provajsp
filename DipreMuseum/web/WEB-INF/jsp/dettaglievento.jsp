@@ -27,10 +27,19 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-                
-          
+
                 <p> ${evento.getDescrizione()} </p>
+
+                <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
                 <button style="margin-top:47% " class="col-md-12 btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+
+
+
+                <%}%>
+                 <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+                 <a href="./register"><button style="margin-top:47% " class="col-md-12 btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                <%}%>
+
             </div>
         </div>
     </div>
@@ -100,12 +109,12 @@
             var categoria = [];
 
     <%
-                Visita vs = (Visita) request.getAttribute("evento");
-                if (vs.getDataI() == null) {
+        Visita vs = (Visita) request.getAttribute("evento");
+        if (vs.getDataI() == null) {
     %>
             tipo = 0;
     <%
-            } else {
+    } else {
     %>
             tipo = 1;
     <%}%>
@@ -136,16 +145,24 @@
             for (var i = 0; i < 5; i++) {
                 if (qtys[i] != 0) {
 
-                    console.log("REQUEST ./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo="+tipo);
+                    console.log("REQUEST ./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=" + tipo);
 
                     $.get("./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=0", function (resp) {
                         console.log(resp);
+
                     });
                 }
 
             }
+            $("#tickets").modal('toggle');
 
         });
+
+
+
+
+
+
 
     });
 
