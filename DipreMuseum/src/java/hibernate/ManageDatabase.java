@@ -8,6 +8,7 @@ package hibernate;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import hibernate.HibernateUtil;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -28,6 +29,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 /**
  *
@@ -274,12 +276,11 @@ public class ManageDatabase {
     }
 
     //ricorda di fare il punto length
-    public List<Visita> getEventiInCorso(Date dataI, Date dataF) {
+    public List<Visita> getEventiInCorso() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("select * from Visite where DataI='" + dataI + "'and DataF='" + dataF + "'").addEntity(Visita.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Visite WHERE DataF >= CURDATE( ) AND NOT DataI > CURDATE( ) ").addEntity(Visita.class);
         List<Visita> rows = query.list();
-
         session.getTransaction().commit();
         session.close();
         return rows;
@@ -317,11 +318,10 @@ public class ManageDatabase {
         return rows;
     }
 
-    public List<Visita> getEventiPassati(Date dataF) {
+    public List<Visita> getEventiPassati() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("select * from Visite where  DataF<=? order by DataF DESC ").addEntity(Visita.class);
-        query.setDate(0, dataF);
+        SQLQuery query = session.createSQLQuery("select * from Visite where  DataF<=CURDATE() order by DataF DESC ").addEntity(Visita.class);
         List<Visita> rows = query.list();
         session.getTransaction().commit();
         session.close();
@@ -333,15 +333,16 @@ public class ManageDatabase {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("select IdVisita,Titolo,Tariffa,DataI,DataF from Visite where DataI>= ? and DataF<=?").addEntity(Visita.class);
-            query.setDate(0, dataI);
-            query.setDate(1, dataF);
+            SQLQuery query = session.createSQLQuery("select * from Visite where DataI >= :datai and DataF <= :dataf").addEntity(Visita.class);
+            query.setDate("datai", dataI);
+            query.setDate("dataf", dataF);
             List cats = query.list();
             if (cats.size() > 0) {
                 session.getTransaction().commit();
                 session.close();
                 return cats;
             }
+            return null;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -356,10 +357,10 @@ public class ManageDatabase {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?").addEntity(Biglietto.class);
+            SQLQuery query = session.createSQLQuery("select COUNT(*) from Biglietti where IdVisita =?");
             query.setString(0, idVisita);
-            int value = (int) query.uniqueResult();
-            return value;
+            BigInteger value = (BigInteger) query.uniqueResult();
+            return value.intValue();
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();

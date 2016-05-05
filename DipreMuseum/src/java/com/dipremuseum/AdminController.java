@@ -198,10 +198,11 @@ public class AdminController {
         startw =c.getTime();
         c.add(Calendar.DATE, 6);
         endw=c.getTime();
-        List<Visita> pastevents = db.getEventiPassati(startw);
+        List<Visita> pastevents = db.getEventiPassati();
         Visita past= pastevents.get(0);
         System.out.println(past.getDescrizione());
-        List<Visita> eventithisweek = db.query1(startw, endw);
+        List<Visita> eventithisweek = db.getEventiInCorso();
+        
         int tiklasteve =0;
         if(eventithisweek!=null) tiklasteve = db.query2(eventithisweek.get(0).getIdVisita());
         List<Visita> eventi = db.getEventi();
