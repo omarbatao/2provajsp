@@ -372,10 +372,12 @@ public class ManageDatabase {
 
     //non so se il group by è giusto perchè nel foglio delle query è diverso
     public void vista1(String idVisita) {
+        
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
-                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita=" + idVisita + " GROUP BY IdVisita,Categirua,Conta,Sconto");
+        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
+                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita=:id GROUP BY IdVisita,Categoria,Sconto");
+        query.setString("id",idVisita);
         int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
@@ -384,7 +386,7 @@ public class ManageDatabase {
     public void vista2(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista2 (Tariffa,IdVisita) AS"
+        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista2 (Tariffa,IdVisita) AS"
                 + "SELECT Tariffa,IdVisita FROM Visite WHERE IdVisita=" + idVisita + " ");
         int result = query.executeUpdate();
         session.getTransaction().commit();
@@ -394,21 +396,14 @@ public class ManageDatabase {
     public void vista3() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE VIEW Vista3 (Categoria,Totale) AS"
+        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista3 (Categoria,Totale) AS"
                 + "SELECT Categoria,(Tariffa * Conta)-(Tariffa*100/Sconto)*Conta AS Totale FROM Vista1 NATURAL JOIN Vista2 GROUP BY Categoria");
         int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
-    public void dropViste() {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("DROP VIEW Vista1,Vista2,Vista3");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
+
 
     public Integer query3() {
         Session session = factory.openSession();

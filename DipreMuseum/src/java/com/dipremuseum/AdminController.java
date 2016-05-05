@@ -199,10 +199,10 @@ public class AdminController {
         c.add(Calendar.DATE, 6);
         endw=c.getTime();
         List<Visita> pastevents = db.getEventiPassati();
+
         Visita past= pastevents.get(0);
         System.out.println(past.getDescrizione());
         List<Visita> eventithisweek = db.getEventiInCorso();
-        
         int tiklasteve =0;
         if(eventithisweek!=null) tiklasteve = db.query2(eventithisweek.get(0).getIdVisita());
         List<Visita> eventi = db.getEventi();
@@ -214,6 +214,7 @@ public class AdminController {
         if(pastevents!=null) npastevents= db.query2(past.getIdVisita());
         map.put("eventithisweek",n);
         map.put("bigliettipassati",npastevents);
+        map.put("eventipassati", pastevents);
         map.put("tiklasteve",tiklasteve);
         map.put("biglietti", biglietti);
         map.put("eventi", eventi);
