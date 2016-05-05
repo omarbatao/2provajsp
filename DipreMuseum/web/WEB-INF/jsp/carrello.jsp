@@ -13,7 +13,7 @@
 
 <jsp:include page="menu.jsp"/>
 <script>
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         $("#acquistarichiesta").click(function () {
             alert("cliccato");
             $.post("./bigliettocompra",
@@ -25,7 +25,7 @@
             }
             );
         });
-    });
+    });*/
 
     function del(n) {
         alert(n);
@@ -163,9 +163,12 @@
                     } else {
 
                     %>
-                    <div class="panel-footer "><button id="acquistaactive" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button></div>
+                    
+                    <div class="panel-footer ">
+                        <button id="acquistaactive" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button>
+                    </div>
 
-                    <%                        }
+                    <%}
                     %>
 
                 </div>
@@ -193,7 +196,11 @@
 
                 <div class="modal-footer">
                     <button  type="button" class="btn btn-danger"  data-dismiss="modal">No</button>
-                    <button id="acquistarichiesta" type="button" class="btn btn-warning">Ok</button>
+                    <form action="./bigliettocompra" method="post">
+                        <input type="hidden" name="comprabiglietti" value =" true"/>
+                        <button type="submit" class="btn btn-warning">Ok</button>
+                    </form>
+                    
                 </div>
 
             </div>

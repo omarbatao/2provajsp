@@ -63,6 +63,7 @@ public class AcquistiController {
     }
 
     @RequestMapping(value = "/bigliettocompra", method = RequestMethod.POST)
+    
     public String compraBiglietti(
             @RequestParam(value = "comprabiglietti", required = true) boolean compra,
             HttpServletRequest request
