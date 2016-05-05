@@ -217,8 +217,7 @@ public class ManageDatabase {
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("select * from Servizi ").addEntity(Servizio.class);
         List<Servizio> rows = query.list();
-
-        session.getTransaction().commit();
+        tx.commit();
         session.close();
         return rows;
     }

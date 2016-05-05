@@ -66,5 +66,5 @@
                 </div>
             </div>
             <!-- /#wrapper -->
-
+        </div>
             <jsp:include page="../footer.jsp"/>

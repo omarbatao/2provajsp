@@ -24,6 +24,7 @@ import java.util.HashSet;
 import javax.servlet.http.HttpServletRequest;
 import models.Amministratore;
 import models.Biglietto;
+import models.Servizio;
 import models.Visitatore;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,6 +137,9 @@ public class AdminController {
         map.put("menustate", menustate);
         map.put("titolo", "Admin - Services");
         map.put("username", "Username");
+        List<Servizio> servizi = db.getServizi();
+        System.out.println(servizi.toString());
+        map.put("servizi",servizi);
         return "adminviews/services";
 
     }
@@ -199,9 +203,8 @@ public class AdminController {
         c.add(Calendar.DATE, 6);
         endw=c.getTime();
         List<Visita> pastevents = db.getEventiPassati();
-
         Visita past= pastevents.get(0);
-        System.out.println(past.getDescrizione());
+        //System.out.println(past.getDescrizione());
         List<Visita> eventithisweek = db.getEventiInCorso();
         int tiklasteve =0;
         if(eventithisweek!=null) tiklasteve = db.query2(eventithisweek.get(0).getIdVisita());
