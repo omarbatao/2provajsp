@@ -37,7 +37,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map) {
         try {
-            List<Visita> ultimiEventi = db.getEventiRecenti();
+            List<Visita> ultimiEventi = db.getEventiInCorso();
             if (ultimiEventi != null) {
                 map.put("ultimiEventi", ultimiEventi);
             }

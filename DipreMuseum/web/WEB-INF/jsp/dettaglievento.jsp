@@ -36,8 +36,8 @@
 
 
                 <%}%>
-                 <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-                 <a href="./register"><button style="margin-top:47% " class="col-md-12 btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+                <a href="./register"><button style="margin-top:47% " class="col-md-12 btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
                 <%}%>
 
             </div>
@@ -149,7 +149,6 @@
 
                     $.get("./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=0", function (resp) {
                         console.log(resp);
-
                     });
                 }
 

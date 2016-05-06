@@ -12,37 +12,46 @@
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
- <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-<c:redirect url="./"/>                
-<%}%>
 <script>
     /*$(document).ready(function () {
-        $("#acquistarichiesta").click(function () {
-            alert("cliccato");
-            $.post("./bigliettocompra",
-                    {
-                        comprabiglietti: true
-                    }, function (resp) {
-                console.log(resp);
+     $("#acquistarichiesta").click(function () {
+     alert("cliccato");
+     $.post("./bigliettocompra",
+     {
+     comprabiglietti: true
+     }, function (resp) {
+     console.log(resp);
+     
+     }
+     );
+     });
+     });*/
+    
 
-            }
-            );
-        });
-    });*/
-
-    function del(n) {
-        alert(n);
+    function del(n, qty) {
+        alert(n + " qty: " + qty);
         $('#' + n + "'").remove();
+    }
+    
+    function invia(categoria,idvisita){
+        console.log("inviato: "+categoria+" "+idvisita);
+        $.get("./rimuovibiglietto?categoria="+categoria+"&idVisita="+idvisita,function(){
+            location.reload();
+        });
     }
 </script>
 
 <!-- Page Content -->
 <div class="container">
-    <%!
-        public String printrow(int count, Biglietto b, int qty) {
+    <%!        public String printrow(int count, Biglietto b, int qty) {
+
+            String codC=b.getCategoria().getCodC().toString();
+            
+            
+            String idV=b.getIdVisita().getIdVisita();
 
             return "<tr id='row" + count + "'>"
-                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge' onclick='del('row" + count + "')'>Rimuovi</span> </td>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge'  onclick=invia('"+codC+"','"+idV+"')>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
                     + "<td id='' style='display:none'>" + b.getCategoria().getCodC() + "</td>"
                     + "<td> Categoria <b style='color:green'>" + b.getCategoria().getDescrizione() + "</b> sconto: " + b.getCategoria().getSconto() + "%</td>"
@@ -104,12 +113,6 @@
                                     <%
                                         double price = 0.0;
                                         List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
-                                        
-                                        for(Biglietto b:biglietti){
-                                            System.out.println("idBiglietto "+b.getCodB());
-                                            System.out.println("prezzo: "+b.getIdVisita().getTariffa().doubleValue());
-                                            System.out.println("categoria "+b.getCategoria().getDescrizione());
-                                        }
 
                                         if (biglietti == null) {
                                     %>
@@ -137,7 +140,7 @@
                                                 double tariffa = bthis.getIdVisita().getTariffa().doubleValue();
                                                 price += (tariffa * bperc) - (((tariffa * sconto) / 100) * bperc);
                                                 break;
-                                            } else if (bthis.getCategoria().equals(bnext.getCategoria())&&bthis.getIdVisita().getIdVisita().equals(bnext.getIdVisita().getIdVisita())) {
+                                            } else if (bthis.getCategoria().equals(bnext.getCategoria()) && bthis.getIdVisita().getIdVisita().equals(bnext.getIdVisita().getIdVisita())) {
                                                 bperc++;
                                             } else {
                                                 out.write(printrow(rowcount, bthis, bperc));
@@ -172,7 +175,7 @@
                     } else {
 
                     %>
-                    
+
                     <div class="panel-footer ">
                         <button id="acquistaactive" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#grazie">Acquista</button>
                     </div>
@@ -209,7 +212,7 @@
                         <input type="hidden" name="comprabiglietti" value =" true"/>
                         <button type="submit" class="btn btn-warning">Ok</button>
                     </form>
-                    
+
                 </div>
 
             </div>
