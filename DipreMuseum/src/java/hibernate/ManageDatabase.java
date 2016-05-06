@@ -5,10 +5,11 @@ package hibernate;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import hibernate.HibernateUtil;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -91,15 +92,7 @@ public class ManageDatabase {
         session.close();
     }
 
-    public void inserisciVisitatori(Visitatore visitatore) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(visitatore);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void inserisciServizi(Servizio servizio) {
+    public void inserisciServizio(Servizio servizio) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(servizio);
@@ -110,7 +103,7 @@ public class ManageDatabase {
     public int inserisciVisitatore(Visitatore visitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        int id=  (Integer)session.save(visitatore);
+        int id = (Integer) session.save(visitatore);
         session.getTransaction().commit();
         session.close();
         return id;
@@ -371,12 +364,12 @@ public class ManageDatabase {
 
     //non so se il group by è giusto perchè nel foglio delle query è diverso
     public void vista1(String idVisita) {
-        
+
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
                 + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita=:id GROUP BY IdVisita,Categoria,Sconto");
-        query.setString("id",idVisita);
+        query.setString("id", idVisita);
         int result = query.executeUpdate();
         session.getTransaction().commit();
         session.close();
@@ -401,8 +394,6 @@ public class ManageDatabase {
         session.getTransaction().commit();
         session.close();
     }
-
-
 
     public Integer query3() {
         Session session = factory.openSession();
@@ -447,18 +438,67 @@ public class ManageDatabase {
         return v;
     }
 
+    public Servizio getServizio(String cod) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Servizio.findByCodS");
+        query.setString("codS", cod);
+        Servizio v = (Servizio) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
+
     public Categoria getCategoria(String categoria) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         SQLQuery query = session.createSQLQuery("SELECT * FROM Categorie WHERE Descrizione =  :desrizione").addEntity(Categoria.class);
         query.setString("desrizione", categoria);
-           List cats = query.list();
-            if (cats.size() > 0) {
-                return (Categoria) cats.get(0);
-            }
+        List cats = query.list();
+        if (cats.size() > 0) {
+            return (Categoria) cats.get(0);
+        }
         tx.commit();
         session.close();
         return null;
+    }
+
+    public void updateServizio(Servizio old, Servizio n) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Servizio s = (Servizio) session.get(Servizio.class, old.getCodS());
+            s.setCodS(n.getCodS());
+            s.setDescrizione(n.getDescrizione());
+            s.setPrezzo(n.getPrezzo());
+            session.update(s);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public void deleteServizio(Servizio s) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "delete from Servizi where codS= :cods";
+            SQLQuery query = session.createSQLQuery(hql).addEntity(Servizio.class);
+            query.setString("cods", s.getCodS());
+            query.executeUpdate();
+            tx.commit();
+        } catch (Throwable e) {
+            tx.rollback();
+            throw e;
+        }
+
     }
 
 }
