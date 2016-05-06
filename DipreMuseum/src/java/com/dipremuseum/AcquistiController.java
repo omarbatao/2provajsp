@@ -114,7 +114,11 @@ public class AcquistiController {
         Collections.sort(butente, new Comparator<Biglietto>() {
             @Override
             public int compare(Biglietto t, Biglietto t1) {
-                return t.getCategoria().getCodC().compareTo(t1.getCategoria().getCodC());
+                if(t.getIdVisita().getIdVisita().equals(t1.getIdVisita().getIdVisita())) {
+                    if(t.getCategoria().getCodC().equals(t1.getCategoria().getCodC())) return 0;
+                    else return 1;
+                }
+                return -1;
             }
         
        } );
