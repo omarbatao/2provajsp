@@ -12,6 +12,9 @@
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
+ <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+<c:redirect url="./"/>                
+<%}%>
 <script>
     /*$(document).ready(function () {
         $("#acquistarichiesta").click(function () {
@@ -101,6 +104,12 @@
                                     <%
                                         double price = 0.0;
                                         List<Biglietto> biglietti = (List) request.getAttribute("biglietti");
+                                        
+                                        for(Biglietto b:biglietti){
+                                            System.out.println("idBiglietto "+b.getCodB());
+                                            System.out.println("prezzo: "+b.getIdVisita().getTariffa().doubleValue());
+                                            System.out.println("categoria "+b.getCategoria().getDescrizione());
+                                        }
 
                                         if (biglietti == null) {
                                     %>
