@@ -128,7 +128,7 @@
                                                 double tariffa = bthis.getIdVisita().getTariffa().doubleValue();
                                                 price += (tariffa * bperc) - (((tariffa * sconto) / 100) * bperc);
                                                 break;
-                                            } else if (bthis.getCategoria().equals(bnext.getCategoria())) {
+                                            } else if (bthis.getCategoria().equals(bnext.getCategoria())&&bthis.getIdVisita().getIdVisita().equals(bnext.getIdVisita().getIdVisita())) {
                                                 bperc++;
                                             } else {
                                                 out.write(printrow(rowcount, bthis, bperc));
