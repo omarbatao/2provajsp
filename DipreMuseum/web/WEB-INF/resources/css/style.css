@@ -8,6 +8,25 @@ and open the template in the editor.
     Author     : FSEVERI\ceretta2991
 */
 
+.navbar-default {
+    background-color: #FAF0E6;
+    border-color: #000000;
+}
+
+.navbar-fixed-top{
+    background-color:  #FAF0E6;
+
+    border-color: #000000;;
+}
+
+.navbar{
+    background-color:   #FAF0E6;
+    border-color: #000000;
+}
+
+.panel-heading{
+     background-color:   #FAF0E6 !important;
+}
 
 .pad{
     padding-top: 10px;

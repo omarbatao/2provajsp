@@ -19,19 +19,19 @@
         <div class="item active">
             <div class="fill" style="background-image:url('./resources/img/cover1.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Le scelte del critico d'arte Andrea Dipr&egrave</h2>
+                <h2 style="color:#ffffff">Le scelte del critico d'arte Andrea Dipr&egrave</h2>
             </div>
         </div>
         <div class="item">
             <div class="fill" style="background-image:url('./resources/img/cover2.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Nasce all'interno di New York City</h2>
+                <h2 style="color:#ffffff">Nasce all'interno di New York City</h2>
             </div>
         </div>
         <div class="item">
             <div class="fill" style="background-image:url('./resources/img/cover3.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Il museo di riferimento per l'arte contemporanea</h2>
+                <h2 style="color:#ffffff">Il museo di riferimento per l'arte contemporanea</h2>
             </div>
         </div>
     </div>
@@ -56,35 +56,35 @@
             </h1>
         </div>
         <div class="col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:260px;position:relative;">
                 <div class="panel-heading">
                     <h4><i class="fa fa-university"></i> La massima espressione artistica</h4>
                 </div>
                 <div class="panel-body">
                     <p>Solo all'interno del Dipr&egrave Museum potrai trovare i migliori quadri, selezionati dal critico d'arte ed avvocato Andrea Dipr&egrave, provenienti da qualunque parte del globo. Il museo garantisce inoltre ampi spazi per la consultazione...</p>
-                    <a href="./info" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./info" class="btn btn-default" style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:260px;position:relative">
                 <div class="panel-heading">
                     <h4><i class="fa fa-calendar"></i> I migliori eventi</h4>
                 </div>
                 <div class="panel-body">
                     <p>All'interno del Dipr&egrave Museum potrete assistere ai migliori eventi ed alle migliori esposizioni mondiali per quanto concerne l'arte contemporanea. Gli eventi vengono gestiti e supervisionati da uno staff internazionale, prenota subito...</p>
-                    <a href="./eventi" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./eventi" class="btn btn-default" style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:260px;position:relative">
                 <div class="panel-heading">
                     <h4><i class="fa fa-cogs"></i> Potenzialit&agrave enormi</h4>
                 </div>
                 <div class="panel-body">
                     <p>Le semplici visite guidate non sono conformi agli standard del Dipr&egrave Museum, difatti con noi sarai coadiuvato nella visita da strumenti che ti aiuteranno a comprendere meglio quello che stai osservando, quali un audioguida, un catalogo...</p>
-                    <a href="#" class="btn btn-default">Leggi di pi&ugrave</a>
+                    <a href="./info" class="btn btn-default" style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">Leggi di pi&ugrave</a>
                 </div>
             </div>
         </div>

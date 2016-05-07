@@ -31,7 +31,7 @@
                                   <p> ${evento.getDescrizione()} </p>
 
                 <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
-                <div style="text-align:center;"> 
+                <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
                     <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
                 </div>
 
@@ -39,8 +39,8 @@
 
                 <%}%>
                 <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-                <div style="text-align:center"> 
-                    <a href="./register"><button class="btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
+                    <a href="./register"><button class="btn btn-primary" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
                     <br> 
                     <b>Oppure</b>
                     <div>

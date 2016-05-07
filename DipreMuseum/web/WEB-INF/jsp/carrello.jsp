@@ -51,7 +51,7 @@
             String idV=b.getIdVisita().getIdVisita();
 
             return "<tr id='row" + count + "'>"
-                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-danger label-as-badge'  onclick=invia('"+codC+"','"+idV+"')>Rimuovi</span> </td>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-primary label-as-badge'  onclick=invia('"+codC+"','"+idV+"')>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
                     + "<td id='' style='display:none'>" + b.getCategoria().getCodC() + "</td>"
                     + "<td> Categoria <b style='color:green'>" + b.getCategoria().getDescrizione() + "</b> sconto: " + b.getCategoria().getSconto() + "%</td>"
@@ -162,7 +162,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel panel-warning">
+                <div class="panel panel-default">
                     <div class="panel-heading">Totale provvisorio: </div>
                     <div class="panel-body" style="color:red;text-align: center">
                         EUR <b style="font-size:200%"><%=price%></b>

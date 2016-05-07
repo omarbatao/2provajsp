@@ -31,7 +31,7 @@
                     <p>${evento.getDescrizione()}</p>
                 </div>
                 <div>
-                <a  href="./evento?id=${evento.getIdVisita()}">  <button class="btn btn-default"  style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">info</button></a>
+                <a  href="./evento?id=${evento.getIdVisita()}">  <button class="btn btn-info"  style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">info</button></a>
                 </div>
             </div>
         </div>
