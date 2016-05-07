@@ -9,7 +9,9 @@ import hibernate.ManageDatabase;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -55,62 +57,70 @@ public class AdminVisiteController {
             return "redirect: /admin";
         }
         init();
-        
         menustate[2] = "active";
         map.put("menustate", menustate);
         map.put("titolo", "Admin - Visits");
         map.put("username", "Username");
         if(!cerca) {
             visite=db.getVisite(); 
+            cerca=false;
         }
         map.put("visite", visite);
         return "adminviews/visite";
 
     }
     
-     @RequestMapping(value="/addvisita",method = RequestMethod.POST)
+     @RequestMapping(value="/addvisit",method = RequestMethod.POST)
     public String addvisits(HttpServletRequest request,
-           @RequestParam(value = "code") String code,
+           @RequestParam(value = "idvisita") String idvisita,
+           @RequestParam(value = "titolo") String titolo,
            @RequestParam(value = "desc") String desc,
            @RequestParam(value = "price") double price){
         if (!UtilityAdmin.authcheck(admins, request)) {
             return "redirect: admin";
         }
-        /*Servizio s = new Servizio();
-        s.setCodS(code);
-        s.setDescrizione(desc);
-        s.setPrezzo(new BigDecimal(price, MathContext.DECIMAL64));
-        db.inserisciServizio(s);*/
+        int idA = (int) request.getSession().getAttribute("useridadmin");
+        Visita v = new Visita();
+        v.setIdVisita(idvisita);
+        v.setTitolo(titolo);
+        v.setDescrizione(desc);
+        v.setTariffa(new BigDecimal(price, MathContext.DECIMAL64));
+        v.setIdA(db.getAmministratore(idA));
+        db.inserisciVisita(v);
         return "redirect: /adminvisits?inseriti=true";
     }
     
     @RequestMapping(value="/modificavisit",method = RequestMethod.POST)
     public String modificavisits(HttpServletRequest request,
-           @RequestParam(value = "oldcode") String oldcode, 
-           @RequestParam(value = "newcode") String newcode,
+           @RequestParam(value = "oldidvisita") String ololdidvisita, 
+           @RequestParam(value = "newidvisita") String newidvisita,
+           @RequestParam(value = "titolo") String titolo,
            @RequestParam(value = "desc") String desc,
            @RequestParam(value = "price") double price){
         if (!UtilityAdmin.authcheck(admins, request)) {
             return "redirect: admin";
         }
         
-        /*Servizio so = db.getServizio(oldcode);
-        Servizio s = new Servizio();
-        s.setCodS(newcode);
-        s.setDescrizione(desc);
-        s.setPrezzo(new BigDecimal(price, MathContext.DECIMAL64));
-        db.updateServizio(so,s);*/
+        Visita vo= db.getVisita(ololdidvisita);
+        int idA = (int) request.getSession().getAttribute("useridadmin");
+        Visita v = new Visita();
+        v.setIdVisita(newidvisita);
+        v.setTitolo(titolo);
+        v.setDescrizione(desc);
+        v.setTariffa(new BigDecimal(price, MathContext.DECIMAL64));
+        v.setIdA(db.getAmministratore(idA));
+        db.updateVisita(vo,v);
         return "redirect: /adminvisits?aggiornato=true";
     }
     
     
     @RequestMapping(value="/cercavisit",method = RequestMethod.POST)
     public String cercaservice(ModelMap map,HttpServletRequest request,
-           @RequestParam(value = "code") String code){
-        //Servizio so = db.getServizio(code);
-        //if(so==null)return "redirect: /adminvisits?cerca=fasle";
+           @RequestParam(value = "idvisita") String idvisita){
+        Visita v = db.getVisita(idvisita);
+        if(v==null)return "redirect: /adminvisits?cerca=fasle";
         visite = new ArrayList<>();
-        //visite.add(so);
+        visite.add(v);
         cerca=true;
         return "redirect: /adminvisits?cerca=true";
     }
@@ -120,13 +130,14 @@ public class AdminVisiteController {
     @RequestMapping(value="/eliminavisita",method = RequestMethod.POST)
     @ResponseBody
     public String eliminavisita(HttpServletRequest request,
-           @RequestParam(value = "cods") String cods
+           @RequestParam(value = "idvisita") String idvisita
            ){
         if (!UtilityAdmin.authcheck(admins, request)) {
             return "error";
         }
-        //Servizio s = db.getServizio(cods);
-        //db.deleteServizio(s);
+        
+        Visita v = db.getVisita(idvisita);
+        db.deleteVisita(v);
         return "success";
     }
 

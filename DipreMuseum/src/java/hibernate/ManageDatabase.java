@@ -448,6 +448,17 @@ public class ManageDatabase {
         session.close();
         return v;
     }
+    
+    public Amministratore getAmministratore(int id) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Amministratore.findById");
+        query.setInteger("id", id);
+        Amministratore v = (Amministratore) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
 
     public Categoria getCategoria(String categoria) {
         Session session = factory.openSession();
@@ -498,7 +509,45 @@ public class ManageDatabase {
             tx.rollback();
             throw e;
         }
+    }
+    
+     public void updateVisita(Visita old, Visita n) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Visita v = (Visita) session.get(Visita.class,old.getIdVisita());
+            v.setIdVisita(n.getIdVisita());
+            v.setTitolo(n.getTitolo());
+            v.setDescrizione(n.getDescrizione());
+            v.setTariffa(n.getTariffa());
+            v.setIdA(n.getIdA());
+            session.update(v);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 
+    public void deleteVisita(Visita v) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "delete from Visite where Idvisita= :id";
+            SQLQuery query = session.createSQLQuery(hql).addEntity(Servizio.class);
+            query.setString("id", v.getIdVisita());
+            query.executeUpdate();
+            tx.commit();
+        } catch (Throwable e) {
+            tx.rollback();
+            throw e;
+        }
     }
 
 }

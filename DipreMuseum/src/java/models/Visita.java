@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -182,15 +183,18 @@ public class Visita implements Serializable {
     }
     
     
-    public String getDateIString(){
+    public String getDataIString(){
         DateFormat df = new SimpleDateFormat("yyy-MM-dd");
         String reportdate = df.format(dataI);
         return reportdate;
     }
     
-     public String getDateFString(){
+     public String getDataFString(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(dataF);
+        c.add(Calendar.DATE, 1); 
         DateFormat df = new SimpleDateFormat("yyy-MM-dd");
-        String reportdate = df.format(dataF);
+        String reportdate = df.format(c.getTime());
         return reportdate;
     }
     

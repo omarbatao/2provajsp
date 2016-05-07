@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="models.Visita"%>
@@ -64,67 +65,37 @@
                             </div>
 
                             <div class="modal-body">
-                                <form class="form-horizontal" action='./adminaddevent' method="POST">
-                                    <fieldset>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="idevento">Id Event</label>
-                                            <div class="controls">
-                                                <input type="text" id="idevento" name="idevento" placeholder="" class="input-xlarge">
-
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="title">Title</label>
-                                            <div class="controls">
-                                                <input type="text" id="title" name="title" placeholder="" class="input-xlarge">
-
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="desc">Description</label>
-                                            <div class="controls">
-                                                <input type="text" id="desc" name="desc" placeholder="" class="input-xlarge">
-
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="tariffa">Price</label>
-                                            <div class="controls">
-                                                <input type="text" id="tariffa" name="tariffa" placeholder="" class="input-xlarge">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="dateI">Start date</label>
-                                            <div class="controls">
-                                                <input type="text" id="datepicker0" name="dataI">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <!-- Username -->
-                                            <label class="control-label"  for="dateF">End date</label>
-                                            <div class="controls">
-                                                <input type="text" id="datepicker1" name="dataF">
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group">
-                                            <!-- Password-->
-                                            <label class="control-label" for="maxp">Max people</label>
-                                            <div class="controls">
-                                                <input type="text" id="maxp" name="maxp" placeholder="" class="input-xlarge">
-
-                                            </div>
-                                        </div>
-                                        <div class="controls">
-                                            <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
-                                            <button type="submit" class="btn btn-success">Add</button>
-                                        </div>    
-                                    </fieldset>
+                                <form action='./adminaddevent' method="POST">
+                                    <div class="form-group">
+                                        <label for="idvisita">Event's id</label>
+                                        <input name="idvisita" type="text" class="form-control" id="idvisita" placeholder="Event's code">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="titolo">Title</label>
+                                        <input name="titolo" type="text" class="form-control" id="titolo" placeholder="Event's title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="desc">Description</label>
+                                        <textarea name="desc" type="text" class="form-control" id="desc" placeholder="Event 's description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input name="price" type="text" class="form-control" id="price" placeholder="Event 's price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataI">Start date</label>
+                                        <input name="dataI" type="text" class="form-control" id="dataI">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dataF">End date</label>
+                                        <input name="dataF" type="text" class="form-control" id="dataF">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maxp">Max people</label>
+                                        <input name="maxp" type="text" class="form-control" id="maxp" placeholder="Event's max people">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning">Add</button>
+                                    <button  type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
                                 </form>
                             </div>
                         </div>
@@ -135,9 +106,9 @@
                     <div class="col-md-12">
                         <div id='calendar' ></div>
                         <script>
-                            
+
                             $(function () {
-                                $("#datepicker0").datepicker({
+                                $("#dataI").datepicker({
                                     changeMonth: true,
                                     changeYear: true,
                                     showButtonPanel: true,
@@ -145,9 +116,9 @@
 
                                 });
                             });
-                            
+
                             $(function () {
-                                $("#datepicker1").datepicker({
+                                $("#dataF").datepicker({
                                     changeMonth: true,
                                     changeYear: true,
                                     showButtonPanel: true,
@@ -155,7 +126,7 @@
 
                                 });
                             });
-  
+
                             $(document).ready(function () {
 
                                 $('#calendar').fullCalendar({
@@ -176,7 +147,7 @@
                             <%                                List<Visita> eventi = (List) request.getAttribute("eventi");
                                 String s = "";
                                 for (Visita evento : eventi) {
-                                    s += "{ id: '" + evento.getIdVisita() + "', title: '" + evento.getTitolo() + "', start: '" + evento.getDateIString() + "', end: '" + evento.getDateFString() + "' }, ";
+                                    s += "{ id: '" + evento.getIdVisita() + "', title: '" + evento.getTitolo() + "', start: '" + evento.getDataIString() + "', end: '" + evento.getDataFString() + "' }, ";
 
                                 }
                                 s = s.substring(0, s.length() - 2);
@@ -234,7 +205,9 @@
                                          url: 'http://google.com/',
                                          start: '2016-04-28'
                                          }*/
-                                    ]
+                                    ], eventClick: function (event) {
+                                       openmodal("modal"+event.id);
+                                    }
                                 });
 
                             });
@@ -259,7 +232,59 @@
                                 return mm + '-' + dd + '-' + yyyy;
                             }
 
+                            function openmodal(id) {
+                                $("#" + id).modal()
+                            }
+
                         </script>
+
+                        <c:forEach items="${eventi}" var="evento">
+                            <div class="modal fade" id="modal${evento.getIdVisita()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Info event</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form action='./adminaddevent' method="POST">
+                                                <div class="form-group">
+                                                    <label for="idvisita">Event's id</label>
+                                                    <input name="idvisita" type="text" class="form-control" id="idvisita" value="${evento.getIdVisita()}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="titolo">Title</label>
+                                                    <input name="titolo" type="text" class="form-control" id="titolo" value="${evento.getTitolo()}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="desc">Description</label>
+                                                    <textarea name="desc" type="text" class="form-control" id="desc">${evento.getDescrizione()}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price">Price</label>
+                                                    <input name="price" type="text" class="form-control" id="price" value="${evento.getTariffa()}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dataI">Start date</label>
+                                                    <input name="dataI" type="text" class="form-control" id="dataI" value="${evento.getDataIString()}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dataF">End date</label>
+                                                    <input name="dataF" type="text" class="form-control" id="dataF" value="${evento.getDataFString()}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="maxp">Max people</label>
+                                                    <input name="maxp" type="text" class="form-control" id="maxp" value="${evento.getMaxPartecipanti()}">
+                                                </div>
+                                                <button type="submit" class="btn btn-warning">Modify</button>
+                                                <button  type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>  
                     </div>
                 </div>
             </div>
@@ -268,6 +293,6 @@
         </div>
     </div>
     <!-- /#wrapper -->
-    
+
 
     <jsp:include page="../footer.jsp"/>
