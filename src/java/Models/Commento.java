@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "WA2P_COMMENTI")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Commento.findAll", query = "SELECT w FROM WA2P_Commento w"),
-    @NamedQuery(name = "WA2P_Commento.findById", query = "SELECT w FROM WA2P_Commento w WHERE w.id = :id"),
-    @NamedQuery(name = "WA2P_Commento.findByCommento", query = "SELECT w FROM WA2P_Commento w WHERE w.commento = :commento"),
-    @NamedQuery(name = "WA2P_Commento.findByVoto", query = "SELECT w FROM WA2P_Commento w WHERE w.voto = :voto")})
+    @NamedQuery(name = "Commento.findAll", query = "SELECT c FROM Commento c"),
+    @NamedQuery(name = "Commento.findById", query = "SELECT c FROM Commento c WHERE c.id = :id"),
+    @NamedQuery(name = "Commento.findByCommento", query = "SELECT c FROM Commento c WHERE c.commento = :commento"),
+    @NamedQuery(name = "Commento.findByVoto", query = "SELECT c FROM Commento c WHERE c.voto = :voto")})
 public class Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -123,7 +123,7 @@ public class Commento implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Commento[ id=" + id + " ]";
+        return "Models.Commento[ id=" + id + " ]";
     }
     
 }

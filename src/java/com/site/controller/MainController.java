@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.site;
+package com.site.controller;
 
-
+import Models.Evento;
+import com.site.Database;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,11 +55,11 @@ public class MainController {
    
     @RequestMapping(value = "/joinus", method = RequestMethod.GET)//defaulr get metod
     public String joinus(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){  
-        return "utente/joinus";
+        return "joinus";
     }
     @RequestMapping(value = "/addEvento", method = RequestMethod.GET)//defaulr get metod
     public String addEvento(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){  
-        return "evento/addEvento";
+        return "addEvento";
     }
     
 }

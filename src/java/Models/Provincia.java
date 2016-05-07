@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_PROVINCE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Provincia.findAll", query = "SELECT w FROM WA2P_Provincia w"),
-    @NamedQuery(name = "WA2P_Provincia.findByIdProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.idProvincia = :idProvincia"),
-    @NamedQuery(name = "WA2P_Provincia.findByIdRegione", query = "SELECT w FROM WA2P_Provincia w WHERE w.idRegione = :idRegione"),
-    @NamedQuery(name = "WA2P_Provincia.findByNomeProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.nomeProvincia = :nomeProvincia"),
-    @NamedQuery(name = "WA2P_Provincia.findBySiglaProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.siglaProvincia = :siglaProvincia")})
+    @NamedQuery(name = "Provincia.findAll", query = "SELECT p FROM Provincia p"),
+    @NamedQuery(name = "Provincia.findByIdProvincia", query = "SELECT p FROM Provincia p WHERE p.idProvincia = :idProvincia"),
+    @NamedQuery(name = "Provincia.findByIdRegione", query = "SELECT p FROM Provincia p WHERE p.idRegione = :idRegione"),
+    @NamedQuery(name = "Provincia.findByNomeProvincia", query = "SELECT p FROM Provincia p WHERE p.nomeProvincia = :nomeProvincia"),
+    @NamedQuery(name = "Provincia.findBySiglaProvincia", query = "SELECT p FROM Provincia p WHERE p.siglaProvincia = :siglaProvincia")})
 public class Provincia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,9 +47,8 @@ public class Provincia implements Serializable {
     @Basic(optional = false)
     @Column(name = "siglaProvincia")
     private String siglaProvincia;
-    
-    @OneToMany(mappedBy = "luogo")
-    private Collection<Evento> eventi;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "luogo")
+    private Collection<Evento> eventoCollection;
 
     public Provincia() {
     }
@@ -98,12 +97,12 @@ public class Provincia implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Evento> getWA2PEventoCollection() {
-        return eventi;
+    public Collection<Evento> getEventoCollection() {
+        return eventoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
-        this.eventi = wA2PEventoCollection;
+    public void setEventoCollection(Collection<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class Provincia implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Provincia[ idProvincia=" + idProvincia + " ]";
+        return "Models.Provincia[ idProvincia=" + idProvincia + " ]";
     }
     
 }

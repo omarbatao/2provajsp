@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_EVENTI")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Evento.findAll", query = "SELECT w FROM WA2P_Evento w"),
-    @NamedQuery(name = "WA2P_Evento.findById", query = "SELECT w FROM WA2P_Evento w WHERE w.id = :id"),
-    @NamedQuery(name = "WA2P_Evento.findByTitolo", query = "SELECT w FROM WA2P_Evento w WHERE w.titolo = :titolo"),
-    @NamedQuery(name = "WA2P_Evento.findByData", query = "SELECT w FROM WA2P_Evento w WHERE w.data = :data")})
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e"),
+    @NamedQuery(name = "Evento.findById", query = "SELECT e FROM Evento e WHERE e.id = :id"),
+    @NamedQuery(name = "Evento.findByTitolo", query = "SELECT e FROM Evento e WHERE e.titolo = :titolo"),
+    @NamedQuery(name = "Evento.findByData", query = "SELECT e FROM Evento e WHERE e.data = :data")})
 public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,18 +48,18 @@ public class Evento implements Serializable {
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
-    @ManyToMany(mappedBy = "wA2PEventoCollection")
-    private Collection<Artista> wA2PArtistaCollection;
+    @ManyToMany(mappedBy = "eventoCollection")
+    private Collection<Artista> artistaCollection;
     @OneToMany(mappedBy = "evento")
-    private Collection<Commento> wA2PCommentoCollection;
+    private Collection<Commento> commentoCollection;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")
     @ManyToOne
     private Utente idU;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne
     private Categoria categoria;
-    @ManyToOne
-    @JoinColumn(name = "luogo",referencedColumnName="idProvincia")
+    @JoinColumn(name = "luogo", referencedColumnName = "idProvincia")
+    @ManyToOne(optional = false)
     private Provincia luogo;
 
     public Evento() {
@@ -99,21 +99,21 @@ public class Evento implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Artista> getWA2PArtistaCollection() {
-        return wA2PArtistaCollection;
+    public Collection<Artista> getArtistaCollection() {
+        return artistaCollection;
     }
 
-    public void setWA2PArtistaCollection(Collection<Artista> wA2PArtistaCollection) {
-        this.wA2PArtistaCollection = wA2PArtistaCollection;
+    public void setArtistaCollection(Collection<Artista> artistaCollection) {
+        this.artistaCollection = artistaCollection;
     }
 
     @XmlTransient
-    public Collection<Commento> getWA2PCommentoCollection() {
-        return wA2PCommentoCollection;
+    public Collection<Commento> getCommentoCollection() {
+        return commentoCollection;
     }
 
-    public void setWA2PCommentoCollection(Collection<Commento> wA2PCommentoCollection) {
-        this.wA2PCommentoCollection = wA2PCommentoCollection;
+    public void setCommentoCollection(Collection<Commento> commentoCollection) {
+        this.commentoCollection = commentoCollection;
     }
 
     public Utente getIdU() {
@@ -162,7 +162,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Evento[ id=" + id + " ]";
+        return "Models.Evento[ id=" + id + " ]";
     }
     
 }

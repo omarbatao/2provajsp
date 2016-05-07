@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_UTENTI")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Utente.findAll", query = "SELECT w FROM WA2P_Utente w"),
-    @NamedQuery(name = "WA2P_Utente.findByNickname", query = "SELECT w FROM WA2P_Utente w WHERE w.nickname = :nickname"),
-    @NamedQuery(name = "WA2P_Utente.findByNome", query = "SELECT w FROM WA2P_Utente w WHERE w.nome = :nome"),
-    @NamedQuery(name = "WA2P_Utente.findByCognome", query = "SELECT w FROM WA2P_Utente w WHERE w.cognome = :cognome"),
-    @NamedQuery(name = "WA2P_Utente.findByEmail", query = "SELECT w FROM WA2P_Utente w WHERE w.email = :email"),
-    @NamedQuery(name = "WA2P_Utente.findByPw", query = "SELECT w FROM WA2P_Utente w WHERE w.pw = :pw")})
+    @NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u"),
+    @NamedQuery(name = "Utente.findByNickname", query = "SELECT u FROM Utente u WHERE u.nickname = :nickname"),
+    @NamedQuery(name = "Utente.findByNome", query = "SELECT u FROM Utente u WHERE u.nome = :nome"),
+    @NamedQuery(name = "Utente.findByCognome", query = "SELECT u FROM Utente u WHERE u.cognome = :cognome"),
+    @NamedQuery(name = "Utente.findByEmail", query = "SELECT u FROM Utente u WHERE u.email = :email"),
+    @NamedQuery(name = "Utente.findByPw", query = "SELECT u FROM Utente u WHERE u.pw = :pw")})
 public class Utente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,11 +57,11 @@ public class Utente implements Serializable {
         @JoinColumn(name = "idU", referencedColumnName = "nickname")}, inverseJoinColumns = {
         @JoinColumn(name = "idC", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<Categoria> wA2PCategoriaCollection;
+    private Collection<Categoria> categoriaCollection;
     @OneToMany(mappedBy = "idU")
-    private Collection<Commento> wA2PCommentoCollection;
+    private Collection<Commento> commentoCollection;
     @OneToMany(mappedBy = "idU")
-    private Collection<Evento> wA2PEventoCollection;
+    private Collection<Evento> eventoCollection;
 
     public Utente() {
     }
@@ -119,30 +119,30 @@ public class Utente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Categoria> getWA2PCategoriaCollection() {
-        return wA2PCategoriaCollection;
+    public Collection<Categoria> getCategoriaCollection() {
+        return categoriaCollection;
     }
 
-    public void setWA2PCategoriaCollection(Collection<Categoria> wA2PCategoriaCollection) {
-        this.wA2PCategoriaCollection = wA2PCategoriaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Commento> getWA2PCommentoCollection() {
-        return wA2PCommentoCollection;
-    }
-
-    public void setWA2PCommentoCollection(Collection<Commento> wA2PCommentoCollection) {
-        this.wA2PCommentoCollection = wA2PCommentoCollection;
+    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+        this.categoriaCollection = categoriaCollection;
     }
 
     @XmlTransient
-    public Collection<Evento> getWA2PEventoCollection() {
-        return wA2PEventoCollection;
+    public Collection<Commento> getCommentoCollection() {
+        return commentoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
-        this.wA2PEventoCollection = wA2PEventoCollection;
+    public void setCommentoCollection(Collection<Commento> commentoCollection) {
+        this.commentoCollection = commentoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Evento> getEventoCollection() {
+        return eventoCollection;
+    }
+
+    public void setEventoCollection(Collection<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
     }
 
     @Override
@@ -167,7 +167,7 @@ public class Utente implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Utente[ nickname=" + nickname + " ]";
+        return "Models.Utente[ nickname=" + nickname + " ]";
     }
     
 }
