@@ -25,6 +25,7 @@ public static SessionFactory getSessionFactory() {
             if(sessionFactory==null){
         Configuration configuration = new Configuration();         
         configuration.addAnnotatedClass(Categoria.class)
+                .addAnnotatedClass(Evento.class)
                 .addAnnotatedClass(Artista.class)
                 .addAnnotatedClass(Commento.class)
                 .addAnnotatedClass(Utente.class)
