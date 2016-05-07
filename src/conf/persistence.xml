@@ -10,6 +10,12 @@
     <class>Models.Evento</class>
     <class>Models.Provincia</class>
     <class>Models.Utente</class>
+    <class>Models.Utenti</class>
+    <class>Models.Categorie</class>
+    <class>Models.Province</class>
+    <class>Models.Artisti</class>
+    <class>Models.Commenti</class>
+    <class>Models.Eventi</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.1.252:3306/5ib22?zeroDateTimeBehavior=convertToNull"/>

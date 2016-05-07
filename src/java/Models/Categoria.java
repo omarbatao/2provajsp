@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_CATEGORIE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Categoria.findAll", query = "SELECT w FROM WA2P_Categoria w"),
-    @NamedQuery(name = "WA2P_Categoria.findById", query = "SELECT w FROM WA2P_Categoria w WHERE w.id = :id"),
-    @NamedQuery(name = "WA2P_Categoria.findByNome", query = "SELECT w FROM WA2P_Categoria w WHERE w.nome = :nome")})
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
+    @NamedQuery(name = "Categoria.findById", query = "SELECT c FROM Categoria c WHERE c.id = :id"),
+    @NamedQuery(name = "Categoria.findByNome", query = "SELECT c FROM Categoria c WHERE c.nome = :nome")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,10 +39,10 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @ManyToMany(mappedBy = "wA2PCategoriaCollection")
-    private Collection<Utente> wA2PUtenteCollection;
+    @ManyToMany(mappedBy = "categoriaCollection")
+    private Collection<Utente> utenteCollection;
     @OneToMany(mappedBy = "categoria")
-    private Collection<Evento> wA2PEventoCollection;
+    private Collection<Evento> eventoCollection;
 
     public Categoria() {
     }
@@ -73,21 +73,21 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Utente> getWA2PUtenteCollection() {
-        return wA2PUtenteCollection;
+    public Collection<Utente> getUtenteCollection() {
+        return utenteCollection;
     }
 
-    public void setWA2PUtenteCollection(Collection<Utente> wA2PUtenteCollection) {
-        this.wA2PUtenteCollection = wA2PUtenteCollection;
+    public void setUtenteCollection(Collection<Utente> utenteCollection) {
+        this.utenteCollection = utenteCollection;
     }
 
     @XmlTransient
-    public Collection<Evento> getWA2PEventoCollection() {
-        return wA2PEventoCollection;
+    public Collection<Evento> getEventoCollection() {
+        return eventoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
-        this.wA2PEventoCollection = wA2PEventoCollection;
+    public void setEventoCollection(Collection<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Categoria[ id=" + id + " ]";
+        return "Models.Categoria[ id=" + id + " ]";
     }
     
 }

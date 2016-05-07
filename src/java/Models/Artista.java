@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WA2P_ARTISTI")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Artista.findAll", query = "SELECT w FROM WA2P_Artista w"),
-    @NamedQuery(name = "WA2P_Artista.findById", query = "SELECT w FROM WA2P_Artista w WHERE w.id = :id"),
-    @NamedQuery(name = "WA2P_Artista.findByNomeArte", query = "SELECT w FROM WA2P_Artista w WHERE w.nomeArte = :nomeArte")})
+    @NamedQuery(name = "Artista.findAll", query = "SELECT a FROM Artista a"),
+    @NamedQuery(name = "Artista.findById", query = "SELECT a FROM Artista a WHERE a.id = :id"),
+    @NamedQuery(name = "Artista.findByNomeArte", query = "SELECT a FROM Artista a WHERE a.nomeArte = :nomeArte")})
 public class Artista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,7 +44,7 @@ public class Artista implements Serializable {
         @JoinColumn(name = "idA", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "idE", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<Evento> wA2PEventoCollection;
+    private Collection<Evento> eventoCollection;
 
     public Artista() {
     }
@@ -75,12 +75,12 @@ public class Artista implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Evento> getWA2PEventoCollection() {
-        return wA2PEventoCollection;
+    public Collection<Evento> getEventoCollection() {
+        return eventoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
-        this.wA2PEventoCollection = wA2PEventoCollection;
+    public void setEventoCollection(Collection<Evento> eventoCollection) {
+        this.eventoCollection = eventoCollection;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Artista implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Artista[ id=" + id + " ]";
+        return "Models.Artista[ id=" + id + " ]";
     }
     
 }

@@ -6,8 +6,9 @@
 package com.site;
 
 
-import Models.NewHibernateUtil;
+
 import Models.*;
+import databaseUtility.NewHibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
