@@ -6,8 +6,8 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="head.jsp"/>
-<jsp:include page="menu.jsp"/>
+<jsp:include page="./layout/head.jsp"/>
+<jsp:include page="./layout/menu.jsp"/>
 
 
 
@@ -157,4 +157,4 @@
        <!-- Footer -->
 
       
-<jsp:include page="foot.jsp"/>
+<jsp:include page="./layout/foot.jsp"/>

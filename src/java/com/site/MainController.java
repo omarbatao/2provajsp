@@ -5,7 +5,7 @@
  */
 package com.site;
 
-import Models.Evento;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,11 +54,11 @@ public class MainController {
    
     @RequestMapping(value = "/joinus", method = RequestMethod.GET)//defaulr get metod
     public String joinus(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){  
-        return "joinus";
+        return "utente/joinus";
     }
     @RequestMapping(value = "/addEvento", method = RequestMethod.GET)//defaulr get metod
     public String addEvento(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){  
-        return "addEvento";
+        return "evento/addEvento";
     }
     
 }

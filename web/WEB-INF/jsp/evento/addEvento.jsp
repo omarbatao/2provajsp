@@ -6,8 +6,8 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="head.jsp"/>
-<jsp:include page="menu.jsp"/>
+<jsp:include page="./layout/head.jsp"/>
+<jsp:include page="./layout/menu.jsp"/>
 
 <div class="container">
     <div class="col-lg-7 center-block">
@@ -45,4 +45,4 @@
 
 
 
-<jsp:include page="foot.jsp"/>
+<jsp:include page="./layout/foot.jsp"/>
