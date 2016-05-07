@@ -20,16 +20,16 @@
     <!-- Features Section -->
         <c:forEach items="${visite}" var="visita">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:250px;position:relative">
                 <div class="panel-heading">
                     <h4><i class="fa fa-bars"></i> ${visita.getTitolo()}</h4>
                 </div>
                 <div class="panel-heading">
-                    <h4><i class="fa fa-usd"></i> ${visita.getTariffa()}</h4>
+                    <h4><i class="fa fa-euro"></i> ${visita.getTariffa()}</h4>
                 </div>
                 <div class="panel-body">
                     <p>${visita.getDescrizione()}</p>
-                    <a href="#" class="btn btn-success" style="margin-top: 7%;width: 100%;">Acquista</a>
+                    <a  href="./evento?id=${visita.getIdVisita()}">  <button class="btn btn-default"  style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">info</button></a>
                 </div>
             </div>
         </div>

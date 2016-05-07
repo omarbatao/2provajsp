@@ -27,10 +27,10 @@
                         Login</button>
                     <div style="text-align:center"> <br> <b>Oppure</b><div>
                             <a href="./register" class="text-center new-account"><h4>Crea un account</h4> </a>
-                            </form>
                         </div>
 
                     </div>
+                </form>
             </div>
         </div>
     </div>

@@ -107,13 +107,13 @@
             <h2 class="page-header">Eventi in corso</h2>
             <c:forEach items="${ultimiEventi}" var="evento">
                 <div class="col-md-4">
-                    <div class="panel panel-default"  style="height:220px;">
+                    <div class="panel panel-default"  style="height:220px;position:relative">
                         <div class="panel-heading">
                             <a href="./evento?id=${evento.getIdVisita()}"> <h4><i class="fa fa-university"></i>${evento.getTitolo()}</h4></a>
                         </div>
                         <div class="panel-body">
                             <p>${evento.getDescrizione()}</p>
-                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default" style="position:absolute;bottom:40px;">Leggi di pi&ugrave</a>
+                            <a href="./evento?id=${evento.getIdVisita()}" class="btn btn-default" style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">Leggi di pi&ugrave</a>
                         </div>
                     </div>
                 </div>

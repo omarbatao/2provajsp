@@ -20,19 +20,18 @@
     <!-- Features Section -->
         <c:forEach items="${eventi}" var="evento">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:250px;position:relative">
                 <div class="panel-heading">
                     <h4><i class="fa fa-university"></i> ${evento.getTitolo()}</h4>
                 </div>
                 <div class="panel-heading">
                     <h4><i class="fa fa-calendar"></i> ${evento.getDataI()} <i class="fa fa-ellipsis-h"></i> ${evento.getDataF()}</h4>
                 </div>
-                <div class="panel-heading">
-                    <h4><i class="fa fa-usd"></i> ${evento.getTariffa()}</h4>
-                </div>
                 <div class="panel-body">
                     <p>${evento.getDescrizione()}</p>
-                    <a href="#" class="btn btn-success" style="margin-top: 2%;width: 100%;">Acquista</a>
+                </div>
+                <div>
+                <a  href="./evento?id=${evento.getIdVisita()}">  <button class="btn btn-default"  style="bottom:10px;right: 5%;left:5%;position:absolute;width:90%;">info</button></a>
                 </div>
             </div>
         </div>

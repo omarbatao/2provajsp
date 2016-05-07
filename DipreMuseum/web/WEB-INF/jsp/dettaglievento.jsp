@@ -27,18 +27,29 @@
         </div>
         <div class="col-md-6">
             <div class="row">
-
-                <p> ${evento.getDescrizione()} </p>
+                <div style="position:relative;height:357px">
+                                  <p> ${evento.getDescrizione()} </p>
 
                 <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
-                <button style="margin-top:47% " class="col-md-12 btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+                <div style="text-align:center;"> 
+                    <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+                </div>
 
 
 
                 <%}%>
                 <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-                <a href="./register"><button style="margin-top:47% " class="col-md-12 btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                <div style="text-align:center"> 
+                    <a href="./register"><button class="btn btn-warning" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                    <br> 
+                    <b>Oppure</b>
+                    <div>
+                        <a href="./login"><button type="button" class="btn btn-info">Effettua il login</button></a>
+                    </div>
+                </div>
                 <%}%>
+                </div>
+  
 
             </div>
         </div>
