@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "WA2P_Commento.findById", query = "SELECT w FROM WA2P_Commento w WHERE w.id = :id"),
     @NamedQuery(name = "WA2P_Commento.findByCommento", query = "SELECT w FROM WA2P_Commento w WHERE w.commento = :commento"),
     @NamedQuery(name = "WA2P_Commento.findByVoto", query = "SELECT w FROM WA2P_Commento w WHERE w.voto = :voto")})
-public class WA2P_Commento implements Serializable {
+public class Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -43,19 +43,19 @@ public class WA2P_Commento implements Serializable {
     private Character voto;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")
     @ManyToOne
-    private WA2P_Utente idU;
+    private Utente idU;
     @JoinColumn(name = "evento", referencedColumnName = "id")
     @ManyToOne
-    private WA2P_Evento evento;
+    private Evento evento;
 
-    public WA2P_Commento() {
+    public Commento() {
     }
 
-    public WA2P_Commento(String id) {
+    public Commento(String id) {
         this.id = id;
     }
 
-    public WA2P_Commento(String id, String commento, Character voto) {
+    public Commento(String id, String commento, Character voto) {
         this.id = id;
         this.commento = commento;
         this.voto = voto;
@@ -85,19 +85,19 @@ public class WA2P_Commento implements Serializable {
         this.voto = voto;
     }
 
-    public WA2P_Utente getIdU() {
+    public Utente getIdU() {
         return idU;
     }
 
-    public void setIdU(WA2P_Utente idU) {
+    public void setIdU(Utente idU) {
         this.idU = idU;
     }
 
-    public WA2P_Evento getEvento() {
+    public Evento getEvento() {
         return evento;
     }
 
-    public void setEvento(WA2P_Evento evento) {
+    public void setEvento(Evento evento) {
         this.evento = evento;
     }
 
@@ -111,10 +111,10 @@ public class WA2P_Commento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WA2P_Commento)) {
+        if (!(object instanceof Commento)) {
             return false;
         }
-        WA2P_Commento other = (WA2P_Commento) object;
+        Commento other = (Commento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

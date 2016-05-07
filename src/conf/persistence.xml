@@ -3,13 +3,13 @@
   <persistence-unit name="SecondaProvaWebAppPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Models.Wa2pUtenti</class>
-    <class>Models.WA2P_Artista</class>
     <class>Models.Wa2pEventi</class>
-    <class>Models.WA2P_Commento</class>
-    <class>Models.WA2P_Categoria</class>
-    <class>Models.WA2P_Evento</class>
-    <class>Models.WA2P_Utente</class>
-    <class>Models.WA2P_Provincia</class>
+    <class>Models.Artista</class>
+    <class>Models.Categoria</class>
+    <class>Models.Commento</class>
+    <class>Models.Evento</class>
+    <class>Models.Provincia</class>
+    <class>Models.Utente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.0.1.252:3306/5ib22?zeroDateTimeBehavior=convertToNull"/>

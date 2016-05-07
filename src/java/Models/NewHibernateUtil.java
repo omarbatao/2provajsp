@@ -23,12 +23,12 @@ public class NewHibernateUtil {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
             sessionFactory = (SessionFactory) new AnnotationConfiguration()
-                    .addAnnotatedClass(WA2P_Artista.class)
-                    .addAnnotatedClass(WA2P_Categoria.class)
-                    .addAnnotatedClass(WA2P_Commento.class)
-                    .addAnnotatedClass(WA2P_Evento.class)
-                    .addAnnotatedClass(WA2P_Utente.class)
-                    .addAnnotatedClass(WA2P_Provincia.class)
+                    .addAnnotatedClass(Artista.class)
+                    .addAnnotatedClass(Categoria.class)
+                    .addAnnotatedClass(Commento.class)
+                    .addAnnotatedClass(Evento.class)
+                    .addAnnotatedClass(Utente.class)
+                    .addAnnotatedClass(Provincia.class)
                     .configure()
                     .buildSessionFactory();
         } catch (Throwable ex) {

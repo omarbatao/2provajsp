@@ -5,7 +5,7 @@
  */
 package com.site;
 
-import Models.WA2P_Utente;
+import Models.Utente;
 import java.util.ArrayList;
 
 /**
@@ -24,10 +24,10 @@ public class Login {
         this.db=db;
     }//Login
     
-    public WA2P_Utente checkLogin(){
-        WA2P_Utente u;
-        ArrayList<WA2P_Utente> ut= db.getUtenti();
-        for(WA2P_Utente utente : ut){
+    public Utente checkLogin(){
+        Utente u;
+        ArrayList<Utente> ut= db.getUtenti();
+        for(Utente utente : ut){
             if(utente.getNickname().equals(username)&& utente.getPw().equals(password)){
                 u=utente;
                 return u;

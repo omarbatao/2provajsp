@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "WA2P_Evento.findById", query = "SELECT w FROM WA2P_Evento w WHERE w.id = :id"),
     @NamedQuery(name = "WA2P_Evento.findByTitolo", query = "SELECT w FROM WA2P_Evento w WHERE w.titolo = :titolo"),
     @NamedQuery(name = "WA2P_Evento.findByData", query = "SELECT w FROM WA2P_Evento w WHERE w.data = :data")})
-public class WA2P_Evento implements Serializable {
+public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,27 +49,27 @@ public class WA2P_Evento implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date data;
     @ManyToMany(mappedBy = "wA2PEventoCollection")
-    private Collection<WA2P_Artista> wA2PArtistaCollection;
+    private Collection<Artista> wA2PArtistaCollection;
     @OneToMany(mappedBy = "evento")
-    private Collection<WA2P_Commento> wA2PCommentoCollection;
+    private Collection<Commento> wA2PCommentoCollection;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")
     @ManyToOne
-    private WA2P_Utente idU;
+    private Utente idU;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne
-    private WA2P_Categoria categoria;
+    private Categoria categoria;
     @ManyToOne
     @JoinColumn(name = "luogo",referencedColumnName="idProvincia")
-    private WA2P_Provincia luogo;
+    private Provincia luogo;
 
-    public WA2P_Evento() {
+    public Evento() {
     }
 
-    public WA2P_Evento(String id) {
+    public Evento(String id) {
         this.id = id;
     }
 
-    public WA2P_Evento(String id, String titolo) {
+    public Evento(String id, String titolo) {
         this.id = id;
         this.titolo = titolo;
     }
@@ -99,44 +99,44 @@ public class WA2P_Evento implements Serializable {
     }
 
     @XmlTransient
-    public Collection<WA2P_Artista> getWA2PArtistaCollection() {
+    public Collection<Artista> getWA2PArtistaCollection() {
         return wA2PArtistaCollection;
     }
 
-    public void setWA2PArtistaCollection(Collection<WA2P_Artista> wA2PArtistaCollection) {
+    public void setWA2PArtistaCollection(Collection<Artista> wA2PArtistaCollection) {
         this.wA2PArtistaCollection = wA2PArtistaCollection;
     }
 
     @XmlTransient
-    public Collection<WA2P_Commento> getWA2PCommentoCollection() {
+    public Collection<Commento> getWA2PCommentoCollection() {
         return wA2PCommentoCollection;
     }
 
-    public void setWA2PCommentoCollection(Collection<WA2P_Commento> wA2PCommentoCollection) {
+    public void setWA2PCommentoCollection(Collection<Commento> wA2PCommentoCollection) {
         this.wA2PCommentoCollection = wA2PCommentoCollection;
     }
 
-    public WA2P_Utente getIdU() {
+    public Utente getIdU() {
         return idU;
     }
 
-    public void setIdU(WA2P_Utente idU) {
+    public void setIdU(Utente idU) {
         this.idU = idU;
     }
 
-    public WA2P_Categoria getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(WA2P_Categoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public WA2P_Provincia getLuogo() {
+    public Provincia getLuogo() {
         return luogo;
     }
 
-    public void setLuogo(WA2P_Provincia luogo) {
+    public void setLuogo(Provincia luogo) {
         this.luogo = luogo;
     }
 
@@ -150,10 +150,10 @@ public class WA2P_Evento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WA2P_Evento)) {
+        if (!(object instanceof Evento)) {
             return false;
         }
-        WA2P_Evento other = (WA2P_Evento) object;
+        Evento other = (Evento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

@@ -5,7 +5,7 @@
  */
 package com.site;
 
-import Models.WA2P_Evento;
+import Models.Evento;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     
-    List<WA2P_Evento> eventi = new ArrayList<>();
+    List<Evento> eventi = new ArrayList<>();
     Database db;
     
     

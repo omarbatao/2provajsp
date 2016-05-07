@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "WA2P_Provincia.findByIdRegione", query = "SELECT w FROM WA2P_Provincia w WHERE w.idRegione = :idRegione"),
     @NamedQuery(name = "WA2P_Provincia.findByNomeProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.nomeProvincia = :nomeProvincia"),
     @NamedQuery(name = "WA2P_Provincia.findBySiglaProvincia", query = "SELECT w FROM WA2P_Provincia w WHERE w.siglaProvincia = :siglaProvincia")})
-public class WA2P_Provincia implements Serializable {
+public class Provincia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,16 +49,16 @@ public class WA2P_Provincia implements Serializable {
     private String siglaProvincia;
     
     @OneToMany(mappedBy = "luogo")
-    private Collection<WA2P_Evento> eventi;
+    private Collection<Evento> eventi;
 
-    public WA2P_Provincia() {
+    public Provincia() {
     }
 
-    public WA2P_Provincia(String idProvincia) {
+    public Provincia(String idProvincia) {
         this.idProvincia = idProvincia;
     }
 
-    public WA2P_Provincia(String idProvincia, String idRegione, String nomeProvincia, String siglaProvincia) {
+    public Provincia(String idProvincia, String idRegione, String nomeProvincia, String siglaProvincia) {
         this.idProvincia = idProvincia;
         this.idRegione = idRegione;
         this.nomeProvincia = nomeProvincia;
@@ -98,11 +98,11 @@ public class WA2P_Provincia implements Serializable {
     }
 
     @XmlTransient
-    public Collection<WA2P_Evento> getWA2PEventoCollection() {
+    public Collection<Evento> getWA2PEventoCollection() {
         return eventi;
     }
 
-    public void setWA2PEventoCollection(Collection<WA2P_Evento> wA2PEventoCollection) {
+    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
         this.eventi = wA2PEventoCollection;
     }
 
@@ -116,10 +116,10 @@ public class WA2P_Provincia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WA2P_Provincia)) {
+        if (!(object instanceof Provincia)) {
             return false;
         }
-        WA2P_Provincia other = (WA2P_Provincia) object;
+        Provincia other = (Provincia) object;
         if ((this.idProvincia == null && other.idProvincia != null) || (this.idProvincia != null && !this.idProvincia.equals(other.idProvincia))) {
             return false;
         }

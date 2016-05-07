@@ -11,10 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -24,36 +25,37 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author FSEVERI\benetti3004
  */
 @Entity
-@Table(name = "WA2P_CATEGORIE")
+@Table(name = "WA2P_ARTISTI")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "WA2P_Categoria.findAll", query = "SELECT w FROM WA2P_Categoria w"),
-    @NamedQuery(name = "WA2P_Categoria.findById", query = "SELECT w FROM WA2P_Categoria w WHERE w.id = :id"),
-    @NamedQuery(name = "WA2P_Categoria.findByNome", query = "SELECT w FROM WA2P_Categoria w WHERE w.nome = :nome")})
-public class WA2P_Categoria implements Serializable {
+    @NamedQuery(name = "WA2P_Artista.findAll", query = "SELECT w FROM WA2P_Artista w"),
+    @NamedQuery(name = "WA2P_Artista.findById", query = "SELECT w FROM WA2P_Artista w WHERE w.id = :id"),
+    @NamedQuery(name = "WA2P_Artista.findByNomeArte", query = "SELECT w FROM WA2P_Artista w WHERE w.nomeArte = :nomeArte")})
+public class Artista implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id")
     private String id;
     @Basic(optional = false)
-    @Column(name = "nome")
-    private String nome;
-    @ManyToMany(mappedBy = "wA2PCategoriaCollection")
-    private Collection<WA2P_Utente> wA2PUtenteCollection;
-    @OneToMany(mappedBy = "categoria")
-    private Collection<WA2P_Evento> wA2PEventoCollection;
+    @Column(name = "nomeArte")
+    private String nomeArte;
+    @JoinTable(name = "WA2P_E_A", joinColumns = {
+        @JoinColumn(name = "idA", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idE", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Evento> wA2PEventoCollection;
 
-    public WA2P_Categoria() {
+    public Artista() {
     }
 
-    public WA2P_Categoria(String id) {
+    public Artista(String id) {
         this.id = id;
     }
 
-    public WA2P_Categoria(String id, String nome) {
+    public Artista(String id, String nomeArte) {
         this.id = id;
-        this.nome = nome;
+        this.nomeArte = nomeArte;
     }
 
     public String getId() {
@@ -64,29 +66,20 @@ public class WA2P_Categoria implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeArte() {
+        return nomeArte;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @XmlTransient
-    public Collection<WA2P_Utente> getWA2PUtenteCollection() {
-        return wA2PUtenteCollection;
-    }
-
-    public void setWA2PUtenteCollection(Collection<WA2P_Utente> wA2PUtenteCollection) {
-        this.wA2PUtenteCollection = wA2PUtenteCollection;
+    public void setNomeArte(String nomeArte) {
+        this.nomeArte = nomeArte;
     }
 
     @XmlTransient
-    public Collection<WA2P_Evento> getWA2PEventoCollection() {
+    public Collection<Evento> getWA2PEventoCollection() {
         return wA2PEventoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<WA2P_Evento> wA2PEventoCollection) {
+    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
         this.wA2PEventoCollection = wA2PEventoCollection;
     }
 
@@ -100,10 +93,10 @@ public class WA2P_Categoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WA2P_Categoria)) {
+        if (!(object instanceof Artista)) {
             return false;
         }
-        WA2P_Categoria other = (WA2P_Categoria) object;
+        Artista other = (Artista) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -112,7 +105,7 @@ public class WA2P_Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.WA2P_Categoria[ id=" + id + " ]";
+        return "Models.WA2P_Artista[ id=" + id + " ]";
     }
     
 }

@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "WA2P_Utente.findByCognome", query = "SELECT w FROM WA2P_Utente w WHERE w.cognome = :cognome"),
     @NamedQuery(name = "WA2P_Utente.findByEmail", query = "SELECT w FROM WA2P_Utente w WHERE w.email = :email"),
     @NamedQuery(name = "WA2P_Utente.findByPw", query = "SELECT w FROM WA2P_Utente w WHERE w.pw = :pw")})
-public class WA2P_Utente implements Serializable {
+public class Utente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,20 +57,20 @@ public class WA2P_Utente implements Serializable {
         @JoinColumn(name = "idU", referencedColumnName = "nickname")}, inverseJoinColumns = {
         @JoinColumn(name = "idC", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<WA2P_Categoria> wA2PCategoriaCollection;
+    private Collection<Categoria> wA2PCategoriaCollection;
     @OneToMany(mappedBy = "idU")
-    private Collection<WA2P_Commento> wA2PCommentoCollection;
+    private Collection<Commento> wA2PCommentoCollection;
     @OneToMany(mappedBy = "idU")
-    private Collection<WA2P_Evento> wA2PEventoCollection;
+    private Collection<Evento> wA2PEventoCollection;
 
-    public WA2P_Utente() {
+    public Utente() {
     }
 
-    public WA2P_Utente(String nickname) {
+    public Utente(String nickname) {
         this.nickname = nickname;
     }
 
-    public WA2P_Utente(String nickname, String nome, String cognome, String email, String pw) {
+    public Utente(String nickname, String nome, String cognome, String email, String pw) {
         this.nickname = nickname;
         this.nome = nome;
         this.cognome = cognome;
@@ -119,29 +119,29 @@ public class WA2P_Utente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<WA2P_Categoria> getWA2PCategoriaCollection() {
+    public Collection<Categoria> getWA2PCategoriaCollection() {
         return wA2PCategoriaCollection;
     }
 
-    public void setWA2PCategoriaCollection(Collection<WA2P_Categoria> wA2PCategoriaCollection) {
+    public void setWA2PCategoriaCollection(Collection<Categoria> wA2PCategoriaCollection) {
         this.wA2PCategoriaCollection = wA2PCategoriaCollection;
     }
 
     @XmlTransient
-    public Collection<WA2P_Commento> getWA2PCommentoCollection() {
+    public Collection<Commento> getWA2PCommentoCollection() {
         return wA2PCommentoCollection;
     }
 
-    public void setWA2PCommentoCollection(Collection<WA2P_Commento> wA2PCommentoCollection) {
+    public void setWA2PCommentoCollection(Collection<Commento> wA2PCommentoCollection) {
         this.wA2PCommentoCollection = wA2PCommentoCollection;
     }
 
     @XmlTransient
-    public Collection<WA2P_Evento> getWA2PEventoCollection() {
+    public Collection<Evento> getWA2PEventoCollection() {
         return wA2PEventoCollection;
     }
 
-    public void setWA2PEventoCollection(Collection<WA2P_Evento> wA2PEventoCollection) {
+    public void setWA2PEventoCollection(Collection<Evento> wA2PEventoCollection) {
         this.wA2PEventoCollection = wA2PEventoCollection;
     }
 
@@ -155,10 +155,10 @@ public class WA2P_Utente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof WA2P_Utente)) {
+        if (!(object instanceof Utente)) {
             return false;
         }
-        WA2P_Utente other = (WA2P_Utente) object;
+        Utente other = (Utente) object;
         if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
             return false;
         }

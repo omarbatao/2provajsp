@@ -31,17 +31,16 @@ public class Database {
    
     
     
-    public  ArrayList<WA2P_Evento> getEventi(){
+    public  ArrayList<Evento> getEventi(){
         Transaction tx = null;
-        ArrayList<WA2P_Evento> eve= new ArrayList<>(); ;
+        ArrayList<Evento> eve= new ArrayList<>(); 
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List eventi = session.createCriteria(WA2P_Evento.class).list();
-             for (Iterator iterator =
-                 eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento evento = (WA2P_Evento) iterator.next();
+             List eventi = session.createCriteria(Evento.class).list();
+             for (Iterator iterator = eventi.iterator(); iterator.hasNext();){
+                 Evento evento = (Evento) iterator.next();
                  System.out.println("Evento: "+evento.toString());
                  eve.add(evento);
              }
@@ -55,21 +54,21 @@ public class Database {
          return null;
     }
     
-      public  ArrayList<WA2P_Categoria> getCategorie(){
+      public  ArrayList<Categoria> getCategorie(){
         Transaction tx = null;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List categorie = session.createCriteria(WA2P_Categoria.class).list();
+             List categorie = session.createCriteria(Categoria.class).list();
              /*for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
+                 Evento persona = (Evento) iterator.next();
                  
              }*/
              
              tx.commit();
-             return (ArrayList<WA2P_Categoria>) categorie;
+             return (ArrayList<Categoria>) categorie;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
@@ -77,21 +76,21 @@ public class Database {
          return null;
     }  
  
-      public  ArrayList<WA2P_Artista> getArtisti(){
+      public  ArrayList<Artista> getArtisti(){
         Transaction tx = null;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List artisti = session.createCriteria(WA2P_Artista.class).list();
+             List artisti = session.createCriteria(Artista.class).list();
              /*for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
+                 Evento persona = (Evento) iterator.next();
                  
              }*/
              
              tx.commit();
-             return (ArrayList<WA2P_Artista>) artisti;
+             return (ArrayList<Artista>) artisti;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
@@ -99,21 +98,21 @@ public class Database {
          return null;
     }      
 
-      public  ArrayList<WA2P_Commento> getCommenti(){
+      public  ArrayList<Commento> getCommenti(){
         Transaction tx = null;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List artisti = session.createCriteria(WA2P_Commento.class).list();
+             List artisti = session.createCriteria(Commento.class).list();
              /*for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
+                 Evento persona = (Evento) iterator.next();
                  
              }*/
              
              tx.commit();
-             return (ArrayList<WA2P_Commento>) artisti;
+             return (ArrayList<Commento>) artisti;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
@@ -122,21 +121,21 @@ public class Database {
     }       
       
 
-      public  ArrayList<WA2P_Provincia> getProvince(){
+      public  ArrayList<Provincia> getProvince(){
         Transaction tx = null;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List province = session.createCriteria(WA2P_Provincia.class).list();
+             List province = session.createCriteria(Provincia.class).list();
              /*for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
+                 Evento persona = (Evento) iterator.next();
                  
              }*/
              
              tx.commit();
-             return (ArrayList<WA2P_Provincia>) province;
+             return (ArrayList<Provincia>) province;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
@@ -145,21 +144,21 @@ public class Database {
     }          
       
       
-      public  ArrayList<WA2P_Utente> getUtenti(){
+      public  ArrayList<Utente> getUtenti(){
         Transaction tx = null;
         Session session = factory.openSession();
          try{
               tx = session.beginTransaction();
              
-             List utenti = session.createCriteria(WA2P_Utente.class).list();
+             List utenti = session.createCriteria(Utente.class).list();
              /*for (Iterator iterator =
                  eventi.iterator(); iterator.hasNext();){
-                 WA2P_Evento persona = (WA2P_Evento) iterator.next();
+                 Evento persona = (Evento) iterator.next();
                  
              }*/
              
              tx.commit();
-             return (ArrayList<WA2P_Utente>) utenti;
+             return (ArrayList<Utente>) utenti;
          }catch (HibernateException e) {
              if (tx!=null) tx.rollback();
          }
