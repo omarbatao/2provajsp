@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -43,10 +43,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AcquistiController {
 
-    
     private List<Biglietto> bigliettitmp;
     private ManageDatabase db;
-    
+
     public AcquistiController() {
         try {
             db = new ManageDatabase();
@@ -55,30 +54,35 @@ public class AcquistiController {
             Logger.getLogger(AcquistiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @RequestMapping(value = "/carrello")
     public String carrello(ModelMap map, HttpServletRequest request) {
         map.put("titolo", "Carrello");
-        map.put("biglietti",request.getSession().getAttribute("biglietti"));
+        map.put("biglietti", request.getSession().getAttribute("biglietti"));
         return "carrello";
     }
 
     @RequestMapping(value = "/bigliettocompra", method = RequestMethod.POST)
-    
+
     public String compraBiglietti(
             @RequestParam(value = "comprabiglietti", required = true) boolean compra,
             HttpServletRequest request
-            ){
-        if(!compra) return "redirect: /carrello?comprati=false";
-        List<Biglietto> biglietti= (List<Biglietto>) request.getSession().getAttribute("biglietti");
-        if(biglietti==null)return "redirect: /carrello?comprati=false";
-        
-        for(Biglietto b:biglietti){
+    ) {
+        if (!compra) {
+            return "redirect: /carrello?comprati=false";
+        }
+        List<Biglietto> biglietti = (List<Biglietto>) request.getSession().getAttribute("biglietti");
+        if (biglietti == null) {
+            return "redirect: /carrello?comprati=false";
+        }
+
+        for (Biglietto b : biglietti) {
             db.inserisciBiglietto(b);
         }
-        request.getSession().setAttribute("biglietti",null);
+        request.getSession().setAttribute("biglietti", null);
         return "redirect: /carrello?comprati=true";
     }
-    
+
     @RequestMapping(value = "/addgruppobigliettocategoria", method = RequestMethod.GET)
     @ResponseBody
     public String addGruppoBiglietti(
@@ -87,26 +91,35 @@ public class AcquistiController {
             @RequestParam(value = "categoria", required = true) String categoria,
             @RequestParam(value = "qty", required = true) int qty,
             HttpServletRequest request) {
-        if(qty<0||qty>10) return "errore";
-        if(qty==0) return "nessun";
-        Integer idVisitatore =(Integer) request.getSession().getAttribute("userid");
-        Visitatore user = db.getVisitatore(""+idVisitatore);
+        if (qty < 0 || qty > 10) {
+            return "errore";
+        }
+        if (qty == 0) {
+            return "nessun";
+        }
+        Integer idVisitatore = (Integer) request.getSession().getAttribute("userid");
+        Visitatore user = db.getVisitatore("" + idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
-         List<Biglietto> butente= (List<Biglietto>) request.getSession().getAttribute("biglietti");
-        if(butente==null)butente= new ArrayList<Biglietto>();
-        for(int i = 0; i<qty;i++){
+        List<Biglietto> butente = (List<Biglietto>) request.getSession().getAttribute("biglietti");
+        if (butente == null) {
+            butente = new ArrayList<Biglietto>();
+        }
+        for (int i = 0; i < qty; i++) {
             Biglietto b = new Biglietto();
-            if(tipo==1) b.setValidita(visita.getDataF());
-            else b.setValidita(validita());
+            if (tipo == 1) {
+                b.setValidita(visita.getDataF());
+            } else {
+                b.setValidita(validita());
+            }
             b.setTipo(tipo);
             b.setCategoria(cat);
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
-           System.out.println("for: "+b.toString());
+            System.out.println("for: " + b.toString());
 
             butente.add(b);
-            
+
         }
         /*for(Biglietto b:butente){
             System.out.println("Biglietto: "+b.toString());
@@ -114,22 +127,39 @@ public class AcquistiController {
         Collections.sort(butente, new Comparator<Biglietto>() {
             @Override
             public int compare(Biglietto t, Biglietto t1) {
-                if(t.getIdVisita().getIdVisita().equals(t1.getIdVisita().getIdVisita())) {
-                    if(t.getCategoria().getCodC().equals(t1.getCategoria().getCodC())) return 0;
-                    else return 1;
+                if (t.getIdVisita().getIdVisita().equals(t1.getIdVisita().getIdVisita())) {
+                    if (t.getCategoria().getCodC().equals(t1.getCategoria().getCodC())) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
                 }
                 return -1;
             }
-        
-       } );
+
+        });
         request.getSession().setAttribute("biglietti", butente);
         return "inserito";
     }
-    
-   
-    
-    
-    
+
+    @RequestMapping(value = "/rimuovibiglietto", method = RequestMethod.GET)
+    @ResponseBody
+    public String rimuovibiglietto(ModelMap map, HttpServletRequest request,
+            @RequestParam(value = "categoria", required = true) String categoria,
+            @RequestParam(value = "idVisita", required = true) String idvisita) {
+        List<Biglietto> biglietti = (List) request.getSession().getAttribute("biglietti");
+        if(biglietti.size()==1){
+            request.getSession().setAttribute("biglietti",null);
+            return "rimosso";
+        }
+        for(int i=0;i<biglietti.size();i++){
+            if(biglietti.get(i).getCategoria().getCodC().equals(categoria) && biglietti.get(i).getIdVisita().getIdVisita().equals(idvisita)){
+                biglietti.remove(i);
+                break;
+            }
+        }
+        return "rimosso";
+    }
 
     private Date validita() {
         Date today = Calendar.getInstance().getTime();

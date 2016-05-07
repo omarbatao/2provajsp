@@ -104,7 +104,7 @@
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-md-12">
-            <h2 class="page-header">Eventi pi&ugrave recenti</h2>
+            <h2 class="page-header">Eventi in corso</h2>
             <c:forEach items="${ultimiEventi}" var="evento">
                 <div class="col-md-4">
                     <div class="panel panel-default"  style="height:220px;">
