@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../head.jsp"/>
+<jsp:include page="head.jsp"/>
 
 <body>
     <div id="wrapper">
@@ -39,19 +39,19 @@
                         <%
                             if (request.getParameter("inseriti") != null) {
                                 if (request.getParameter("inseriti").equals("true")) {
-                                    out.write(" <div class='alert alert-success' role='alert'>Successfully added event</div>");
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully added visit</div>");
                                 }
                             }
                             if (request.getParameter("aggiornato") != null) {
                                 if (request.getParameter("aggiornato").equals("true")) {
-                                    out.write(" <div class='alert alert-success' role='alert'>Successfully updated event</div>");
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully updated visit</div>");
                                 }
                             }
                             if (request.getParameter("eliminato") != null) {
                                 if (request.getParameter("eliminato").equals("true")) {
-                                    out.write(" <div class='alert alert-success' role='alert'>Successfully delited event</div>");
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully delited visit</div>");
                                 } else {
-                                    out.write(" <div class='alert alert-danger' role='alert'>Error event not delited </div>");
+                                    out.write(" <div class='alert alert-danger' role='alert'>Error visit not delited </div>");
                                 }
                             }
                         %>

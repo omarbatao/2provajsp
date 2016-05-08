@@ -2,11 +2,26 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="models.Visita"%>
-<jsp:include page="../head.jsp"/>
+<jsp:include page="head.jsp"/>
 
 <body>
     <div id="wrapper">
         <jsp:include page="menu.jsp"/>
+        <script>
+            function del(idvisita) {
+                $.ajax({
+                    type: "POST",
+                    url: "./eliminaevent",
+                    data: {idevento: idvisita},
+                    success: function () {
+                        window.location.replace("./adminevents?eliminato=true");
+                    },
+                    error: function () {
+                        window.location.replace("./adminevents?eliminato=false");
+                    }
+                });
+            }
+        </script>
         <div id="page-wrapper" >
             <div class="container-fluid">
 
@@ -26,14 +41,22 @@
                     <div class="col-md-12">
                         <%
                             if (request.getParameter("inserito") != null) {
-                                if (request.getParameter("inserito").equals("fasle")) {
-
-                        %>
-                        <div class="alert alert-danger" role="alert">Event error not set</div>
-                        <%            } else {
-                        %>
-                        <div class="alert alert-success" role="alert">Successfully added event</div>
-                        <%
+                                if (request.getParameter("inserito").equals("true")) {
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully added event</div>");
+                                }
+                            }
+                            if (request.getParameter("aggiornato") != null) {
+                                if (request.getParameter("aggiornato").equals("true")) {
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully updated event</div>");
+                                }else{
+                                    out.write(" <div class='alert alert-danger' role='alert'>Error</div>");
+                                }
+                            }
+                            if (request.getParameter("eliminato") != null) {
+                                if (request.getParameter("eliminato").equals("true")) {
+                                    out.write(" <div class='alert alert-success' role='alert'>Successfully delited event</div>");
+                                } else {
+                                    out.write(" <div class='alert alert-danger' role='alert'>Error event not delited </div>");
                                 }
                             }
                         %>
@@ -42,10 +65,10 @@
 
                 <div class="row pad">
                     <div class="col-md-12">
-                        <form class="form-inline" role="search">
+                        <form action="./cercaevent" method="post" class="form-inline" role="search">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addevent" >Add event</button>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Find Event">
+                                <input type="text" class="form-control" placeholder="Find Event by id" name="idevento">
                             </div>
                             <button type="submit" class="btn btn-default">Search</button>
                         </form>
@@ -65,7 +88,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <form action='./adminaddevent' method="POST">
+                                <form action='./adminaddevent' method="post">
                                     <div class="form-group">
                                         <label for="idvisita">Event's id</label>
                                         <input name="idvisita" type="text" class="form-control" id="idvisita" placeholder="Event's code">
@@ -102,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-12">
                         <div id='calendar' ></div>
                         <script>
@@ -139,12 +162,9 @@
                                     editable: true,
                                     eventLimit: true, // allow "more" link when too many events
                                     events: [
-                                        /*{
-                                         title: 'All Day Event',
-                                         start: '2016-04-01'
-                                         }*/
-
-                            <%                                List<Visita> eventi = (List) request.getAttribute("eventi");
+                            
+                            <%  
+                                List<Visita> eventi = (List) request.getAttribute("eventi");
                                 String s = "";
                                 for (Visita evento : eventi) {
                                     s += "{ id: '" + evento.getIdVisita() + "', title: '" + evento.getTitolo() + "', start: '" + evento.getDataIString() + "', end: '" + evento.getDataFString() + "' }, ";
@@ -152,69 +172,13 @@
                                 }
                                 s = s.substring(0, s.length() - 2);
                                 out.println(s);
-                            %>
-
-
-                                        /*{
-                                         title: 'Long Event',
-                                         start: '2016-04-07',
-                                         end: '2016-04-10'
-                                         },
-                                         {
-                                         id: 999,
-                                         title: 'Repeating Event',
-                                         start: '2016-04-09T16:00:00'
-                                         },
-                                         {
-                                         id: 999,
-                                         title: 'Repeating Event',
-                                         start: '2016-04-16T16:00:00'
-                                         },
-                                         {
-                                         title: 'Conference',
-                                         start: '2016-04-11',
-                                         end: '2016-04-13'
-                                         },
-                                         {
-                                         title: 'Meeting',
-                                         start: '2016-04-12T10:30:00',
-                                         end: '2016-04-12T12:30:00'
-                                         },
-                                         {
-                                         title: 'Lunch',
-                                         start: '2016-04-12T12:00:00'
-                                         },
-                                         {
-                                         title: 'Meeting',
-                                         start: '2016-04-12T14:30:00'
-                                         },
-                                         {
-                                         title: 'Happy Hour',
-                                         start: '2016-04-12T17:30:00'
-                                         },
-                                         {
-                                         title: 'Dinner',
-                                         start: '2016-04-12T20:00:00'
-                                         },
-                                         {
-                                         title: 'Birthday Party',
-                                         start: '2016-04-13T07:00:00'
-                                         },
-                                         {
-                                         title: 'Click for Google',
-                                         url: 'http://google.com/',
-                                         start: '2016-04-28'
-                                         }*/
+                            %>    
                                     ], eventClick: function (event) {
                                        openmodal("modal"+event.id);
                                     }
                                 });
 
                             });
-
-
-
-
                             function getToday() {
                                 var today = new Date();
                                 var dd = today.getDate();
@@ -248,10 +212,11 @@
                                         </div>
 
                                         <div class="modal-body">
-                                            <form action='./adminaddevent' method="POST">
+                                            <form action='./modificaevent' method="post">
+                                                <input type="hidden" name="oldidevento" value="${evento.getIdVisita()}">
                                                 <div class="form-group">
-                                                    <label for="idvisita">Event's id</label>
-                                                    <input name="idvisita" type="text" class="form-control" id="idvisita" value="${evento.getIdVisita()}">
+                                                    <label for="newidevento">Event's id</label>
+                                                    <input name="newidevento" type="text" class="form-control" id="newidevento" value="${evento.getIdVisita()}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="titolo">Title</label>
@@ -277,8 +242,9 @@
                                                     <label for="maxp">Max people</label>
                                                     <input name="maxp" type="text" class="form-control" id="maxp" value="${evento.getMaxPartecipanti()}">
                                                 </div>
-                                                <button type="submit" class="btn btn-warning">Modify</button>
-                                                <button  type="button" class="btn btn-default"  data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-warning">Modify event</button>
+                                                <button type="button" class="btn btn-danger" onclick="del('${evento.getIdVisita()}')">Remove event</button>
+                                                <button  type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
                                             </form>
                                         </div>
                                     </div>

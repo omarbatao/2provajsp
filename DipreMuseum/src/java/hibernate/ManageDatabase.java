@@ -540,7 +540,49 @@ public class ManageDatabase {
         try {
             tx = session.beginTransaction();
             String hql = "delete from Visite where Idvisita= :id";
-            SQLQuery query = session.createSQLQuery(hql).addEntity(Servizio.class);
+            SQLQuery query = session.createSQLQuery(hql).addEntity(Visita.class);
+            query.setString("id", v.getIdVisita());
+            query.executeUpdate();
+            tx.commit();
+        } catch (Throwable e) {
+            tx.rollback();
+            throw e;
+        }
+    }
+
+    public void updateEvento(Visita old, Visita n) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Visita v = (Visita) session.get(Visita.class,old.getIdVisita());
+            v.setIdVisita(n.getIdVisita());
+            v.setTitolo(n.getTitolo());
+            v.setDescrizione(n.getDescrizione());
+            v.setTariffa(n.getTariffa());
+            v.setDataI(n.getDataI());
+            v.setDataF(n.getDataF());
+            v.setMaxPartecipanti(n.getMaxPartecipanti());
+            v.setIdA(n.getIdA());
+            session.update(v);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void deleteEvento(Visita v) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "delete from Visite where Idvisita= :id";
+            SQLQuery query = session.createSQLQuery(hql).addEntity(Visita.class);
             query.setString("id", v.getIdVisita());
             query.executeUpdate();
             tx.commit();

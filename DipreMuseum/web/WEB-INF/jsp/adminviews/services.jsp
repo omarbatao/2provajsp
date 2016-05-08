@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../head.jsp"/>
+<jsp:include page="head.jsp"/>
 
 <div id="wrapper">
     <jsp:include page="menu.jsp"/>

@@ -184,7 +184,7 @@ public class Visita implements Serializable {
     
     
     public String getDataIString(){
-        DateFormat df = new SimpleDateFormat("yyy-MM-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String reportdate = df.format(dataI);
         return reportdate;
     }
@@ -193,7 +193,7 @@ public class Visita implements Serializable {
         Calendar c = Calendar.getInstance();
         c.setTime(dataF);
         c.add(Calendar.DATE, 1); 
-        DateFormat df = new SimpleDateFormat("yyy-MM-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String reportdate = df.format(c.getTime());
         return reportdate;
     }

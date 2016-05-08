@@ -5,7 +5,7 @@
 <%@page import="models.Visita"%>
 <%@page import="hibernate.ManageDatabase"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="head.jsp"/>
+<jsp:include page="adminviews/head.jsp"/>
 
 <body>
 
