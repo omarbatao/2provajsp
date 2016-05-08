@@ -67,6 +67,12 @@ public class AdminController {
         }
         return "adminviews/login";
     }
+    
+    @RequestMapping(value = "/adminlogout")
+    public String adminlogout(ModelMap map, HttpServletRequest request) {// --- request menu
+        request.getSession().invalidate();
+        return "adminviews/login";
+    }
 
     @RequestMapping(value = "/adminchecklogin", method = RequestMethod.POST)
     public String check(ModelMap map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, HttpServletRequest request) {
