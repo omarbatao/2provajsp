@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Categoria;
+import models.Servizio;
 import models.Visita;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -54,6 +55,7 @@ public class EventiController {
         if(id !=null && !id.isEmpty()){
             try {
             List<Categoria> categorie = db.getCategorie();
+            List<Servizio> servizi = db.getServizi();
             
             for(Categoria c :categorie){
                 System.out.println("categoria:  ->"+c.getDescrizione());
@@ -64,6 +66,7 @@ public class EventiController {
                 map.put("evento", evento);
                 map.put("titolo", evento.getTitolo());    
                 map.put("categorie",categorie);
+                map.put("servizi",servizi);
                 return "dettaglievento";
             }else{
                 return "redirect:/";

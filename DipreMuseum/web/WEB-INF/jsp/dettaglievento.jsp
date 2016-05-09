@@ -28,28 +28,28 @@
         <div class="col-md-6">
             <div class="row">
                 <div style="position:relative;height:357px">
-                                  <p> ${evento.getDescrizione()} </p>
+                    <p> ${evento.getDescrizione()} </p>
 
-                <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
-                <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
-                    <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
-                </div>
-
-
-
-                <%}%>
-                <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-                <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
-                    <a href="./register"><button class="btn btn-primary" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
-                    <br> 
-                    <b>Oppure</b>
-                    <div>
-                        <a href="./login"><button type="button" class="btn btn-info">Effettua il login</button></a>
+                    <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
+                    <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
+                        <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
                     </div>
+
+
+
+                    <%}%>
+                    <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+                    <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
+                        <a href="./register"><button class="btn btn-primary" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                        <br> 
+                        <b>Oppure</b>
+                        <div>
+                            <a href="./login"><button type="button" class="btn btn-info">Effettua il login</button></a>
+                        </div>
+                    </div>
+                    <%}%>
                 </div>
-                <%}%>
-                </div>
-  
+
 
             </div>
         </div>
@@ -73,9 +73,9 @@
 
                                 <% int i = 0;%>
                                 <c:forEach items="${categorie}" var="categoria">
-                                    <div  id="${categoria.getCodC()}" class="col-md-9 catDiv">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
+                                    <div  id="${categoria.getCodC()}" class="col-md-6 catDiv">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
                                     <div class="form-group col-md-3">
-                                        <select class="form-control" id="sel<%=i%> selectList">
+                                        <select class="form-control qtyselect" id="sel<%=i%> selectList">
                                             <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
@@ -88,6 +88,24 @@
                                             <option>9</option>
                                             <option>10</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <select class="form-control serviziSelect">
+                                            <%int primoElemento=0;%>
+                                            <c:forEach items="${servizi}" var="servizio">
+                                                <% 
+                                                if(primoElemento==0){
+                                                    out.print("<option>Nessuno</option>");
+                                                    primoElemento++;
+                                                }
+                                                %>
+                                                <option>${servizio.getDescrizione()}</option>
+
+                                            </c:forEach>
+
+                                        </select>
+
+
                                     </div>
                                     <%i++;%>
                                 </c:forEach>
@@ -115,6 +133,7 @@
         $('#addcarrello').click(function () {
 
             var qtys = [];
+            var servizi = [];
             var idVisita = "${evento.getIdVisita()}";
             var tipo = "";
             var categoria = [];
@@ -131,12 +150,18 @@
     <%}%>
             var req = "/addgruppobigliettocategoria";
 
-            $('select.form-control :selected').each(function (i) {
+            $('select.qtyselect :selected').each(function (i) {
                 var qty = ($(this).text());
                 qtys[i] = qty;
             });
 
+            $('select.serviziSelect :selected').each(function (i) {
+                var servizio = ($(this).text());
+                servizi[i] = servizio;
+            });
+
             console.log("qty= " + qtys);
+            console.log("servizi= " + servizi);
             console.log("idVisita= " + idVisita);
 
             /*            
@@ -158,7 +183,7 @@
 
                     console.log("REQUEST ./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=" + tipo);
 
-                    $.get("./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=0", function (resp) {
+                    $.get("./addgruppobigliettocategoria?qty=" + qtys[i] + "&idVisita=" + idVisita + "&categoria=" + categoria[i] + "&tipo=0&servizio=" + servizi[i], function (resp) {
                         console.log(resp);
                     });
                 }

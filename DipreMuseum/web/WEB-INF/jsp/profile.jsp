@@ -1,11 +1,16 @@
 
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Biglietto"%>
+<%@page import="models.Servizio"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="javafx.scene.chart.PieChart.Data"%>
 <%@page import="models.Visitatore"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="head.jsp"/>
 
 <jsp:include page="menu.jsp"/>
@@ -75,20 +80,35 @@
                 </div>
                 <div class="col-md-6">
                     <div id="legend">
-                        <legend class="">I Tuoi Biglietti</legend>
+                        <legend>I Tuoi Biglietti</legend>
                     </div>
-                    
+
                     <c:if test="${empty biglietti}">
-                    <td colspan="4" style="text-align:center;">
-                        Non hai nessun biglietto
-                    </td>
+                        <td colspan="4" style="text-align:center;">
+                            Non hai nessun biglietto
+                        </td>
                     </c:if>
                     <c:forEach items="${biglietti}" var="biglietto">
 
                         <div class="panel panel-body panel-default" style="position:relative">
-                         <label class="control-label"  for="username">Biglietto cod#${biglietto.getCodB()} <div style="display:inline-block;position:absolute;right:10px;top:10px"> Validità : ${biglietto.getValidita()}</div></label>
+                            <label class="control-label"  for="username">Biglietto cod#${biglietto.getCodB()} <div style="display:inline-block;position:absolute;right:10px;top:10px"> Validità : ${biglietto.getValidita()}</div></label>
                             <div style="position:relative">
-                                <p>Visita:<b> ${biglietto.getIdVisita().getTitolo()}</b></p>
+                                <p>Nome Visita:<b> ${biglietto.getIdVisita().getTitolo()}</b></p>
+
+                                <%
+
+                                    Biglietto b = (Biglietto) pageContext.findAttribute("biglietto");
+                                    List<Servizio> servizi = new ArrayList<Servizio>();
+                                    servizi.addAll(b.getServizioCollection());
+                                    request.setAttribute("servizi", servizi);
+                                %>
+
+                                <p>
+                                    Categoria:  <b style="margin-right: 10px">${biglietto.getCategoria().getDescrizione()}</b>
+                                    <c:if test="${fn:length(servizi) gt 0}">
+                                   Servizio: <b>${servizi.get(0).getDescrizione()}</b>
+                                </c:if>
+                                </p>
                                 <p> ${biglietto.getIdVisita().getDescrizione()}</p>
                                 <a  href="./evento?id=${biglietto.getIdVisita().getIdVisita()}">  <button class="btn btn-default" >info sulla visita</button></a>
                             </div>

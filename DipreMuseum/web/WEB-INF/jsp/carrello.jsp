@@ -4,6 +4,8 @@
     Author     : Omar
 --%>
 
+<%@page import="models.Servizio"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="models.Biglietto"%>
@@ -50,11 +52,15 @@
             
             String idV=b.getIdVisita().getIdVisita();
 
+            List<Servizio> servizi = new ArrayList<Servizio>();
+            servizi.addAll(b.getServizioCollection());
+
             return "<tr id='row" + count + "'>"
                     + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-primary label-as-badge'  onclick=invia('"+codC+"','"+idV+"')>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
                     + "<td id='' style='display:none'>" + b.getCategoria().getCodC() + "</td>"
                     + "<td> Categoria <b style='color:green'>" + b.getCategoria().getDescrizione() + "</b> sconto: " + b.getCategoria().getSconto() + "%</td>"
+                    + "<td>" + servizi.get(0).getDescrizione() + "</td>"
                     + "<td>" + qty + "</td>"
                     + "</tr>";
         }
@@ -103,6 +109,7 @@
                                         <th>Evento/Visita</th>
                                         <th>Prezzo</th>
                                         <th>Sconto categoria</th>
+                                        <th>Servizio</th>
                                         <th>Quantit&agrave;</th>
 
                                     </tr>
@@ -116,7 +123,7 @@
 
                                         if (biglietti == null) {
                                     %>
-                                <td colspan="4" style="text-align:center;">Nessun biglietto nel carrello</td>
+                                <td colspan="5" style="text-align:center;">Nessun biglietto nel carrello</td>
                                 <%
                                     } else {
                                         //out.write("<script>alert('"+biglietti.toString()+"')</script>");
@@ -165,7 +172,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Totale provvisorio: </div>
                     <div class="panel-body" style="color:red;text-align: center">
-                        EUR <b style="font-size:200%"><%=price%></b>
+                        EUR <b style="font-size:200%"><%
+                            String priceFormatted = String.format("%.4g%n", price);
+                            out.print(priceFormatted);
+                        %></b>
                     </div>
                     <%
                         if (price == 0.0) {

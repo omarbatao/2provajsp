@@ -461,6 +461,19 @@ public class ManageDatabase {
         return v;
     }
     
+    public Servizio getServizioByDescrizione(String descrizione) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.getNamedQuery("Servizio.findByDescrizione");
+        query.setString("descrizione", descrizione);
+        Servizio v = (Servizio) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
+    
+    
+    
     public Amministratore getAmministratore(int id) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();

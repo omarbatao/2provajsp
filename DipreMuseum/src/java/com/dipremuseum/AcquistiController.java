@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import models.Biglietto;
 import models.Categoria;
+import models.Servizio;
 import models.Visita;
 import models.Visitatore;
 import org.springframework.stereotype.Controller;
@@ -90,6 +91,7 @@ public class AcquistiController {
             @RequestParam(value = "tipo", required = true) int tipo,
             @RequestParam(value = "categoria", required = true) String categoria,
             @RequestParam(value = "qty", required = true) int qty,
+            @RequestParam(value = "servizio", required = true) String servizio,
             HttpServletRequest request) {
         if (qty < 0 || qty > 10) {
             return "errore";
@@ -101,6 +103,9 @@ public class AcquistiController {
         Visitatore user = db.getVisitatore("" + idVisitatore);
         Visita visita = db.getVisita(idVisita);
         Categoria cat = db.getCategoria(categoria);
+        Servizio serv = db.getServizioByDescrizione(servizio);
+        List<Servizio> servizi = new ArrayList<>();
+        servizi.add(serv);
         List<Biglietto> butente = (List<Biglietto>) request.getSession().getAttribute("biglietti");
         if (butente == null) {
             butente = new ArrayList<Biglietto>();
@@ -116,6 +121,7 @@ public class AcquistiController {
             b.setCategoria(cat);
             b.setIdVisita(visita);
             b.setIdVisitatore(user);
+            b.setServizioCollection(servizi);
             System.out.println("for: " + b.toString());
 
             butente.add(b);
