@@ -16,61 +16,86 @@
     <div class="container">
         <div class="row" style='margin-top:50px'>
             <div class="col-lg-12">
-                <form class="form-horizontal" action='./update' method="POST">
-                    <fieldset>
-                        <div id="legend">
-                            <legend class="">Profilo</legend>
-                        </div>
+                <div class="col-md-6">
+                    <form class="form-horizontal" action='./update' method="POST">
+                        <fieldset>
+                            <div id="legend">
+                                <legend class="">Profilo</legend>
+                            </div>
 
-                        <div class="control-group">
-                            <!-- Username -->
-                            <label class="control-label"  for="name">Nome</label>
-                            <div class="controls">
-                                <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
-                                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                            <div class="control-group">
+                                <!-- Username -->
+                                <label class="control-label"  for="name">Nome</label>
+                                <div class="controls">
+                                    <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
+                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <!-- Username -->
-                            <label class="control-label"  for="surname">Cognome</label>
-                            <div class="controls">
-                                <input type="text" id="username" name="cognome" value="${profilo.getCognome()}" class="input-xlarge">
-                                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                            <div class="control-group">
+                                <!-- Username -->
+                                <label class="control-label"  for="surname">Cognome</label>
+                                <div class="controls">
+                                    <input type="text" id="username" name="cognome" value="${profilo.getCognome()}" class="input-xlarge">
+                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <!-- Username -->
-                            <label class="control-label"  for="date">Data di nascita</label>
-                            <div class="controls">
-                                <input type="text" id="datepicker" name="dataN">
+                            <div class="control-group">
+                                <!-- Username -->
+                                <label class="control-label"  for="date">Data di nascita</label>
+                                <div class="controls">
+                                    <input type="text" id="datepicker" name="dataN">
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <!-- Username -->
-                            <label class="control-label"  for="username">Username</label>
-                            <div class="controls">
-                                <input type="text" id="username" name="username" value="${profilo.getUsername()}" class="input-xlarge">
-                                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                            <div class="control-group">
+                                <!-- Username -->
+                                <label class="control-label"  for="username">Username</label>
+                                <div class="controls">
+                                    <input type="text" id="username" name="username" value="${profilo.getUsername()}" class="input-xlarge">
+                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="control-group">
-                            <!-- Password-->
-                            <label class="control-label" for="password">Password</label>
-                            <div class="controls">
-                                <input type="password" id="password" name="password" value="${profilo.getPassword()}" class="input-xlarge">
-                                <p class="help-block">Password should be at least 4 characters</p>
+                            <div class="control-group">
+                                <!-- Password-->
+                                <label class="control-label" for="password">Password</label>
+                                <div class="controls">
+                                    <input type="password" id="password" name="password" value="${profilo.getPassword()}" class="input-xlarge">
+                                    <p class="help-block">Password should be at least 4 characters</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="control-group">
-                            <!-- Button -->
-                            <div class="controls">
-                                <button class="btn btn-success">Aggiorna</button>
+                            <div class="control-group">
+                                <!-- Button -->
+                                <div class="controls">
+                                    <button class="btn btn-success" style="margin-bottom:30px">Aggiorna</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div id="legend">
+                        <legend class="">I Tuoi Biglietti</legend>
+                    </div>
+                    
+                    <c:if test="${empty biglietti}">
+                    <td colspan="4" style="text-align:center;">
+                        Non hai nessun biglietto
+                    </td>
+                    </c:if>
+                    <c:forEach items="${biglietti}" var="biglietto">
+
+                        <div class="panel panel-body panel-default" style="position:relative">
+                         <label class="control-label"  for="username">Biglietto cod#${biglietto.getCodB()} <div style="display:inline-block;position:absolute;right:10px;top:10px"> Validità : ${biglietto.getValidita()}</div></label>
+                            <div style="position:relative">
+                                <p>Visita:<b> ${biglietto.getIdVisita().getTitolo()}</b></p>
+                                <p> ${biglietto.getIdVisita().getDescrizione()}</p>
+                                <a  href="./evento?id=${biglietto.getIdVisita().getIdVisita()}">  <button class="btn btn-default" >info sulla visita</button></a>
                             </div>
                         </div>
-                    </fieldset>
-                </form>
+                    </c:forEach>
+
+                </div>
 
             </div>
 
@@ -91,13 +116,13 @@
         });
 
     <%
-            Visitatore vis = (Visitatore) request.getAttribute("profilo");
-            Date data = vis.getDataN();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(data);
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
+        Visitatore vis = (Visitatore) request.getAttribute("profilo");
+        Date data = vis.getDataN();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
 
     %>
         $('#datepicker').datepicker("setDate", new Date(<%=year%>,<%=month%>,<%=day%>));

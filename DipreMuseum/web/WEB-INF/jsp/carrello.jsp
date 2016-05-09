@@ -207,10 +207,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button  type="button" class="btn btn-danger"  data-dismiss="modal">No</button>
+                    <button  type="button" class="btn btn-danger"  data-dismiss="modal" style="margin:5px">No</button>
                     <form action="./bigliettocompra" method="post">
                         <input type="hidden" name="comprabiglietti" value =" true"/>
-                        <button type="submit" class="btn btn-warning">Ok</button>
+                        <button type="submit" class="btn btn-warning" style="margin:5px">Ok</button>
                     </form>
 
                 </div>

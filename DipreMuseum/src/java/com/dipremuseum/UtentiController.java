@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import models.Amministratore;
+import models.Biglietto;
 import models.Visita;
 import models.Visitatore;
 import org.hibernate.Session;
@@ -143,7 +144,9 @@ public class UtentiController {
         System.out.println("ID: " + id);
         if (id != null && !id.equals("")) {
             Visitatore visitatore = db.getVisitatoreById(id);
-            map.put("profilo", visitatore);
+            List<Biglietto> biglietti  = db.getBigliettiByVisitatore(id.toString());
+             map.put("profilo", visitatore);
+             map.put("biglietti", biglietti);
             return "profile";
         } else {
             return "redirect:/";

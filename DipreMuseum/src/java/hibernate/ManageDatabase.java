@@ -219,7 +219,19 @@ public class ManageDatabase {
     public List<Biglietto> getBigliettiByEsposizione(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = '" + idVisita + "'").addEntity(Biglietto.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = ?").addEntity(Biglietto.class);
+        query.setString(0, idVisita);
+        List<Biglietto> rows = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return rows;
+    }
+    
+     public List<Biglietto> getBigliettiByVisitatore(String idVisitatore) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisitatore = ?").addEntity(Biglietto.class);
+        query.setString(0, idVisitatore);
         List<Biglietto> rows = query.list();
         session.getTransaction().commit();
         session.close();
