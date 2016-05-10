@@ -40,11 +40,11 @@
                     <%}%>
                     <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
                     <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
-                        <a href="./register"><button class="btn btn-primary" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
+                        <a href="./register"><button class="btn btn-primary" data-toggle="modal" style="width: 70%;">Registrati per Acquistare un biglietto</button></a>
                         <br> 
                         <b>Oppure</b>
                         <div>
-                            <a href="./login"><button type="button" class="btn btn-info">Effettua il login</button></a>
+                            <a href="./login"><button type="button" class="btn btn-info" style="width: 70%;">Effettua il login</button></a>
                         </div>
                     </div>
                     <%}%>
