@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="DipreMuseumPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>models.Amministratore</class>
+    <class>models.Biglietto</class>
+    <class>models.Cartadicredito</class>
+    <class>models.Categoria</class>
+    <class>models.Servizio</class>
+    <class>models.Visitatore</class>
+    <class>models.Visita</class>
+    <class>models.Biglietti</class>
+    <class>models.Servizi</class>
+    <class>models.Cartedicredito</class>
+    <class>models.Amministratori</class>
+    <class>models.Categorie</class>
+    <class>models.Visite</class>
+    <class>models.Visitatori</class>
+    <class>models.CartaDiCredito</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.5:3306/dipremuseum?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="remoteuser"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="mypass"/>
+    </properties>
+  </persistence-unit>
+</persistence>
