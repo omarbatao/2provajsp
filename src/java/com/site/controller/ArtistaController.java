@@ -5,7 +5,7 @@ package com.site.controller;
  * @author FSEVERI\reginato2906
  */
 
-import com.site.Database;
+import databaseUtility.Database;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;

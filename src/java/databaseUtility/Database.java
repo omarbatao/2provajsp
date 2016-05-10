@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.site;
+package databaseUtility;
 
 
 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -166,5 +167,16 @@ public class Database {
          session.close();
          return null;
     }            
+
+    public Evento getEvento(String id) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_Eventi WHERE Id= :id").addEntity(Categoria.class);
+        query.setString("id", id);
+        Evento v = (Evento) query.uniqueResult();
+        tx.commit();
+        session.close();
+        return v;
+    }
     
 }
