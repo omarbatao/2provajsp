@@ -171,7 +171,7 @@ public class Database {
     public Evento getEvento(String id) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_Eventi WHERE Id= :id").addEntity(Categoria.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_EVENTI WHERE Id= :id").addEntity(Evento.class);
         query.setString("id", id);
         Evento v = (Evento) query.uniqueResult();
         tx.commit();
@@ -179,4 +179,15 @@ public class Database {
         return v;
     }
     
+    public List<Commento> getCommentiPerEvento(String idevento){
+         Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_COMMENTI WHERE evento= :id").addEntity(Commento.class);
+        query.setString("id", idevento);
+        List<Commento> v = (List<Commento>) query.list();
+        tx.commit();
+        session.close();
+        return v;
+        
+    }
 }

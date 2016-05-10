@@ -5,8 +5,10 @@
  */
 package com.site.controller;
 
+import Models.Commento;
 import Models.Evento;
 import databaseUtility.Database;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
@@ -37,15 +39,16 @@ public class EventiController {
     @RequestMapping(value = "/infoevento", method = RequestMethod.GET)
     public String infoEvento(ModelMap map,@RequestParam(value = "eventoid") String eventoid){
         Evento e = db.getEvento(eventoid);
+        List<Commento> commenti = db.getCommentiPerEvento(eventoid);
+        System.out.println("Commenti per evento:" +commenti.get(0).getIdU().getNickname());
         map.put("evento", e);
+        map.put("commenti", commenti);
         return "evento/infoEvento";
     }
     
     @RequestMapping(value = "/addevento", method = RequestMethod.GET)
     public String addEvento(ModelMap map,@RequestParam(value = "eventoid") String eventoid){
-        Evento e = db.getEvento(eventoid);
-        map.put("evento", e);
-        return "evento/addEvento";
+      return "evento/addEvento";
     }
     
     
