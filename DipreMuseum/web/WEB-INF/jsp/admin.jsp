@@ -1,3 +1,4 @@
+<%@page import="java.math.BigDecimal"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
@@ -216,7 +217,7 @@
                                         </thead>
                                         <tbody>
                                             <%!
-                                                public String print(String ide,Date start,Date finish,double saldo){
+                                                public String print(String ide,Date start,Date finish,String saldo){
                                                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy ");
                                                     return "<tr>"+
                                                            "<td>"+ide+"</td>"+
@@ -230,18 +231,18 @@
                                             
                                             
                                             <%
-                                                /*ManageDatabase db = new ManageDatabase();
+                                                ManageDatabase db = new ManageDatabase();
                                                 
                                                 List<Visita> eventipassati = (List) request.getAttribute("eventipassati");
                                                 if(eventipassati==null) out.write("<tr><td colspan='4'>Empty</td></tr>");
                                                 else{
                                                     for(Visita e : eventipassati){
-                                                        db.vista1(e.getIdVisita());
-                                                        db.vista2(e.getIdVisita());
-                                                        db.vista3();
-                                                        out.write(print(e.getIdVisita(),e.getDataI(),e.getDataF(),db.query3()));
+                                                        BigDecimal i = db.query3(e.getIdVisita());
+                                                        double tot=0;
+                                                        if(i!=null) tot= i.doubleValue();
+                                                         out.write(print(e.getIdVisita(),e.getDataI(),e.getDataF(),tot+""));
                                                     }
-                                                }*/
+                                                }
                                             %>
                                             
                                             
