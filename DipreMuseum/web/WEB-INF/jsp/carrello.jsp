@@ -28,16 +28,16 @@
      );
      });
      });*/
-    
+
 
     function del(n, qty) {
         alert(n + " qty: " + qty);
         $('#' + n + "'").remove();
     }
-    
-    function invia(categoria,idvisita){
-        console.log("inviato: "+categoria+" "+idvisita);
-        $.get("./rimuovibiglietto?categoria="+categoria+"&idVisita="+idvisita,function(){
+
+    function invia(categoria, idvisita) {
+        console.log("inviato: " + categoria + " " + idvisita);
+        $.get("./rimuovibiglietto?categoria=" + categoria + "&idVisita=" + idvisita, function () {
             location.reload();
         });
     }
@@ -47,16 +47,15 @@
 <div class="container">
     <%!        public String printrow(int count, Biglietto b, int qty) {
 
-            String codC=b.getCategoria().getCodC().toString();
-            
-            
-            String idV=b.getIdVisita().getIdVisita();
+            String codC = b.getCategoria().getCodC().toString();
+
+            String idV = b.getIdVisita().getIdVisita();
 
             List<Servizio> servizi = new ArrayList<Servizio>();
             servizi.addAll(b.getServizioCollection());
 
             return "<tr id='row" + count + "'>"
-                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-primary label-as-badge'  onclick=invia('"+codC+"','"+idV+"')>Rimuovi</span> </td>"
+                    + "<td><b>" + b.getIdVisita().getTitolo() + "</b><br/><span style='float:right; cursor: pointer;' class='label label-primary label-as-badge'  onclick=invia('" + codC + "','" + idV + "')>Rimuovi</span> </td>"
                     + "<td>" + b.getIdVisita().getTariffa() + "</td>"
                     + "<td id='' style='display:none'>" + b.getCategoria().getCodC() + "</td>"
                     + "<td> Categoria <b style='color:green'>" + b.getCategoria().getDescrizione() + "</b> sconto: " + b.getCategoria().getSconto() + "%</td>"
@@ -175,7 +174,7 @@
                         EUR <b style="font-size:200%"><%
                             String priceFormatted = String.format("%.4g%n", price);
                             out.print(priceFormatted);
-                        %></b>
+                            %></b>
                     </div>
                     <%
                         if (price == 0.0) {
@@ -208,17 +207,14 @@
                 </div>
 
                 <div class="modal-body">
-
-                    <div class="page-header">
-                        <h3>Acquistare i biglietti? </h3>
-
-                    </div>
+                    <h3>Acquistare i biglietti? </h3>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button  type="button" class="btn btn-danger"  data-dismiss="modal" style="margin:5px">No</button>
+
                     <form action="./bigliettocompra" method="post">
+                        <button  type="button" class="btn btn-danger"  data-dismiss="modal" style="margin:5px">No</button>
                         <input type="hidden" name="comprabiglietti" value =" true"/>
                         <button type="submit" class="btn btn-warning" style="margin:5px">Ok</button>
                     </form>

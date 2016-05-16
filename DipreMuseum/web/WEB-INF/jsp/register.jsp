@@ -15,7 +15,7 @@
         <div class="row" style='margin-top:50px'>
             <div class="col-lg-12">
                 <form class="form-horizontal" action='./register' method="POST">
-                    <fieldset>
+                    
                         <div id="legend">
                             <legend class="">Register</legend>
                         </div>
@@ -74,7 +74,7 @@
                                 <button class="btn btn-success">Register</button>
                             </div>
                         </div>
-                    </fieldset>
+                    
                 </form>
 
             </div>

@@ -4,7 +4,6 @@
 <%@page import="models.Biglietto"%>
 <%@page import="models.Servizio"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="javafx.scene.chart.PieChart.Data"%>
 <%@page import="models.Visitatore"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
