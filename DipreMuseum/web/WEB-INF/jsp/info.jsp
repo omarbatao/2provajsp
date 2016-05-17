@@ -34,7 +34,7 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/9ezlAXiQIYI" frameborder="0" allowfullscreen></iframe></div>
+        <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/9ezlAXiQIYI?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></div>
         <div class="col-md-6" style="text-align: center"><iframe width="540" height="360" src="https://www.youtube.com/embed/Bf6pjzeKjyY?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></div>
     </div>
     <div class="row">

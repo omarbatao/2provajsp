@@ -219,18 +219,18 @@ public class ManageDatabase {
     public List<Biglietto> getBigliettiByEsposizione(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisita = ?").addEntity(Biglietto.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Biglietti WHERE IdVisita = ?").addEntity(Biglietto.class);
         query.setString(0, idVisita);
         List<Biglietto> rows = query.list();
         session.getTransaction().commit();
         session.close();
         return rows;
     }
-    
-     public List<Biglietto> getBigliettiByVisitatore(String idVisitatore) {
+
+    public List<Biglietto> getBigliettiByVisitatore(String idVisitatore) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM BIGLIETTI WHERE IdVisitatore = ?").addEntity(Biglietto.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM Biglietti WHERE IdVisitatore = ?").addEntity(Biglietto.class);
         query.setString(0, idVisitatore);
         List<Biglietto> rows = query.list();
         session.getTransaction().commit();
@@ -374,51 +374,22 @@ public class ManageDatabase {
         return 0;
     }
 
-    //non so se il group by è giusto perchè nel foglio delle query è diverso
-    public void vista1(String idVisita) {
-
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista1 (IdVisita,Categoria,Conta,Sconto) AS "
-                + "SELECT IdVisita,Categoria,COUNT(*) AS Conta,Sconto FROM Biglietti INNER JOIN Categorie ON Categoria=CodC WHERE IdVisita=:id GROUP BY IdVisita,Categoria,Sconto");
-        query.setString("id", idVisita);
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void vista2(String idVisita) {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista2 (Tariffa,IdVisita) AS"
-                + "SELECT Tariffa,IdVisita FROM Visite WHERE IdVisita=" + idVisita + " ");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void vista3() {
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("CREATE OR REPLACE  VIEW Vista3 (Categoria,Totale) AS"
-                + "SELECT Categoria,(Tariffa * Conta)-(Tariffa*100/Sconto)*Conta AS Totale FROM Vista1 NATURAL JOIN Vista2 GROUP BY Categoria");
-        int result = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public Integer query3() {
+    public BigDecimal query3(String idVisita) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            SQLQuery query = session.createSQLQuery("SELECT SUM(Totale) FROM Vista3").addEntity(Biglietto.class);
-            List cats = query.list();
-            if (cats.size() > 0) {
-                session.getTransaction().commit();
-                session.close();
-                return (Integer) cats.get(0);
-            }
+            SQLQuery query = session.createSQLQuery(
+                      "SELECT SUM(tariffa)\n"
+                    + "FROM ( \n"
+                    + "	SELECT (tariffa-((tariffa*sconto)/100)) AS tariffa\n"
+                    + "	FROM (Biglietti  B INNER JOIN Visite V ON B.IdVisita = V.IdVisita) INNER JOIN Categorie C ON B.Categoria = C.CodC\n"
+                    + "	WHERE B.IdVisita = :id \n"
+                    + ")AS tmp"
+                    );
+             query.setString("id", idVisita);
+            BigDecimal value = (BigDecimal) query.uniqueResult();
+            return value;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -460,7 +431,7 @@ public class ManageDatabase {
         session.close();
         return v;
     }
-    
+
     public Servizio getServizioByDescrizione(String descrizione) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
@@ -471,9 +442,7 @@ public class ManageDatabase {
         session.close();
         return v;
     }
-    
-    
-    
+
     public Amministratore getAmministratore(int id) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
@@ -535,13 +504,13 @@ public class ManageDatabase {
             throw e;
         }
     }
-    
-     public void updateVisita(Visita old, Visita n) {
+
+    public void updateVisita(Visita old, Visita n) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Visita v = (Visita) session.get(Visita.class,old.getIdVisita());
+            Visita v = (Visita) session.get(Visita.class, old.getIdVisita());
             v.setIdVisita(n.getIdVisita());
             v.setTitolo(n.getTitolo());
             v.setDescrizione(n.getDescrizione());
@@ -580,7 +549,7 @@ public class ManageDatabase {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Visita v = (Visita) session.get(Visita.class,old.getIdVisita());
+            Visita v = (Visita) session.get(Visita.class, old.getIdVisita());
             v.setIdVisita(n.getIdVisita());
             v.setTitolo(n.getTitolo());
             v.setDescrizione(n.getDescrizione());
@@ -600,7 +569,7 @@ public class ManageDatabase {
             session.close();
         }
     }
-    
+
     public void deleteEvento(Visita v) {
         Session session = factory.openSession();
         Transaction tx = null;
