@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,7 +63,7 @@ public class Visitatore implements Serializable {
     @Basic(optional = false)
     @Column(name = "Password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "idVisitatore")
     private Collection<CartaDiCredito> cartaDiCreditoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVisitatore")
     private Collection<Biglietto> bigliettoCollection;

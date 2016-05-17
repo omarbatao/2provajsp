@@ -183,6 +183,22 @@ public class ManageDatabase {
         return rows;
     }
 
+    public CartaDiCredito getCartaDiCreditoByCod(String id) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        SQLQuery query = session.createSQLQuery("select * from Cartedicredito where CodC= ? ").addEntity(CartaDiCredito.class);
+        query.setString(0, id);
+        List<CartaDiCredito> rows = query.list();
+        if (rows.size() > 0) {
+            session.getTransaction().commit();
+            session.close();
+            return (CartaDiCredito) rows.get(0);
+        }
+        session.getTransaction().commit();
+        session.close();
+        return null;
+    }
+
     public List<Biglietto> getBiglietti() {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
@@ -277,6 +293,26 @@ public class ManageDatabase {
         } finally {
             session.close();
         }
+    }
+
+    public void aggiornaCarta(CartaDiCredito carta,String idCarta) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            CartaDiCredito newcarta = (CartaDiCredito) session.get(CartaDiCredito.class, idCarta);
+            newcarta.setCodC(carta.getCodC());
+            session.update(newcarta);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+       
     }
 
     //ricorda di fare il punto length
@@ -380,14 +416,14 @@ public class ManageDatabase {
         try {
             tx = session.beginTransaction();
             SQLQuery query = session.createSQLQuery(
-                      "SELECT SUM(tariffa)\n"
+                    "SELECT SUM(tariffa)\n"
                     + "FROM ( \n"
                     + "	SELECT (tariffa-((tariffa*sconto)/100)) AS tariffa\n"
                     + "	FROM (Biglietti  B INNER JOIN Visite V ON B.IdVisita = V.IdVisita) INNER JOIN Categorie C ON B.Categoria = C.CodC\n"
                     + "	WHERE B.IdVisita = :id \n"
                     + ")AS tmp"
-                    );
-             query.setString("id", idVisita);
+            );
+            query.setString("id", idVisita);
             BigDecimal value = (BigDecimal) query.uniqueResult();
             return value;
         } catch (HibernateException e) {

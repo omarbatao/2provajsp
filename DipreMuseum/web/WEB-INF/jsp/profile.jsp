@@ -25,15 +25,19 @@
                     <form class="form-horizontal" action='./update' method="POST">
                         <fieldset>
                             <div id="legend">
-                                <legend class="">Profilo</legend>
+                                <legend class="">Profilo </legend>
                             </div>
-
-                            <div class="control-group">
-                                <!-- Username -->
-                                <label class="control-label"  for="name">Nome</label>
-                                <div class="controls">
-                                    <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                            <label style="color:#999999">Carta di credito: 
+                                <c:if test="${fn:length(carte) gt 0}">
+                                    ${carte.get(0).getCodC()}</c:if> 
+                                <c:if test="${fn:length(carte) eq 0}">
+                                    Nessuna Carta</c:if> 
+                            </label>
+                                <div class="control-group">
+                                    <!-- Username -->
+                                    <label class="control-label"  for="name">Nome</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -41,7 +45,6 @@
                                 <label class="control-label"  for="surname">Cognome</label>
                                 <div class="controls">
                                     <input type="text" id="username" name="cognome" value="${profilo.getCognome()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -56,7 +59,6 @@
                                 <label class="control-label"  for="username">Username</label>
                                 <div class="controls">
                                     <input type="text" id="username" name="username" value="${profilo.getUsername()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                                 </div>
                             </div>
 
@@ -65,22 +67,13 @@
                                 <label class="control-label" for="password">Password</label>
                                 <div class="controls">
                                     <input type="password" id="password" name="password" value="${profilo.getPassword()}" class="input-xlarge">
-                                    <p class="help-block">Password should be at least 4 characters</p>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <!-- Password-->
-                                <label class="control-label" for="password">Carta di credito</label>
-                                <div class="controls">
-                                    <input type="number" id="password" name="cartacredito" value="${carte.get(0).getCodC()}" class="input-xlarge">
-                                    <p class="help-block">Password should be at least 4 characters</p>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <!-- Button -->
                                 <div class="controls">
+                                    <br>
                                     <button class="btn btn-success" style="margin-bottom:30px">Aggiorna</button>
                                 </div>
                             </div>
@@ -107,14 +100,9 @@
                                 <%
 
                                     Biglietto b = (Biglietto) pageContext.findAttribute("biglietto");
-                                    Visitatore v = (Visitatore) pageContext.findAttribute("profilo");
-                                    List<CartaDiCredito> carte =  new ArrayList<CartaDiCredito>();
-                                    carte.addAll(v.getCartaDiCreditoCollection());
                                     List<Servizio> servizi = new ArrayList<Servizio>();
                                     servizi.addAll(b.getServizioCollection());
                                     request.setAttribute("servizi", servizi);
-                                    request.setAttribute("carte", carte);
-                                    
                                 %>
 
                                 <p>
