@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import models.Amministratore;
 import models.Biglietto;
+import models.CartaDiCredito;
 import models.Visita;
 import models.Visitatore;
 import org.hibernate.Session;
@@ -103,9 +104,10 @@ public class UtentiController {
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "nome") String nome,
+            @RequestParam(value="cartacredito") String numcarta,
             @RequestParam(value = "cognome") String cognome,HttpServletRequest request) {
         System.out.println("DATAN: " + dataN);
-        if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty()) {
+        if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty() && !numcarta.isEmpty()) {
 
             List<Visitatore> visitatori = db.getVisitatori();
 
@@ -116,6 +118,7 @@ public class UtentiController {
 
             }
             Visitatore newVisitatore = new Visitatore();
+            
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             Date startDate;
             try {
@@ -129,6 +132,9 @@ public class UtentiController {
             newVisitatore.setPassword(password);
             newVisitatore.setUsername(username);
             int newId = db.inserisciVisitatore(newVisitatore);
+            CartaDiCredito carta = new CartaDiCredito(numcarta);
+            carta.setIdVisitatore(newVisitatore);
+            db.inserisciCartaDiCredito(carta);
             request.getSession().setAttribute("userid",newId);
             request.getSession().setAttribute("username",username);
             return "redirect:/";

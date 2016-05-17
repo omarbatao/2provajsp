@@ -1,5 +1,6 @@
 
 
+<%@page import="models.CartaDiCredito"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Biglietto"%>
 <%@page import="models.Servizio"%>
@@ -70,6 +71,15 @@
                             </div>
 
                             <div class="control-group">
+                                <!-- Password-->
+                                <label class="control-label" for="password">Carta di credito</label>
+                                <div class="controls">
+                                    <input type="number" id="password" name="cartacredito" value="${carte.get(0).getCodC()}" class="input-xlarge">
+                                    <p class="help-block">Password should be at least 4 characters</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <!-- Button -->
                                 <div class="controls">
                                     <button class="btn btn-success" style="margin-bottom:30px">Aggiorna</button>
@@ -98,16 +108,21 @@
                                 <%
 
                                     Biglietto b = (Biglietto) pageContext.findAttribute("biglietto");
+                                    Visitatore v = (Visitatore) pageContext.findAttribute("profilo");
+                                    List<CartaDiCredito> carte =  new ArrayList<CartaDiCredito>();
+                                    carte.addAll(v.getCartaDiCreditoCollection());
                                     List<Servizio> servizi = new ArrayList<Servizio>();
                                     servizi.addAll(b.getServizioCollection());
                                     request.setAttribute("servizi", servizi);
+                                    request.setAttribute("carte", carte);
+                                    
                                 %>
 
                                 <p>
                                     Categoria:  <b style="margin-right: 10px">${biglietto.getCategoria().getDescrizione()}</b>
                                     <c:if test="${fn:length(servizi) gt 0}">
-                                   Servizio: <b>${servizi.get(0).getDescrizione()}</b>
-                                </c:if>
+                                        Servizio: <b>${servizi.get(0).getDescrizione()}</b>
+                                    </c:if>
                                 </p>
                                 <p> ${biglietto.getIdVisita().getDescrizione()}</p>
                                 <a  href="./evento?id=${biglietto.getIdVisita().getIdVisita()}">  <button class="btn btn-default" >info sulla visita</button></a>

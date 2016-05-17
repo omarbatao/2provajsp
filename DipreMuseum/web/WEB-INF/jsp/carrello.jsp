@@ -164,7 +164,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -173,7 +172,7 @@
                     <div class="panel-heading">Totale provvisorio: </div>
                     <div class="panel-body" style="color:red;text-align: center">
                         EUR <b style="font-size:200%"><%
-                            String priceFormatted = String.format("%.4g%n", price);
+                            String priceFormatted = String.format("%.2g%n", price);
                             out.print(priceFormatted);
                         %></b>
                     </div>
@@ -222,9 +221,7 @@
                         <input type="hidden" name="comprabiglietti" value =" true"/>
                         <button type="submit" class="btn btn-warning" style="margin:5px">Ok</button>
                     </form>
-
                 </div>
-
             </div>
         </div>
     </div>

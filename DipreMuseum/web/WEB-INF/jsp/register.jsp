@@ -24,7 +24,7 @@
                             <!-- Username -->
                             <label class="control-label"  for="name">Nome</label>
                             <div class="controls">
-                                <input type="text" id="username" name="nome" placeholder="" class="input-xlarge">
+                                <input type="text" id="username" name="nome" placeholder="Nome" class="input-xlarge">
                                 <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <!-- Username -->
                             <label class="control-label"  for="surname">Cognome</label>
                             <div class="controls">
-                                <input type="text" id="username" name="cognome" placeholder="" class="input-xlarge">
+                                <input type="text" id="username" name="cognome" placeholder="Cognome" class="input-xlarge">
                                 <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             <!-- Username -->
                             <label class="control-label"  for="username">Username</label>
                             <div class="controls">
-                                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                                <input type="text" id="username" name="username" placeholder="Username" class="input-xlarge">
                                 <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                             </div>
                         </div>
@@ -56,7 +56,16 @@
                             <!-- Password-->
                             <label class="control-label" for="password">Password</label>
                             <div class="controls">
-                                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                                <input type="password" id="password" name="password" placeholder="Password" class="input-xlarge">
+                                <p class="help-block">Password should be at least 4 characters</p>
+                            </div>
+                        </div>
+                        
+                         <div class="control-group">
+                            <!-- Password-->
+                            <label class="control-label" for="password">Carta di credito</label>
+                            <div class="controls">
+                                <input type="number" id="password" name="cartacredito" placeholder="Carta di credito" class="input-xlarge">
                                 <p class="help-block">Password should be at least 4 characters</p>
                             </div>
                         </div>
