@@ -103,3 +103,9 @@ input[type=cerca]:focus {
 .over {
     z-index: 10;
 }
+
+.dettagli{
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+}
