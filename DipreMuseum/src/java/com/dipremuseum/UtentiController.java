@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import models.Amministratore;
 import models.Biglietto;
+import models.CartaDiCredito;
 import models.Visita;
 import models.Visitatore;
 import org.hibernate.Session;
@@ -65,7 +66,7 @@ public class UtentiController {
 //                map.put("email", email);
 //                map.put("password", password);
 //            }
-           
+
             for (int i = 0; i < visitatori.size(); i++) {
                 if (visitatori.get(i).getPassword().equals(password) && visitatori.get(i).getUsername().equals(username)) {
                     Visitatore v = db.getVisitatoreById(visitatori.get(i).getId());
@@ -103,9 +104,12 @@ public class UtentiController {
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "nome") String nome,
-            @RequestParam(value = "cognome") String cognome,HttpServletRequest request) {
+            @RequestParam(value = "cartacredito") String numcarta,
+            @RequestParam(value = "dataS") String dataS,
+            @RequestParam(value = "pin") String pin,
+            @RequestParam(value = "cognome") String cognome, HttpServletRequest request) {
         System.out.println("DATAN: " + dataN);
-        if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty()) {
+        if (!username.isEmpty() && !password.isEmpty() && !nome.isEmpty() && !cognome.isEmpty() && !dataN.isEmpty() && !numcarta.isEmpty() && !dataS.isEmpty() && !pin.isEmpty()) {
 
             List<Visitatore> visitatori = db.getVisitatori();
 
@@ -116,8 +120,9 @@ public class UtentiController {
 
             }
             Visitatore newVisitatore = new Visitatore();
+
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            Date startDate;
+            Date startDate=new Date();
             try {
                 startDate = df.parse(dataN);
                 newVisitatore.setDataN(startDate);
@@ -129,8 +134,18 @@ public class UtentiController {
             newVisitatore.setPassword(password);
             newVisitatore.setUsername(username);
             int newId = db.inserisciVisitatore(newVisitatore);
-            request.getSession().setAttribute("userid",newId);
-            request.getSession().setAttribute("username",username);
+            CartaDiCredito carta = new CartaDiCredito(numcarta);
+            carta.setIdVisitatore(newVisitatore);
+            try {
+                startDate = df.parse(dataS);
+            } catch (ParseException ex) {
+                Logger.getLogger(UtentiController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            carta.setDataS(startDate);
+            carta.setPin(pin);
+            db.inserisciCartaDiCredito(carta);
+            request.getSession().setAttribute("userid", newId);
+            request.getSession().setAttribute("username", username);
             return "redirect:/";
         } else {
             return "redirect:/register?fields=true";
@@ -144,9 +159,12 @@ public class UtentiController {
         System.out.println("ID: " + id);
         if (id != null && !id.equals("")) {
             Visitatore visitatore = db.getVisitatoreById(id);
-            List<Biglietto> biglietti  = db.getBigliettiByVisitatore(id.toString());
-             map.put("profilo", visitatore);
-             map.put("biglietti", biglietti);
+            List<Biglietto> biglietti = db.getBigliettiByVisitatore(id.toString());
+            map.put("profilo", visitatore);
+            map.put("biglietti", biglietti);
+            List<CartaDiCredito> carte = new ArrayList<CartaDiCredito>();
+            carte.addAll(visitatore.getCartaDiCreditoCollection());
+            if(carte.size()>0) map.put("carte", carte);
             return "profile";
         } else {
             return "redirect:/";
@@ -159,21 +177,29 @@ public class UtentiController {
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "nome") String nome,
+           /* @RequestParam(value = "cartacredito") String cartacredito,
+            @RequestParam(value = "idcarta") String idCarta,*/
             @RequestParam(value = "cognome") String cognome) {
         Visitatore v = new Visitatore();
         v.setUsername(username);
         v.setPassword(password);
         v.setNome(nome);
         v.setCognome(cognome);
-         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            Date startDate;
-            try {
-                startDate = df.parse(dataN);
-                v.setDataN(startDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        v.setId((Integer)request.getSession().getAttribute("userid"));
+/*
+        CartaDiCredito carta = db.getCartaDiCreditoByCod(idCarta);
+        carta.setCodC(cartacredito);
+                System.out.println("carta found :" +carta.toString());
+
+        db.aggiornaCarta(carta,idCarta);*/
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        Date startDate;
+        try {
+            startDate = df.parse(dataN);
+            v.setDataN(startDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        v.setId((Integer) request.getSession().getAttribute("userid"));
         db.aggiornaVisitatore(v);
         return "redirect:./profile";
     }
