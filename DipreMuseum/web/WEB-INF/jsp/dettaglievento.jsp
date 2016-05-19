@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading dettagli">
                 <h4>Descrizione </h4>
@@ -74,7 +74,7 @@
 
         <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
         <div style="text-align:center;margin-top: 2%;bottom:0px;width:100%"> 
-            <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+            <button style="position:absolute;bottom:0px;width:100%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
         </div>
 
 
@@ -82,12 +82,9 @@
         <%}%>
         <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
         <div style="text-align:center;margin-top: 2%;bottom:0px;width:100%"> 
-            <a href="./register"><button class="btn btn-primary" data-toggle="modal" style="width: 50%;">Registrati per Acquistare un biglietto</button></a>
-            <br> 
+            <a href="./register"><button class="btn btn-primary" data-toggle="modal" style="width: 30%;">Registrati per Acquistare un biglietto</button></a>
             <b>Oppure</b>
-            <div>
-                <a href="./login"><button type="button" class="btn btn-info" style="width: 50%;">Effettua il login</button></a>
-            </div>
+                <a href="./login"><button type="button" class="btn btn-info" style="width: 25%;">Effettua il login</button></a>
         </div>
         <%}%>
 

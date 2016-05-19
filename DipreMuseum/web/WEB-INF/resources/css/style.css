@@ -107,5 +107,7 @@ input[type=cerca]:focus {
 .dettagli{
     font-size: 24px;
     text-align: center;
+    padding-top: 4%;
     text-transform: uppercase;
+    height: 100px;
 }
