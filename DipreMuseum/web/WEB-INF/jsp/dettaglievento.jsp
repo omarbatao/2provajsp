@@ -74,7 +74,7 @@
 
         <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
         <div style="text-align:center;margin-top: 2%;bottom:0px;width:100%"> 
-            <button style="position:absolute;bottom:0px;width:100%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+            <button style="position:absolute;bottom:0px;width:50%;left: 25%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
         </div>
 
 
