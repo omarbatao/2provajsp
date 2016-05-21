@@ -29,8 +29,10 @@
     <!-- Posted Comments -->
 
     <!-- Comment -->
+    <div class="row">
     <div class="media">
         <c:forEach items="${commenti}" var="commento"> 
+            <div class="col-md-12">
             <div class="media-body">
                 <c:if test="${commento.getVoto()<3 }">
                     <div class="panel panel-danger">
@@ -51,8 +53,10 @@
                     </div>
                 </c:if>
             </div>
+                </div>
         </c:forEach>
     </div>
+        </div>
 
 
 

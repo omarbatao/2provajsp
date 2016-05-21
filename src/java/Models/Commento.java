@@ -40,7 +40,7 @@ public class Commento implements Serializable {
     private String commento;
     @Basic(optional = false)
     @Column(name = "voto")
-    private Character voto;
+    private Integer voto;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")
     @ManyToOne
     private Utente idU;
@@ -55,7 +55,7 @@ public class Commento implements Serializable {
         this.id = id;
     }
 
-    public Commento(String id, String commento, Character voto) {
+    public Commento(String id, String commento, Integer voto) {
         this.id = id;
         this.commento = commento;
         this.voto = voto;
@@ -77,11 +77,11 @@ public class Commento implements Serializable {
         this.commento = commento;
     }
 
-    public Character getVoto() {
+    public Integer getVoto() {
         return voto;
     }
 
-    public void setVoto(Character voto) {
+    public void setVoto(Integer voto) {
         this.voto = voto;
     }
 
