@@ -36,6 +36,7 @@
     <script src="./resources/js/jquery.js"></script>
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/plugins/jquery_ui/jquery-ui.min.js"></script>
+    <script src="./resources/js/jquery-ui.js"></script>
     <script src="./resources/js/bootstrap.min.js"></script>
     <script src='./resources/js/fullcalendar.min.js'></script>
     

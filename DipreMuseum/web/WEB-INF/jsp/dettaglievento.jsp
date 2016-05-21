@@ -22,107 +22,144 @@
     <!-- /.row -->
     <!-- Features Section -->
     <div class="row">
-        <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450" alt="">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading dettagli"><h4>Data Inizio</h4></div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div style="position:relative;height:357px">
-                    <p> ${evento.getDescrizione()} </p>
-
-                    <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
-                    <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
-                        <button style="position:absolute;bottom:0px;width:90%;left: 5%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
-                    </div>
-
-
-
-                    <%}%>
-                    <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
-                    <div style="text-align:center;position:absolute;bottom:0px;width:100%"> 
-                        <a href="./register"><button class="btn btn-primary" data-toggle="modal">Registati per Acquistare un biglietto</button></a>
-                        <br> 
-                        <b>Oppure</b>
-                        <div>
-                            <a href="./login"><button type="button" class="btn btn-info">Effettua il login</button></a>
-                        </div>
-                    </div>
-                    <%}%>
-                </div>
-
-
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading dettagli"><i class="fa fa-calendar"></i><h4> ${evento.getDataI()}</h4></div>
             </div>
         </div>
     </div>
-    <!-- /.row -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading dettagli"><h4>Data Fine</h4></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading dettagli"><i class="fa fa-calendar"></i><h4> ${evento.getDataF()}</h4></div>
+            </div>
+        </div>
+    </div>
+            <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading dettagli"><h4>Prezzo</h4></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                    <div class="panel-heading dettagli"><i class="fa fa-dollar"></i><h4> ${evento.getTariffa()}</h4></div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="tickets" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading dettagli">
+                <h4>Descrizione </h4>
+            </div>
+            <div class="panel-body">
+                <p>${evento.getDescrizione()}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Acquista biglietti</h4>
-                </div>
+        <% if (session.getAttribute("username") != null && !session.getAttribute("username").toString().equals("")) {%>
+        <div style="text-align:center;margin-top: 2%;bottom:0px;width:100%"> 
+            <button style="position:absolute;bottom:0px;width:50%;left: 25%;right: 5%" class="btn btn-success" data-toggle="modal" data-target="#tickets" >Acquista</button>
+        </div>
 
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="row">
-                            <div class="col-md-12">
 
-                                <% int i = 0;%>
-                                <c:forEach items="${categorie}" var="categoria">
-                                    <div  id="${categoria.getCodC()}" class="col-md-6 catDiv">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
-                                    <div class="form-group col-md-3">
-                                        <select class="form-control qtyselect" id="sel<%=i%> selectList">
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>                                                
-                                            <option>9</option>
-                                            <option>10</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <select class="form-control serviziSelect">
-                                            <%int primoElemento=0;%>
-                                            <c:forEach items="${servizi}" var="servizio">
-                                                <% 
-                                                if(primoElemento==0){
+
+        <%}%>
+        <% if (session.getAttribute("username") == null || session.getAttribute("username").toString().equals("")) {%>
+        <div style="text-align:center;margin-top: 2%;bottom:0px;width:100%"> 
+            <a href="./register"><button class="btn btn-primary" data-toggle="modal" style="width: 30%;">Registrati per Acquistare un biglietto</button></a>
+            <b>Oppure</b>
+                <a href="./login"><button type="button" class="btn btn-info" style="width: 25%;">Effettua il login</button></a>
+        </div>
+        <%}%>
+
+
+    </div>
+</div>
+<!-- /.row -->
+
+<!-- Modal -->
+<div class="modal fade" id="tickets" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Acquista biglietti</h4>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <% int i = 0;%>
+                            <c:forEach items="${categorie}" var="categoria">
+                                <div  id="${categoria.getCodC()}" class="col-md-6 catDiv">Bigetto categoria <b>${categoria.getDescrizione()}</b></div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control qtyselect" id="sel<%=i%> selectList">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>                                                
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control serviziSelect">
+                                        <%int primoElemento = 0;%>
+                                        <c:forEach items="${servizi}" var="servizio">
+                                            <%
+                                                if (primoElemento == 0) {
                                                     out.print("<option>Nessuno</option>");
                                                     primoElemento++;
                                                 }
-                                                %>
-                                                <option>${servizio.getDescrizione()}</option>
+                                            %>
+                                            <option>${servizio.getDescrizione()}</option>
 
-                                            </c:forEach>
+                                        </c:forEach>
 
-                                        </select>
+                                    </select>
 
 
-                                    </div>
-                                    <%i++;%>
-                                </c:forEach>
+                                </div>
+                                <%i++;%>
+                            </c:forEach>
 
-                            </div>
                         </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-                    <button type="button" class="btn btn-primary" id="addcarrello">Aggiungi al Carrello</button>
-                </div>
-
+                    </div>
+                </form>
             </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-primary" id="addcarrello">Aggiungi al Carrello</button>
+            </div>
+
         </div>
     </div>
+</div>
 
 
 </div>

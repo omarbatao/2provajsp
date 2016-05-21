@@ -1,10 +1,10 @@
 
 
+<%@page import="models.CartaDiCredito"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Biglietto"%>
 <%@page import="models.Servizio"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="javafx.scene.chart.PieChart.Data"%>
 <%@page import="models.Visitatore"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -25,15 +25,19 @@
                     <form class="form-horizontal" action='./update' method="POST">
                         <fieldset>
                             <div id="legend">
-                                <legend class="">Profilo</legend>
+                                <legend class="">Profilo </legend>
                             </div>
-
-                            <div class="control-group">
-                                <!-- Username -->
-                                <label class="control-label"  for="name">Nome</label>
-                                <div class="controls">
-                                    <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                            <label style="color:#999999">Carta di credito: 
+                                <c:if test="${fn:length(carte) gt 0}">
+                                    ${carte.get(0).getCodC()}</c:if> 
+                                <c:if test="${fn:length(carte) eq 0}">
+                                    Nessuna Carta</c:if> 
+                            </label>
+                                <div class="control-group">
+                                    <!-- Username -->
+                                    <label class="control-label"  for="name">Nome</label>
+                                    <div class="controls">
+                                        <input type="text" id="username" name="nome" value="${profilo.getNome()}" class="input-xlarge">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -41,7 +45,6 @@
                                 <label class="control-label"  for="surname">Cognome</label>
                                 <div class="controls">
                                     <input type="text" id="username" name="cognome" value="${profilo.getCognome()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -56,7 +59,6 @@
                                 <label class="control-label"  for="username">Username</label>
                                 <div class="controls">
                                     <input type="text" id="username" name="username" value="${profilo.getUsername()}" class="input-xlarge">
-                                    <p class="help-block">Username can contain any letters or numbers, without spaces</p>
                                 </div>
                             </div>
 
@@ -65,13 +67,13 @@
                                 <label class="control-label" for="password">Password</label>
                                 <div class="controls">
                                     <input type="password" id="password" name="password" value="${profilo.getPassword()}" class="input-xlarge">
-                                    <p class="help-block">Password should be at least 4 characters</p>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <!-- Button -->
                                 <div class="controls">
+                                    <br>
                                     <button class="btn btn-success" style="margin-bottom:30px">Aggiorna</button>
                                 </div>
                             </div>
@@ -106,8 +108,8 @@
                                 <p>
                                     Categoria:  <b style="margin-right: 10px">${biglietto.getCategoria().getDescrizione()}</b>
                                     <c:if test="${fn:length(servizi) gt 0}">
-                                   Servizio: <b>${servizi.get(0).getDescrizione()}</b>
-                                </c:if>
+                                        Servizio: <b>${servizi.get(0).getDescrizione()}</b>
+                                    </c:if>
                                 </p>
                                 <p> ${biglietto.getIdVisita().getDescrizione()}</p>
                                 <a  href="./evento?id=${biglietto.getIdVisita().getIdVisita()}">  <button class="btn btn-default" >info sulla visita</button></a>

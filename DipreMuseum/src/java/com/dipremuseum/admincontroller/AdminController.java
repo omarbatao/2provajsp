@@ -103,30 +103,24 @@ public class AdminController {
 
     private void adminhome(ModelMap map) {
         init();
-        Calendar c = Calendar.getInstance();
-        Date startw, endw;
-        startw = c.getTime();
-        c.add(Calendar.DATE, 6);
-        endw = c.getTime();
         List<Visita> pastevents = db.getEventiPassati();
-        Visita past = pastevents.get(0);
-        //System.out.println(past.getDescrizione());
         List<Visita> eventithisweek = db.getEventiInCorso();
+        List<Visita> eventi = db.getEventi();
+        List<Biglietto> biglietti = db.getBiglietti();
+        Visita past = pastevents.get(0);
         int tiklasteve = 0;
+        int n = 0;
+        int npastevents = 0;
         if (eventithisweek != null) {
             tiklasteve = db.query2(eventithisweek.get(0).getIdVisita());
         }
-        List<Visita> eventi = db.getEventi();
-        List<Biglietto> biglietti = db.getBiglietti();
-        menustate[0] = "active";
-        int n = 0;
         if (eventithisweek != null) {
             n = eventithisweek.size();
         }
-        int npastevents = 0;
         if (pastevents != null) {
             npastevents = db.query2(past.getIdVisita());
         }
+        menustate[0] = "active";
         map.put("eventithisweek", n);
         map.put("bigliettipassati", npastevents);
         map.put("eventipassati", pastevents);
