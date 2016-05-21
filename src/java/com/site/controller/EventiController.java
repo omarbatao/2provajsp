@@ -7,6 +7,7 @@ package com.site.controller;
 
 import Models.Commento;
 import Models.Evento;
+import Models.Utente;
 import databaseUtility.Database;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,35 +22,49 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author FSEVERI\ceretta2991
  */
-
 @Controller
 public class EventiController {
-    
+
     private Database db;
-    
-    public EventiController(){
+
+    public EventiController() {
         try {
-            db= new Database();
+            db = new Database();
         } catch (Throwable ex) {
             Logger.getLogger(EventiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     @RequestMapping(value = "/infoevento", method = RequestMethod.GET)
-    public String infoEvento(ModelMap map,@RequestParam(value = "eventoid") String eventoid){
+    public String infoEvento(ModelMap map, @RequestParam(value = "eventoid") String eventoid) {
         Evento e = db.getEvento(eventoid);
         List<Commento> commenti = db.getCommentiPerEvento(eventoid);
-        System.out.println("Commenti per evento:" +commenti.get(0).getIdU().getNickname());
+        System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
         map.put("evento", e);
         map.put("commenti", commenti);
         return "evento/infoEvento";
     }
-    
-    @RequestMapping(value = "/addevento", method = RequestMethod.GET)
-    public String addEvento(ModelMap map,@RequestParam(value = "eventoid") String eventoid){
-      return "evento/addEvento";
+
+    @RequestMapping(value = "/addComment", method = RequestMethod.GET)
+    public String addComment(ModelMap map,
+            @RequestParam(value = "testo") String testo,
+            @RequestParam(value = "voto") Integer voto,
+            @RequestParam(value = "utente") String utente,
+            @RequestParam(value = "eventoid") String eventoid) {
+        
+        Utente u = db.getUtente(utente);
+        Evento e = db.getEvento(eventoid);
+        Commento c = new Commento();
+        c.setCommento(testo);
+        c.setVoto(voto);
+        c.setEvento(e);
+        c.setIdU(u);
+        return "redirect: /infoevento?inserito=true ";
     }
-    
-    
+
+    @RequestMapping(value = "/addevento", method = RequestMethod.GET)
+    public String addEvento(ModelMap map, @RequestParam(value = "eventoid") String eventoid) {
+        return "evento/addEvento";
+    }
+
 }

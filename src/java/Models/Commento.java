@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,9 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Commento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "commento")
     private String commento;
@@ -51,23 +54,19 @@ public class Commento implements Serializable {
     public Commento() {
     }
 
-    public Commento(String id) {
-        this.id = id;
-    }
+   
 
-    public Commento(String id, String commento, Integer voto) {
-        this.id = id;
+    public Commento( String commento, Integer voto) {
+        
         this.commento = commento;
         this.voto = voto;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+   
 
     public String getCommento() {
         return commento;
