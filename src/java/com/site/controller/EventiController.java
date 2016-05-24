@@ -40,27 +40,30 @@ public class EventiController {
     public String infoEvento(ModelMap map, @RequestParam(value = "eventoid") String eventoid) {
         Evento e = db.getEvento(eventoid);
         List<Commento> commenti = db.getCommentiPerEvento(eventoid);
-        System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
+        //System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
         map.put("evento", e);
+        if(commenti== null) return "evento/infoEvento?errore=nocommenti";
         map.put("commenti", commenti);
         return "evento/infoEvento";
     }
 
-    @RequestMapping(value = "/addComment", method = RequestMethod.GET)
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(ModelMap map,
             HttpServletRequest request,
             @RequestParam(value = "testo") String testo,
             @RequestParam(value = "voto") Integer voto,
             @RequestParam(value = "eventoid") String eventoid) {
         
-        Utente u = (Utente)request.getSession().getAttribute("user");
+        Utente u = db.getUtente("Ceretta");
         Evento e = db.getEvento(eventoid);
         Commento c = new Commento();
         c.setCommento(testo);
         c.setVoto(voto);
         c.setEvento(e);
         c.setIdU(u);
-        return "redirect: /infoevento?inserito=true ";
+        db.insertCommento(c);
+        
+        return "redirect: /infoevento?inserito=true&eventoid="+eventoid;
     }
 
     @RequestMapping(value = "/addevento", method = RequestMethod.GET)

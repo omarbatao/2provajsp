@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                    
-                                    <form class="form" role="form" method="post" action="./login" accept-charset="UTF-8" id="login-nav">
+                                    <form class="form" role="form" method="post" action="./verificaLogin" accept-charset="UTF-8" id="login-nav">
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail2">Username</label>
                                             <input type="username" name="username" class="form-control" id="exampleInputEmail2" placeholder="Username" required>

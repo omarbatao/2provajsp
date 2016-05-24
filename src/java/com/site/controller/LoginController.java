@@ -34,18 +34,8 @@ public class LoginController {
       
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap map,
-            @RequestParam(value = "username", required = false) String nomeUtente,
-            @RequestParam(value = "password", required = false) String password) {
-        
-                return "login";
-    }
-
-
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
-    public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
+    public String verificaLogin(ModelMap map, @RequestParam(value = "username", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
         String passwordCifrata=db.cifraPassword(password);
         
         if(nomeUtente != null && passwordCifrata != null ){
@@ -67,11 +57,11 @@ public class LoginController {
                map.put("accesso",true);
             }else{
                map.put("risposta","La password è errata");
-               return "home";
+               return "/";
 
             }
         }
-        return "home";
+        return "/";
         
 
     }

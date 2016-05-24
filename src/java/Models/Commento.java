@@ -6,6 +6,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,6 +43,9 @@ public class Commento implements Serializable {
     @Column(name = "commento")
     private String commento;
     @Basic(optional = false)
+    @Column(name = "dataC")
+    private Date dataC;
+    @Basic(optional = false)
     @Column(name = "voto")
     private Integer voto;
     @JoinColumn(name = "idU", referencedColumnName = "nickname")
@@ -65,7 +69,14 @@ public class Commento implements Serializable {
     public Integer getId() {
         return id;
     }
+    
+    public Date getDataC(){
+        return dataC;
+    }
 
+    public void setDataC(Date data) {
+        this.dataC = data;
+    }
    
 
     public String getCommento() {

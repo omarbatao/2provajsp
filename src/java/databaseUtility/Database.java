@@ -185,7 +185,7 @@ public class Database {
     public List<Commento> getCommentiPerEvento(String idevento){
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_COMMENTI WHERE evento= :id").addEntity(Commento.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_COMMENTI WHERE evento= :id ORDER BY dataC ASC").addEntity(Commento.class);
         query.setString("id", idevento);
         List<Commento> v = (List<Commento>) query.list();
         tx.commit();
@@ -197,7 +197,7 @@ public class Database {
     public Utente getUtente(String utente) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_Utente WHERE nickname= :id").addEntity(Evento.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_UTENTI WHERE nickname= :id").addEntity(Utente.class);
         query.setString("id", utente);
         Utente u = (Utente) query.uniqueResult();
         tx.commit();
@@ -278,7 +278,8 @@ public class Database {
         }
         return 1;
     }
-        public void salvaUtente(Utente u) {
+          
+    public void salvaUtente(Utente u) {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
@@ -288,5 +289,17 @@ public class Database {
             ex.printStackTrace();
             session.getTransaction().rollback();
         }
-}
+    }
+
+    public void insertCommento(Commento c) {
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(c);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
 }
