@@ -59,7 +59,7 @@ public class LoginController {
                map.put("accesso",true);
             }else{
                map.put("risposta","La password è errata");
-               return "login";
+               return "home";
 
             }
         }
