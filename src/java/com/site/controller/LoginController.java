@@ -34,9 +34,9 @@ public class LoginController {
       
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
-                return "login";
+                return "menu";
     }
 
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
@@ -77,20 +77,25 @@ public class LoginController {
         String verPassword=db.cifraPassword(verificaPassword);
         if (0 == db.utenteEsistente(nickname)) {
             if (pass.equals(verPassword)) {
-                db.salvaUtente(new Utente(nickname,nome,cognome,email,password));
-                return "login";
+                db.salvaUtente(new Utente(nickname,nome,cognome,email,pass));
+                return "home";
             } else {
                 map.put("risposta","La password non coincide");
             }
         } else {
             map.put("risposta","Nome utente già esistente");
         }
-        return "login";
+        return "menu";
                 
     }
 
      @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap map) {
         return "logout";
+    }
+    
+    @RequestMapping(value = "/joinus", method = RequestMethod.GET)
+    public String joinus(ModelMap map) {
+        return "joinus";
     }
 }
