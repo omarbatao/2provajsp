@@ -6,7 +6,7 @@
 package com.site.controller;
 
 import Models.Utente;
-import com.site.Database;
+import databaseUtility.Database;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
@@ -34,10 +34,7 @@ public class LoginController {
       
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
-                return "menu";
-    }
+
 
     @RequestMapping(value = "/verificaLogin", method = RequestMethod.POST)
     public String verificaLogin(ModelMap map, @RequestParam(value = "utente", required = true) String nomeUtente, @RequestParam(value = "password", required = true) String password) {
@@ -66,13 +63,13 @@ public class LoginController {
 
             }
         }
-        return "login";
+        return "home";
         
 
     }
 
     @RequestMapping(value = "/registra", method = RequestMethod.POST)
-    public String registra(ModelMap map, @RequestParam(value = "utente", required = true) String nickname, @RequestParam(value = "password", required = true) String password, @RequestParam(value = "verificaPassword", required = true) String verificaPassword,@RequestParam(value = "nome", required = true) String nome,@RequestParam(value = "cognome", required = true) String cognome,@RequestParam(value = "email", required = true) String email) {
+    public String registra(ModelMap map, @RequestParam(value = "utente", required = true) String nickname, @RequestParam(value = "nome", required = true) String nome, @RequestParam(value = "cognome", required = true) String cognome,@RequestParam(value = "email", required = true) String email,@RequestParam(value = "password", required = true) String password,@RequestParam(value = "verificaPassword", required = true) String verificaPassword) {
         String pass=db.cifraPassword(password);
         String verPassword=db.cifraPassword(verificaPassword);
         if (0 == db.utenteEsistente(nickname)) {
@@ -85,17 +82,17 @@ public class LoginController {
         } else {
             map.put("risposta","Nome utente già esistente");
         }
-        return "menu";
+        return "home";
                 
     }
 
      @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap map) {
-        return "logout";
+        return "utente/logout";
     }
     
     @RequestMapping(value = "/joinus", method = RequestMethod.GET)
     public String joinus(ModelMap map) {
-        return "joinus";
+        return "utente/joinus";
     }
 }
