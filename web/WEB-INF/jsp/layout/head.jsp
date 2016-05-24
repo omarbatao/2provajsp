@@ -1,5 +1,6 @@
 <jsp:include page="include.jsp"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="user" class="Models.Utente" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>

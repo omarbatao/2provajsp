@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                            <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                             
                                         </div>
                                         <div class="form-group">
@@ -53,7 +53,7 @@
                                     </form>
                                 </div>
                                 <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Join Us</b></a>
+                                    New here ? <a href="./joinus"><b>Join Us</b></a>
                                 </div>
                             </div>
                         </li>
