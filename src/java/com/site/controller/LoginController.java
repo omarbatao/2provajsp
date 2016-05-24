@@ -35,7 +35,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap map, @RequestParam(value = "utente", required = false) String nomeUtente, @RequestParam(value = "password", required = false) String password) {
+    public String loginPage(ModelMap map,
+            @RequestParam(value = "username", required = false) String nomeUtente,
+            @RequestParam(value = "password", required = false) String password) {
+        
                 return "login";
     }
 

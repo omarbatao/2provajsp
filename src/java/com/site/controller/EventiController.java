@@ -12,6 +12,7 @@ import databaseUtility.Database;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +48,12 @@ public class EventiController {
 
     @RequestMapping(value = "/addComment", method = RequestMethod.GET)
     public String addComment(ModelMap map,
+            HttpServletRequest request,
             @RequestParam(value = "testo") String testo,
             @RequestParam(value = "voto") Integer voto,
-            @RequestParam(value = "utente") String utente,
             @RequestParam(value = "eventoid") String eventoid) {
         
-        Utente u = db.getUtente(utente);
+        Utente u = (Utente)request.getSession().getAttribute("user");
         Evento e = db.getEvento(eventoid);
         Commento c = new Commento();
         c.setCommento(testo);
