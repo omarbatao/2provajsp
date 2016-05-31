@@ -9,6 +9,7 @@ import Models.Commento;
 import Models.Evento;
 import Models.Utente;
 import databaseUtility.Database;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,9 +62,11 @@ public class EventiController {
         c.setVoto(voto);
         c.setEvento(e);
         c.setIdU(u);
+        c.setDataC(new Date());
         db.insertCommento(c);
         
-        return "redirect: /infoevento?inserito=true&eventoid="+eventoid;
+        
+        return "redirect: /infoevento?errore=false&inserito=true&eventoid="+eventoid;
     }
 
     @RequestMapping(value = "/addevento", method = RequestMethod.GET)

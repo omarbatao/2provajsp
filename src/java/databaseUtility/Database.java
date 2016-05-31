@@ -185,7 +185,7 @@ public class Database {
     public List<Commento> getCommentiPerEvento(String idevento){
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_COMMENTI WHERE evento= :id ORDER BY dataC ASC").addEntity(Commento.class);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_COMMENTI WHERE evento= :id ORDER BY dataC DESC").addEntity(Commento.class);
         query.setString("id", idevento);
         List<Commento> v = (List<Commento>) query.list();
         tx.commit();
@@ -292,6 +292,7 @@ public class Database {
     }
 
     public void insertCommento(Commento c) {
+        System.out.println("inserisci "+c.getCommento());
         Session session = factory.openSession();
         try {
             session.beginTransaction();

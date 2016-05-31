@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@page import="Models.Commento"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../layout/head.jsp"/>
@@ -156,14 +155,14 @@
         if (request.getParameter("errore") != null) {
             if (request.getParameter("errore").equals("nocommenti")) {
     %>
-            <div class='row'>
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">Nessun commento per questo evento</div>
-                </div>
-            </div>
+    <div class='row'>
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">Nessun commento per questo evento</div>
+        </div>
+    </div>
     <%
-            }else{
-        
+        } else if(request.getParameter("errore").equals("false")){
+
     %>
 
     <div class="row">
@@ -180,7 +179,7 @@
                                         </div>
                                         <div id="voto" class="col-md-2">
                                             Voto: 
-                                            <%
+                                            <%  
                                                 Commento c = (Commento) pageContext.getAttribute("commento");
                                                 out.print(printrow(c.getVoto()));
                                             %>
@@ -234,6 +233,15 @@
         </div>
     </div> 
     <%
+            }else{
+            %>
+            <div class='row'>
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">Nessun commento per questo evento</div>
+        </div>
+    </div>
+    <%
+        }
         }
     %>
 
