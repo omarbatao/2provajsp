@@ -197,87 +197,15 @@ public class Database {
     public Utente getUtente(String utente) {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_UTENTI WHERE nickname= :id").addEntity(Utente.class);
-        query.setString("id", utente);
+        SQLQuery query = session.createSQLQuery("SELECT * FROM WA2P_UTENTI WHERE nickname= :username").addEntity(Utente.class);
+        query.setString("username", utente);
         Utente u = (Utente) query.uniqueResult();
         tx.commit();
         session.close();
         return u;
     }
     
-          public int verificaUtente(String username, String password) {
-        Transaction tx = null;
-        Session session = factory.openSession();
-        try {
-            tx = session.beginTransaction();
-            Query q = session.createSQLQuery("SELECT pw FROM WA2P_UTENTI  WHERE nickname= ?" );
-            q.setParameter(0, username);
-            if (q.list().isEmpty()) {
-                return 1;
-            }
-            if (q.list().size() > 0) {
-                String passUser = (String) q.list().get(0);
-                if (passUser.equals(password)) {
-                    return 0;
-                } else {
-                    return -1;
-                }
-            }
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return 1;
-        } finally {
-            session.close();
-        }
-        return -2;
-    }
-      public String cifraPassword(String password) {
-        String generatedPassword = null;
-        try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
-            md.update(password.getBytes());
-            //Get the hash's bytes 
-            byte[] bytes = md.digest();
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            //Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        System.out.println(generatedPassword);
-        return (generatedPassword);
-    }
-      
-          public int utenteEsistente(String utente) {
-        Transaction tx = null;
-        Session session = factory.openSession();
-        try {
-            tx = session.beginTransaction();
-             Query q = session.createSQLQuery("SELECT nickname FROM WA2P_UTENTI  WHERE nickname= ?" );
-            q.setParameter(0, utente);
-            if (q.list().isEmpty()) {
-                return 0;
-            }
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return 1;
-    }
+
           
     public void salvaUtente(Utente u) {
         Session session = factory.openSession();

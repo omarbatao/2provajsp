@@ -25,6 +25,10 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <%
+                    if(request.getSession().getAttribute("utente")==null){
+                %>
+                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
@@ -59,6 +63,16 @@
                         </li>
                     </ul>
                 </li>
+                <%
+                    }
+                    else{
+                %>
+                    <li>
+                        <a href="#"><%=request.getSession().getAttribute("utente")%></a>
+                    </li>
+                <%
+                    }
+                %>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
