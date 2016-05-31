@@ -43,8 +43,14 @@ public class EventiController {
         List<Commento> commenti = db.getCommentiPerEvento(eventoid);
         //System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
         map.put("evento", e);
-        if(commenti== null) return "evento/infoEvento?errore=nocommenti";
+        
+        if(commenti== null){ 
+            map.put("errore","nocommenti");
+            return "evento/infoEvento";
+        }
+        System.out.println(commenti);
         map.put("commenti", commenti);
+        map.put("errore","false");
         return "evento/infoEvento";
     }
 
@@ -55,7 +61,11 @@ public class EventiController {
             @RequestParam(value = "voto") Integer voto,
             @RequestParam(value = "eventoid") String eventoid) {
         
-        Utente u = db.getUtente("Ceretta");
+        Utente u = db.getUtente((String)request.getSession().getAttribute("utente"));
+        if(u==null) {
+            map.put("errore","nocommenti");
+            return "evento/infoEvento";
+        }
         Evento e = db.getEvento(eventoid);
         Commento c = new Commento();
         c.setCommento(testo);

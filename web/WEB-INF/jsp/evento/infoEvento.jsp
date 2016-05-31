@@ -151,20 +151,14 @@
         }
     %>
 
-    <%
-        if (request.getParameter("errore") != null) {
-            if (request.getParameter("errore").equals("nocommenti")) {
-    %>
+    <c:if test="${errore == 'nocommenti'}">
     <div class='row'>
         <div class="col-md-12">
             <div class="alert alert-info" role="alert">Nessun commento per questo evento</div>
         </div>
     </div>
-    <%
-        } else if(request.getParameter("errore").equals("false")){
-
-    %>
-
+    </c:if>
+    <c:if test="${errore == 'false'}">
     <div class="row">
         <div class="media">
             <c:forEach items="${commenti}" var="commento"> 
@@ -232,18 +226,7 @@
             </c:forEach>
         </div>
     </div> 
-    <%
-            }else{
-            %>
-            <div class='row'>
-        <div class="col-md-12">
-            <div class="alert alert-info" role="alert">Nessun commento per questo evento</div>
-        </div>
-    </div>
-    <%
-        }
-        }
-    %>
+    </c:if>
 
     <!-- Comment -->
 
