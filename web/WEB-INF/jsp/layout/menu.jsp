@@ -67,8 +67,12 @@
                     }
                     else{
                 %>
-                    <li>
-                        <a href="#"><%=request.getSession().getAttribute("utente")%></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> <%=request.getSession().getAttribute("utente")%></b><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='#'>Profilo</a></li>
+                            <li><a href='./logout'>Esci</a></li>
+                    </ul>
                     </li>
                 <%
                     }

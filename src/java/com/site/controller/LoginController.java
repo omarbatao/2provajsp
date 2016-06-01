@@ -37,8 +37,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap map) {
-        return "utente/logout";
+    public String logout(ModelMap map, HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect: /";
     }
 
     @RequestMapping(value = "/joinus", method = RequestMethod.GET)
@@ -52,23 +53,28 @@ public class LoginController {
             @RequestParam(value = "username", required = true) String username,
             @RequestParam(value = "password", required = true) String pw) {
 
-        String nicknamesession = (String) request.getSession().getAttribute("utente");
-        if (nicknamesession != null && nicknamesession.equals(username)) {
-            map.put("error", "true");
-            map.put("alreadylogged", "true");
+        String nicknamesession = (String) request.getSession().getAttribute("utente");        
+        if (nicknamesession != null){
+            if(nicknamesession.equals(username)) {
+                map.put("error", "true");
+                map.put("alreadylogged", "true");
+                return "redirect: /";
+            }
         }
         Utente user = db.getUtente(username);
         if (user == null) {
             map.put("error", "true");
             map.put("nomach", "true");
+            return "redirect: /";
         }
         if (!user.getPw().equals(Utility.md5(pw))) {
             map.put("error", "true");
             map.put("errpw", "true");
+            return "redirect: /";
         }
-
+        
         request.getSession().setAttribute("utente", user.getNickname());
-        map.put("error", "false");
+        map.put("error", "false");  
         map.put("logged", "true");
         return "redirect: /";
 
