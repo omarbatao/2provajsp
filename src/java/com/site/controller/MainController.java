@@ -5,6 +5,7 @@
  */
 package com.site.controller;
 
+import Models.Categoria;
 import Models.Evento;
 import databaseUtility.Database;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     
+    List<Categoria> categorie = new ArrayList<>();
     List<Evento> eventi = new ArrayList<>();
     Database db;
     
@@ -40,16 +42,17 @@ public class MainController {
     
     
     @RequestMapping(value = "/", method = RequestMethod.GET)//defaulr get metod
-    public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
+    public String index(ModelMap map/*, @RequestParam(value = "risposta",required=false) String risp*/){
         
         map.put("titolopagina","LFH - home");
         if(db!=null){
             eventi = db.getEventi();
+            categorie = db.getCategorie();
         }
         
-        
+        //map.put("risposta",risp);
         map.put("eventi",eventi);
-        
+        map.put("categorie",categorie);
         return "home";
     }
 
