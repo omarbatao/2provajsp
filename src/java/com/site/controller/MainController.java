@@ -5,6 +5,7 @@
  */
 package com.site.controller;
 
+import Models.Categoria;
 import Models.Evento;
 import databaseUtility.Database;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     
+    List<Categoria> categorie = new ArrayList<>();
     List<Evento> eventi = new ArrayList<>();
     Database db;
     
@@ -45,11 +47,12 @@ public class MainController {
         map.put("titolopagina","LFH - home");
         if(db!=null){
             eventi = db.getEventi();
+            categorie = db.getCategorie();
         }
         
         
         map.put("eventi",eventi);
-        
+        map.put("categorie",categorie);
         return "home";
     }
 

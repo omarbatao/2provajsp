@@ -91,34 +91,60 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="list-unstyled">
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
+                            <c:forEach items="${categorie}" var = "categoria">
+                                    <li><a href="#">${categoria.getNome()}</a></li>                                     
+                                </c:forEach>
                         </ul>
                     </div>
-                    <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
-                            <li><a href="#">Category Name</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.col-lg-6 -->
+
                 </div>
                 <!-- /.row -->
             </div>
 
+            <div class="well">
+                    <h4>Aggiungi Evento</h4>
+                    <hr>
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formevento">Aggiungi</button>
+                <div class="modal fade" id="formevento" role="dialog">
+                    <div class="modal-dialog">
+                
+                    <!-- Contenuto modal -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Aggiungi evento:</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form >
+                            <label for="id">Id</label>
+                            <input type="text" class="form-control" id="Id evento">
+                
+                            <label for="evento">Titolo evento</label>
+                            <input type="text" class="form-control" id="Titolo evento">
+                
+                            <label for="luogo">Luogo</label>
+                            <input type="text" class="form-control" id="Luogo">
+                
+                            <label for="data">Data evento</label>
+                            <input type="date" class="form-control" id="Data evento">
+                
+                            <label for="idU">Id Utente</label>
+                            <input type="text" class="form-control" id="Id Utente">
+                
+                            <label for="categoria">Categoria</label>
+                            <input type="text" class="form-control" id="Categoria">
+                        </form>          
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-block" data-dismiss="modal">Aggiungi</button>
+                    </div>
+                    </div>
+                </div>
+            </div>               
+                        <!-- /.col-lg-6 -->
+                    
+                    <!-- /.row -->
+                </div>
             <!-- Side Widget Well -->
             <!--<div class="well">
                 <h4>Side Widget Well</h4>
