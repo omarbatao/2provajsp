@@ -40,14 +40,14 @@ public class MainController {
     
     
     @RequestMapping(value = "/", method = RequestMethod.GET)//defaulr get metod
-    public String index(ModelMap map/*, @RequestParam(value = "id",required=false) String id*/){
+    public String index(ModelMap map/*, @RequestParam(value = "risposta",required=false) String risp*/){
         
         map.put("titolopagina","LFH - home");
         if(db!=null){
             eventi = db.getEventi();
         }
         
-        
+        //map.put("risposta",risp);
         map.put("eventi",eventi);
         
         return "home";
