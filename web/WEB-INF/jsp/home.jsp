@@ -48,9 +48,9 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> ${evento.getData()} ${evento.getLuogo().getNomeProvincia()}</p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img style="height: 300px; width: 900px;" class="img-responsive img-related" src="${evento.getImmagine()}" alt="">
                 <hr>
-                <p>{evento.getDescrizione()} </p>
+                <p>${evento.getDescrizione()} </p>
                 <a class="btn btn-primary" href="./infoevento?eventoid=${evento.getId()}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
