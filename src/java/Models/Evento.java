@@ -48,6 +48,11 @@ public class Evento implements Serializable {
     @Column(name = "data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    @Column(name="descrizione")
+    private String descrizione;
+    @Column (name="Immagine")
+    private String Immagine;
+    
     @ManyToMany(mappedBy = "eventoCollection")
     private Collection<Artista> artistaCollection;
     @OneToMany(mappedBy = "evento")
@@ -61,6 +66,7 @@ public class Evento implements Serializable {
     @JoinColumn(name = "luogo", referencedColumnName = "idProvincia")
     @ManyToOne(optional = false)
     private Provincia luogo;
+    
 
     public Evento() {
     }
@@ -164,5 +170,24 @@ public class Evento implements Serializable {
     public String toString() {
         return "Models.Evento[ id=" + id + " ]";
     }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public String getImmagine() {
+        return Immagine;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void setImmagine(String Immagine) {
+        this.Immagine = Immagine;
+    }
+    
+    
+    
     
 }
