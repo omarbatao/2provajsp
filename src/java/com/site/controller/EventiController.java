@@ -9,9 +9,11 @@ import Models.Commento;
 import Models.Evento;
 import Models.Utente;
 import databaseUtility.Database;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,27 +41,42 @@ public class EventiController {
     public String infoEvento(ModelMap map, @RequestParam(value = "eventoid") String eventoid) {
         Evento e = db.getEvento(eventoid);
         List<Commento> commenti = db.getCommentiPerEvento(eventoid);
-        System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
+        //System.out.println("Commenti per evento:" + commenti.get(0).getIdU().getNickname());
         map.put("evento", e);
+        
+        if(commenti== null){ 
+            map.put("errore","nocommenti");
+            return "evento/infoEvento";
+        }
+        System.out.println(commenti);
         map.put("commenti", commenti);
+        map.put("errore","false");
         return "evento/infoEvento";
     }
 
-    @RequestMapping(value = "/addComment", method = RequestMethod.GET)
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(ModelMap map,
+            HttpServletRequest request,
             @RequestParam(value = "testo") String testo,
             @RequestParam(value = "voto") Integer voto,
-            @RequestParam(value = "utente") String utente,
             @RequestParam(value = "eventoid") String eventoid) {
         
-        Utente u = db.getUtente(utente);
+        Utente u = db.getUtente((String)request.getSession().getAttribute("utente"));
+        if(u==null) {
+            map.put("errore","nocommenti");
+            return "evento/infoEvento";
+        }
         Evento e = db.getEvento(eventoid);
         Commento c = new Commento();
         c.setCommento(testo);
         c.setVoto(voto);
         c.setEvento(e);
         c.setIdU(u);
-        return "redirect: /infoevento?inserito=true ";
+        c.setDataC(new Date());
+        db.insertCommento(c);
+        
+        
+        return "redirect: /infoevento?errore=false&inserito=true&eventoid="+eventoid;
     }
 
     @RequestMapping(value = "/addevento", method = RequestMethod.GET)

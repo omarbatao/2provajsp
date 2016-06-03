@@ -25,26 +25,21 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <%
+                    if(request.getSession().getAttribute("utente")==null){
+                %>
+                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <c:if test="${risposta!=null}">
-                                        <div style="color:red;text-align:center"><b>${risposta}</b></div> </br>
-                                            </c:if>
-                                            <c:if test="${username!=null}">
-                                                <jsp:setProperty name="user" property="nickname" value="${username}"></jsp:setProperty>
-                                                <c:redirect url="./home"/>
-                                            </c:if>
-                                    
-                                    
-                                                
+                                   
                                     <form class="form" role="form" method="post" action="./verificaLogin" accept-charset="UTF-8" id="login-nav">
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail2">Username</label>
-                                            <input type="username" class="form-control" name="utente" id="username" placeholder="Username" required>
+                                            <input type="username" name="username" class="form-control" id="exampleInputEmail2" placeholder="Username" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputPassword2">Password</label>
@@ -68,6 +63,20 @@
                         </li>
                     </ul>
                 </li>
+                <%
+                    }
+                    else{
+                %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b> <%=request.getSession().getAttribute("utente")%></b><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='#'>Profilo</a></li>
+                            <li><a href='./logout'>Esci</a></li>
+                    </ul>
+                    </li>
+                <%
+                    }
+                %>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

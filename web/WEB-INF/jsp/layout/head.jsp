@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="./resources/css/style.css" />
         <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="./resources/css/blog-home.css" rel="stylesheet">
+        <script src="./resources/js/jquery.js"></script>
+        <script src="./resources/js/bootstrap.min.js"></script>
         <title >${titolopagina}</title>
     </head>
     <body>
