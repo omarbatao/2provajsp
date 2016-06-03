@@ -58,3 +58,13 @@ and open the template in the editor.
         border-top:0 none;
     }
 }
+
+
+.contenitore {
+  float: left;
+  width: 72%;
+  height: 0px;
+  position: absolute;
+  z-index: 100;
+}
+
