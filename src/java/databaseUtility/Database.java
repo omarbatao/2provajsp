@@ -231,4 +231,17 @@ public class Database {
             session.getTransaction().rollback();
         }
     }
+    
+         public void inviaEmail (Email e) {
+        System.out.println("invia "+e.getEmail());
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(e);
+            session.getTransaction().commit();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
 }
