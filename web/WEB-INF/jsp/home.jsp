@@ -67,20 +67,82 @@
             </ul>
 
         </div>
+       <script>
+
+    function cerca() {
+        var titolo = document.getElementById("ricercaevento").value;
+        
+        if(titolo==="") {
+            pulisci();
+            return;
+        }
+        var request = new XMLHttpRequest();
+        var url = "./cercaevento?titoloevento=" + titolo;
+        request.onreadystatechange = function () {
+            showresults(request);
+        };
+        request.open("GET", url, true);
+        request.send();
+    }
+
+
+    function showresults(val) {
+        var resultstit = [];
+        var resultsid = [];
+        if ((val.readyState == 4) && (val.status == 200)) {
+            if (val.responseText == "errore")
+                resultstit.push("errore");
+            else {
+                val = $.parseXML(val.responseText)
+                $xml = $(val);
+                $($xml).find("evento").each(function (idx, v) {
+                    resultstit[idx] = [];
+                    resultsid[idx] = [];
+                    $(v).find("id").each(function (i, vi) {
+                        resultsid[idx].push($(vi).text());
+                    });
+                    $(v).find("titolo").each(function (i, vi) {
+                        resultstit[idx].push($(vi).text());
+                    });
+                });
+
+                add(resultstit, resultsid);
+            }
+        }
+    }
+    
+    function pulisci(){
+        $('#elenco ul').empty();
+    }
+
+    function add(r, id) {
+        $('#elenco ul').empty();
+        for (var i = 0; i < r.length; i++) {
+
+            $("#elenco ul").append("<li  class='list-group-item cursore'  ><a href='./infoevento?eventoid=" + id[i] + "' >" + r[i] + '</a></li>');
+        }
+    }
+
+</script> 
 
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
 
             <!-- Blog Search Well -->
             <div class="well">
-                <h4>Search events by Location</h4>
+                <h4>Search events</h4>
                 <div class="input-group">
-                    <input type="text" class="form-control">
+                    <input id="ricercaevento" type="cerca" placeholder="Find your events...." onkeyup="cerca()" class="form-control">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
+                </div>
+                <div class="contenitore">
+                    <div style="margin-top: 5px"  id="elenco">
+                        <ul id="eve" class="list-group over" style="list-style-type: none;"></ul>
+                    </div>
                 </div>
                 <!-- /.input-group -->
             </div>
