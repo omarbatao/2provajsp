@@ -24,8 +24,7 @@ public class ArtistaController {
 
     public ArtistaController() {
         try {
-            db= new Database();
-            artisti=db.getArtisti();
+            db= new Database(); 
         } catch (Throwable ex) {
             Logger.getLogger(ArtistaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -33,6 +32,7 @@ public class ArtistaController {
 
     @RequestMapping(value="/artisti",method=RequestMethod.GET)
     public String getArtista(ModelMap map){
+        artisti=db.getArtisti();
         System.out.println(artisti.toString());
         map.put("artisti",artisti );
         return "artista/artisti";
